@@ -206,7 +206,7 @@ public final class ChestIcons {
     @Nullable
     private static Transfer transfer(ResourceManager manager, Wood wood, ResourceLocation texture, Item item, Set<Item> unknown) {
         Map<Integer, Integer> found = new HashMap<>();
-        try (NativeImage chest = read(manager, texture)) {
+        try (NativeImage chest = ChestTextures.asChest(item, read(manager, texture))) {
             for (int y = 0; y < wood.height(); y++)
                 for (int x = 0; x < wood.width(); x++) {
                     if (!wood.at()[y * wood.width() + x])

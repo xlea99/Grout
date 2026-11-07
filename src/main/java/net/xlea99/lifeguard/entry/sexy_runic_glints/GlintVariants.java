@@ -1,7 +1,9 @@
 package net.xlea99.lifeguard.entry.sexy_runic_glints;
 
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
@@ -94,7 +96,7 @@ public final class GlintVariants extends RenderType {
         // Plain (a shaderpack) means Quark's own glint, except its item glints, which no longer draw like vanilla (full
         // item vertices, GlintShader) and so get a copy that does.
         if (GlintShards.plain())
-            return itemGlint ? PLAIN.computeIfAbsent(glint, key -> createPlain(original)) : glint;
+            return itemGlint ? plain(glint, original) : glint;
         // Quark's item glints already colorize over the block atlas, and are plain otherwise.
         if (itemGlint && TextureAtlas.LOCATION_BLOCKS.equals(texture) && trim == null && banner == null && coordScale == 1)
             return glint;
@@ -130,6 +132,25 @@ public final class GlintVariants extends RenderType {
     /** Plain copies of Quark's item glints, for shaderpacks: Quark glint type -> copy. Render thread only. */
     private static final Map<RenderType, RenderType> PLAIN = new IdentityHashMap<>();
 
+    private static RenderType plain(RenderType glint, Original original) {
+        return PLAIN.computeIfAbsent(glint, key -> createPlain(original));
+    }
+
+    /**
+     * Gives the plain copies buffers of their own, beside Quark's glints. Vanilla asks for a glint's buffer before the
+     * item's, so anything that draws in first-use order (ImmediatelyFast's HUD batching) draws a glint without one first,
+     * and the item then covers it; render types with their own buffers draw after the rest. They have to be here from the
+     * start, since ImmediatelyFast copies this list once.
+     */
+    public static void addPlainTypes(Object2ObjectLinkedOpenHashMap<RenderType, ByteBufferBuilder> buffers) {
+        QUARK_TYPES.forEach((glint, original) -> {
+            if (isItemKind(original.kind())) {
+                RenderType plain = plain(glint, original);
+                buffers.putIfAbsent(plain, new ByteBufferBuilder(plain.bufferSize()));
+            }
+        });
+    }
+
     /**
      * Quark's item glint exactly as Quark builds it (vanilla's vertex format and glint shader, which shaderpacks swap for
      * their own glint program), for use under a shaderpack, where ours can't draw.
@@ -140,11 +161,9 @@ public final class GlintVariants extends RenderType {
             case ITEM_DIRECT -> RENDERTYPE_ENTITY_GLINT_DIRECT_SHADER;
             default -> RENDERTYPE_GLINT_SHADER;
         };
-        RenderType type = RenderType.create("lifeguard_plain_" + original.kind().name().toLowerCase() + "_glint_"
+        return RenderType.create("lifeguard_plain_" + original.kind().name().toLowerCase() + "_glint_"
             + original.color(), DefaultVertexFormat.POSITION_TEX, VertexFormat.Mode.QUADS, 256, false, false,
             recipe(original, shader).createCompositeState(false));
-        CREATED.add(type);
-        return type;
     }
 
     /** The render states of Quark's glint of the given kind (see its GlintRenderTypes), with the given shader. */

@@ -1,7 +1,9 @@
 package net.xlea99.lifeguard.mixin.sexy_runic_glints;
 
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.client.renderer.RenderStateShard.EmptyTextureStateShard;
 import net.minecraft.client.renderer.RenderStateShard.ShaderStateShard;
 import net.minecraft.client.renderer.RenderStateShard.TexturingStateShard;
@@ -14,6 +16,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.violetmoon.quark.content.tools.client.render.GlintRenderTypes;
 
@@ -76,6 +79,12 @@ public abstract class GlintRenderTypesMixin {
         index = 1)
     private static VertexFormat lifeguard$itemVertices(VertexFormat original) {
         return DefaultVertexFormat.NEW_ENTITY;
+    }
+
+    /** Where Quark gives its glints their buffers, ours for shaderpacks get theirs ({@link GlintVariants#addPlainTypes}). */
+    @Inject(method = "addGlintTypes(Lit/unimi/dsi/fastutil/objects/Object2ObjectLinkedOpenHashMap;)V", at = @At("TAIL"))
+    private static void lifeguard$addPlainTypes(Object2ObjectLinkedOpenHashMap<RenderType, ByteBufferBuilder> buffers, CallbackInfo ci) {
+        GlintVariants.addPlainTypes(buffers);
     }
 
     /** Remembers each of Quark's glint types and what it's for, so {@link GlintVariants} can stand in for it. */

@@ -113,7 +113,7 @@ public final class PackAnimalTextures {
                     + "keep the vanilla one", BuiltInRegistries.ITEM.getKey(key.chest()));
             return new Made(null);
         }
-        try (NativeImage skin = read(key.skin()); NativeImage chest = read(chestTexture); NativeImage vanilla = read(VANILLA_CHEST)) {
+        try (NativeImage skin = read(key.skin()); NativeImage chest = ChestTextures.asChest(key.chest(), read(chestTexture)); NativeImage vanilla = read(VANILLA_CHEST)) {
             NativeImage out = new NativeImage(skin.getWidth(), skin.getHeight(), true);
             out.copyFrom(skin);
             if (!SaddlebagDrawing.draw(out, key.bags().width, key.bags().at,

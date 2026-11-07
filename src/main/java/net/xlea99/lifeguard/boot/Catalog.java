@@ -18,6 +18,8 @@ import net.xlea99.lifeguard.entry.cc_extended_plated_bricks.CcExtendedPlatedBric
 import net.xlea99.lifeguard.entry.extended_metal_bars.ExtendedMetalBars;
 import net.xlea99.lifeguard.entry.ac_immediately_fast_gingerbread_stripes.AcImmediatelyFastGingerbreadStripes;
 import net.xlea99.lifeguard.entry.ac_irradiated_glow_sync.AcIrradiatedGlowSync;
+import net.xlea99.lifeguard.entry.ac_iris_biome_light.AcIrisBiomeLight;
+import net.xlea99.lifeguard.entry.ac_iris_holograms.AcIrisHolograms;
 import net.xlea99.lifeguard.entry.ac_radiation_glow_batching.AcRadiationGlowBatching;
 import net.xlea99.lifeguard.entry.ac_thornwood_very_slightly_lighter_planks.AcThornwoodVerySlightlyLighterPlanks;
 import net.xlea99.lifeguard.entry.ac_infinite_soda.AcInfiniteSoda;
@@ -45,7 +47,12 @@ import net.xlea99.lifeguard.entry.citadel_iris_post_effects.CitadelIrisPostEffec
 import net.xlea99.lifeguard.entry.cc_cannon_backfire.CcCannonBackfire;
 import net.xlea99.lifeguard.entry.cc_golden_bucket_compat.CcGoldenBucketCompat;
 import net.xlea99.lifeguard.entry.cc_golden_milk_follows_neapolitan.CcGoldenMilkFollowsNeapolitan;
+import net.xlea99.lifeguard.entry.clayworks_emi_recipes.ClayworksEmiRecipes;
 import net.xlea99.lifeguard.entry.clayworks_flower_pots.ClayworksFlowerPots;
+import net.xlea99.lifeguard.entry.clayworks_iris_pot_trims.ClayworksIrisPotTrims;
+import net.xlea99.lifeguard.entry.clayworks_no_pot_washing.ClayworksNoPotWashing;
+import net.xlea99.lifeguard.entry.clayworks_pot_trim_saving.ClayworksPotTrimSaving;
+import net.xlea99.lifeguard.entry.clayworks_trim_palettes.ClayworksTrimPalettes;
 import net.xlea99.lifeguard.entry.dye_depot_runes.DyeDepotRunes;
 import net.xlea99.lifeguard.entry.dye_depot_rock_candy.DyeDepotRockCandy;
 import net.xlea99.lifeguard.entry.easy_anvils_quark_anvils.EasyAnvilsQuarkAnvils;
@@ -72,6 +79,9 @@ import net.xlea99.lifeguard.entry.enderman_head_reach.EndermanHeadReach;
 import net.xlea99.lifeguard.entry.ice_stops_crops.IceStopsCrops;
 import net.xlea99.lifeguard.entry.iris_firework_fade.IrisFireworkFade;
 import net.xlea99.lifeguard.entry.betterf3_lost_f3_info.BetterF3LostF3Info;
+import net.xlea99.lifeguard.entry.connectiblechains_collisions.ConnectibleChainsCollisions;
+import net.xlea99.lifeguard.entry.connectiblechains_knots_always_tick.ConnectibleChainsKnotsAlwaysTick;
+import net.xlea99.lifeguard.entry.zipline_chain_pass_through.ZiplineChainPassThrough;
 import net.xlea99.lifeguard.entry.zipline_server_checks.ZiplineServerChecks;
 import net.xlea99.lifeguard.entry.etcetera_easy_anvils_label_costs.EtceteraEasyAnvilsLabelCosts;
 import net.xlea99.lifeguard.entry.etcetera_label_wash_stacking.EtceteraLabelWashStacking;
@@ -154,6 +164,8 @@ import net.xlea99.lifeguard.entry.zetter_canvas_texture_cleanup.ZetterCanvasText
 import net.xlea99.lifeguard.entry.zetter_canvas_timers.ZetterCanvasTimers;
 import net.xlea99.lifeguard.entry.zetter_copies_like_books.ZetterCopiesLikeBooks;
 import net.xlea99.lifeguard.entry.zetter_easel_sync.ZetterEaselSync;
+import net.xlea99.lifeguard.entry.woodworks_emi_recipes.WoodworksEmiRecipes;
+import net.xlea99.lifeguard.entry.neapolitan_plantain_spider_bundles.NeapolitanPlantainSpiderBundles;
 import net.xlea99.lifeguard.entry.zetter_emi_recipes.ZetterEmiRecipes;
 import net.xlea99.lifeguard.entry.zetter_frame_default_size.ZetterFrameDefaultSize;
 import net.xlea99.lifeguard.entry.zetter_hovered_paintings_stack.ZetterHoveredPaintingsStack;
@@ -176,6 +188,8 @@ public final class Catalog {
         AcImmediatelyFastGingerbreadStripes.class,
         AcIrradiatedGlowSync.class,
         AcRadiationGlowBatching.class,
+        AcIrisHolograms.class,
+        AcIrisBiomeLight.class,
         AcThornwoodVerySlightlyLighterPlanks.class,
         AcInfiniteSoda.class,
         AmLavaBottleDupe.class,
@@ -217,6 +231,11 @@ public final class Catalog {
         CcGoldenBucketCompat.class,
         CcGoldenMilkFollowsNeapolitan.class,
         ClayworksFlowerPots.class,
+        ClayworksEmiRecipes.class,
+        ClayworksNoPotWashing.class,
+        ClayworksPotTrimSaving.class,
+        ClayworksTrimPalettes.class,
+        ClayworksIrisPotTrims.class,
         DyeDepotRunes.class,
         DyeDepotRockCandy.class,
         EasyAnvilsQuarkAnvils.class,
@@ -243,6 +262,9 @@ public final class Catalog {
         IrisFireworkFade.class,
         BetterF3LostF3Info.class,
         ZiplineServerChecks.class,
+        ZiplineChainPassThrough.class,
+        ConnectibleChainsCollisions.class,
+        ConnectibleChainsKnotsAlwaysTick.class,
         EtceteraEasyAnvilsLabelCosts.class,
         EtceteraLabelWashStacking.class,
         EtceteraShimmeringBismuthTrims.class,
@@ -254,6 +276,7 @@ public final class Catalog {
         MoonlightJadeContents.class,
         MoonlightRegistrationRaces.class,
         NeapolitanAmendmentsMilkshakes.class,
+        NeapolitanPlantainSpiderBundles.class,
         NoSuppsJarFish.class,
         QuarkAmethystBeaconTint.class,
         QuarkDonkeyChests.class,
@@ -321,6 +344,7 @@ public final class Catalog {
         VanillaBackportLightningRods.class,
         VanillaBackportPausePausesMusic.class,
         VanillaBackportResinTrimIcons.class,
+        WoodworksEmiRecipes.class,
         ZetaInstanceRace.class,
         ZetterCanvasTextureCleanup.class,
         ZetterCanvasTimers.class,

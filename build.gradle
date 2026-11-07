@@ -163,6 +163,7 @@ dependencies {
     runtimeOnly "maven.modrinth:scholar:${scholar_version}"
     compileOnly "maven.modrinth:clayworks:${clayworks_version}"
     runtimeOnly "maven.modrinth:clayworks:${clayworks_version}"
+    compileOnly "maven.modrinth:iris:${iris_version}"
     compileOnly "maven.modrinth:labels:${labels_version}"
     runtimeOnly "maven.modrinth:labels:${labels_version}"
     compileOnly "maven.modrinth:sleep-tight:${sleep_tight_version}"

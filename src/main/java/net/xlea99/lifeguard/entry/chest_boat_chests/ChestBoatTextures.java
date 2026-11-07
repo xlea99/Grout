@@ -86,7 +86,7 @@ public final class ChestBoatTextures {
                     + "the vanilla one", BuiltInRegistries.ITEM.getKey(key.chest()));
             return new Made(null);
         }
-        try (NativeImage boat = read(key.boat()); NativeImage chest = read(chestTexture)) {
+        try (NativeImage boat = read(key.boat()); NativeImage chest = ChestTextures.asChest(key.chest(), read(chestTexture))) {
             NativeImage out = new NativeImage(boat.getWidth(), boat.getHeight(), true);
             out.copyFrom(boat);
             ChestDrawing.draw(chest, out, key.layout());

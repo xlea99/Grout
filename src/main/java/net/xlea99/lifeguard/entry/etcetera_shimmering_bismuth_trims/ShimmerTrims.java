@@ -58,22 +58,37 @@ public final class ShimmerTrims {
 
     /** Adds a shimmering {@code <texture>_bismuth} for each pattern texture, over any still one of the same name. */
     public static void addShimmering(ResourceManager manager, SpriteSource.Output output, Collection<ResourceLocation> textures) {
-        Shimmer shimmer = load(manager);
-        if (shimmer == null)
-            return;
+        try {
+            addShimmering(manager, output, textures, MATERIAL, pixels(manager, KEY), pixels(manager, PALETTE));
+        } catch (IOException | RuntimeException e) {
+            Lifeguard.LOGGER.error("Lifeguard: couldn't read Etcetera's bismuth palette; its trim stays still", e);
+        }
+    }
+
+    /** The same for any palette key and bismuth palette of the same length: decorated pots' are four colors, not eight. */
+    public static void addShimmering(ResourceManager manager, SpriteSource.Output output, Collection<ResourceLocation> textures, String material, int[] key, int[] palette) {
+        Shimmer shimmer = load(manager, key, palette);
+        if (shimmer != null)
+            add(manager, output, textures, material, shimmer);
+    }
+
+    /** Adds a {@code <texture>_<material>} for each pattern texture in one palette, not animated. */
+    public static void addStill(ResourceManager manager, SpriteSource.Output output, Collection<ResourceLocation> textures, String material, int[] key, int[] palette) {
+        add(manager, output, textures, material, new Shimmer(key, List.of(palette), ResourceMetadata.EMPTY));
+    }
+
+    private static void add(ResourceManager manager, SpriteSource.Output output, Collection<ResourceLocation> textures, String material, Shimmer shimmer) {
         for (ResourceLocation texture : textures) {
             Optional<Resource> pattern = manager.getResource(TEXTURES.idToFile(texture));
             if (pattern.isEmpty())
                 continue;
-            ResourceLocation name = texture.withSuffix("_" + MATERIAL);
+            ResourceLocation name = texture.withSuffix("_" + material);
             output.add(name, loader -> contents(name, pattern.get(), shimmer));
         }
     }
 
-    private static @Nullable Shimmer load(ResourceManager manager) {
+    private static @Nullable Shimmer load(ResourceManager manager, int[] key, int[] base) {
         try {
-            int[] key = pixels(manager, KEY);
-            int[] base = pixels(manager, PALETTE);
             Resource block = manager.getResource(TEXTURES.idToFile(BLOCK)).orElseThrow(() -> new IOException("no " + BLOCK));
             List<Float> hues = new ArrayList<>();
             try (InputStream in = block.open(); NativeImage image = NativeImage.read(in)) {
@@ -86,12 +101,12 @@ public final class ShimmerTrims {
                 palettes.add(turned(base, hue - hues.getFirst()));
             return new Shimmer(key, palettes, block.metadata());
         } catch (IOException | RuntimeException e) {
-            Lifeguard.LOGGER.error("Lifeguard: couldn't read Etcetera's bismuth palette or block; its trim stays still", e);
+            Lifeguard.LOGGER.error("Lifeguard: couldn't read Etcetera's bismuth block; its trim stays still", e);
             return null;
         }
     }
 
-    private static int[] pixels(ResourceManager manager, ResourceLocation texture) throws IOException {
+    public static int[] pixels(ResourceManager manager, ResourceLocation texture) throws IOException {
         Resource resource = manager.getResource(TEXTURES.idToFile(texture)).orElseThrow(() -> new IOException("no " + texture));
         try (InputStream in = resource.open(); NativeImage image = NativeImage.read(in)) {
             return image.getPixelsRGBA();
