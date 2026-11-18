@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(targets = "net.mehvahdjukaar.supplementaries.common.block.cauldron.MovedFluidFiller")
 public abstract class MovedFluidFillerMixin {
 
-    @ModifyConstant(method = "fillIfMovedIntoFluid", constant = @Constant(intValue = 3))
+    @ModifyConstant(method = "getStateMovedInto", constant = @Constant(intValue = 3))
     private static int lifeguard$fullAtFour(int full) {
         return 4;
     }

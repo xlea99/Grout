@@ -25,8 +25,8 @@ import net.xlea99.lifeguard.core.Taste;
 import org.lwjgl.glfw.GLFW;
 
 /**
- * Lifeguard's menu: a profile bar across the top, the entries on the left, the selected entry's details on the right,
- * Done and Cancel at the bottom.
+ * Lifeguard's menu: a profile bar across the top, the filters on the left, the entries in the middle, the selected
+ * entry's details on the right, Done and Cancel at the bottom.
  *
  * <p>Everything edits a draft. Done (or Esc, as in vanilla's own option screens) writes it to the config files and
  * Cancel throws it away; either way nothing changes until the next restart, and the status line says when one would.

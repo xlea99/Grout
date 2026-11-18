@@ -13,6 +13,11 @@ public final class Payloads {
     private Payloads() {
     }
 
+    /** Sends {@code payload} to the server. The caller checks the connection's {@code hasChannel} first, since that's a client class. */
+    public static void sendToServer(CustomPacketPayload payload) {
+        PacketDistributor.sendToServer(payload);
+    }
+
     /** Sends {@code payload} to {@code player}, unless their client can't take it (no Lifeguard, or an older one). */
     public static void send(ServerPlayer player, CustomPacketPayload payload) {
         if (player.connection.hasChannel(payload))

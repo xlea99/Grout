@@ -16,15 +16,41 @@ import net.xlea99.lifeguard.entry.cc_crafted_tether_potions.CcCraftedTetherPotio
 import net.xlea99.lifeguard.entry.cc_hidden_trim_icons.CcHiddenTrimIcons;
 import net.xlea99.lifeguard.entry.cc_extended_plated_bricks.CcExtendedPlatedBricks;
 import net.xlea99.lifeguard.entry.extended_metal_bars.ExtendedMetalBars;
+import net.xlea99.lifeguard.entry.fire_resistance_no_fire_overlay.FireResistanceNoFireOverlay;
 import net.xlea99.lifeguard.entry.ac_immediately_fast_gingerbread_stripes.AcImmediatelyFastGingerbreadStripes;
 import net.xlea99.lifeguard.entry.ac_irradiated_glow_sync.AcIrradiatedGlowSync;
 import net.xlea99.lifeguard.entry.ac_iris_biome_light.AcIrisBiomeLight;
 import net.xlea99.lifeguard.entry.ac_iris_holograms.AcIrisHolograms;
 import net.xlea99.lifeguard.entry.ac_radiation_glow_batching.AcRadiationGlowBatching;
 import net.xlea99.lifeguard.entry.ac_thornwood_very_slightly_lighter_planks.AcThornwoodVerySlightlyLighterPlanks;
+import net.xlea99.lifeguard.entry.ac_flytrap_eats_flies.AcFlytrapEatsFlies;
 import net.xlea99.lifeguard.entry.ac_infinite_soda.AcInfiniteSoda;
+import net.xlea99.lifeguard.entry.am_bone_serpent_dead_targets.AmBoneSerpentDeadTargets;
+import net.xlea99.lifeguard.entry.am_crocodile_basking_poses.AmCrocodileBaskingPoses;
+import net.xlea99.lifeguard.entry.am_crocodile_grab_turn.AmCrocodileGrabTurn;
+import net.xlea99.lifeguard.entry.am_crocodile_ambush.AmCrocodileAmbush;
+import net.xlea99.lifeguard.entry.am_gazelle_movement.AmGazelleMovement;
+import net.xlea99.lifeguard.entry.am_gazelle_step_height.AmGazelleStepHeight;
+import net.xlea99.lifeguard.entry.am_grizzly_tame_cubs.AmGrizzlyTameCubs;
+import net.xlea99.lifeguard.entry.am_grizzly_tempting.AmGrizzlyTempting;
+import net.xlea99.lifeguard.entry.am_hummingbird_fixes.AmHummingbirdFixes;
+import net.xlea99.lifeguard.entry.am_crimson_mosquito_fixes.AmCrimsonMosquitoFixes;
+import net.xlea99.lifeguard.entry.am_slightly_sexier_crimson_mosquito.AmSlightlySexierCrimsonMosquito;
+import net.xlea99.lifeguard.entry.am_rattlesnake_fixes.AmRattlesnakeFixes;
+import net.xlea99.lifeguard.entry.am_slightly_sexier_rattlesnake.AmSlightlySexierRattlesnake;
+import net.xlea99.lifeguard.entry.am_hummingbird_zips_away.AmHummingbirdZipsAway;
+import net.xlea99.lifeguard.entry.am_gorillas_forage_neapolitan_bananas.AmGorillasForageNeapolitanBananas;
+import net.xlea99.lifeguard.entry.am_gorilla_silverbacks.AmGorillaSilverbacks;
+import net.xlea99.lifeguard.entry.am_slightly_sexier_gorilla.AmSlightlySexierGorilla;
+import net.xlea99.lifeguard.entry.am_gorilla_pathing.AmGorillaPathing;
+import net.xlea99.lifeguard.entry.quark_hollow_log_paths.QuarkHollowLogPaths;
 import net.xlea99.lifeguard.entry.am_lava_bottle_dupe.AmLavaBottleDupe;
 import net.xlea99.lifeguard.entry.am_lava_vision_fallback.AmLavaVisionFallback;
+import net.xlea99.lifeguard.entry.am_slightly_sexier_bone_serpent.AmSlightlySexierBoneSerpent;
+import net.xlea99.lifeguard.entry.am_slightly_sexier_crocodile.AmSlightlySexierCrocodile;
+import net.xlea99.lifeguard.entry.am_slightly_sexier_gazelle.AmSlightlySexierGazelle;
+import net.xlea99.lifeguard.entry.am_slightly_sexier_grizzly_bear.AmSlightlySexierGrizzlyBear;
+import net.xlea99.lifeguard.entry.am_slightly_sexier_roadrunner.AmSlightlySexierRoadrunner;
 import net.xlea99.lifeguard.entry.amendments_cake_slicing.AmendmentsCakeSlicing;
 import net.xlea99.lifeguard.entry.amendments_cauldron_dispensing.AmendmentsCauldronDispensing;
 import net.xlea99.lifeguard.entry.amendments_hanging_pot_names.AmendmentsHangingPotNames;
@@ -63,10 +89,14 @@ import net.xlea99.lifeguard.entry.dye_the_world_glow_lights.DyeTheWorldGlowLight
 import net.xlea99.lifeguard.entry.dye_the_world_open_sacks.DyeTheWorldOpenSacks;
 import net.xlea99.lifeguard.entry.emf_haunted_harvest_masks.EmfHauntedHarvestMasks;
 import net.xlea99.lifeguard.entry.better_tridents_loyal_drops_last.BetterTridentsLoyalDropsLast;
+import net.xlea99.lifeguard.entry.big_polar_bears.BigPolarBears;
 import net.xlea99.lifeguard.entry.boidsify.Boidsify;
+import net.xlea99.lifeguard.entry.no_deadly_memes.NoDeadlyMemes;
 import net.xlea99.lifeguard.entry.haunted_harvest_mask_limit.HauntedHarvestMaskLimit;
 import net.xlea99.lifeguard.entry.horseman_quark_horses.HorsemanQuarkHorses;
 import net.xlea99.lifeguard.entry.jukebox_playlists.JukeboxPlaylists;
+import net.xlea99.lifeguard.entry.keyframe_part_lookup.KeyframePartLookup;
+import net.xlea99.lifeguard.entry.model_part_walk.ModelPartWalk;
 import net.xlea99.lifeguard.entry.jukebox_record_scratch.JukeboxRecordScratch;
 import net.xlea99.lifeguard.entry.jukebox_progress_signal.JukeboxProgressSignal;
 import net.xlea99.lifeguard.entry.jukebox_synced_playback.JukeboxSyncedPlayback;
@@ -122,11 +152,18 @@ import net.xlea99.lifeguard.entry.species_stackatick_breeding.SpeciesStackatickB
 import net.xlea99.lifeguard.entry.species_swapper_resets_fall.SpeciesSwapperResetsFall;
 import net.xlea99.lifeguard.entry.species_soap_washes_stackaticks.SpeciesSoapWashesStackaticks;
 import net.xlea99.lifeguard.entry.species_wicked_spares_pets.SpeciesWickedSparesPets;
+import net.xlea99.lifeguard.entry.maggoty_spawn_flies.MaggotySpawnFlies;
+import net.xlea99.lifeguard.entry.sounds_maggot_plops.SoundsMaggotPlops;
+import net.xlea99.lifeguard.entry.spawn_flies_roam_screen.SpawnFliesRoamScreen;
+import net.xlea99.lifeguard.entry.spawn_flies_shovel_swatter.SpawnFliesShovelSwatter;
+import net.xlea99.lifeguard.entry.spawn_frogs_eat_flies.SpawnFrogsEatFlies;
+import net.xlea99.lifeguard.entry.spawn_stew_repels_flies.SpawnStewRepelsFlies;
 import net.xlea99.lifeguard.entry.spawn_ru_pineify_rotten_wood.SpawnRuPineifyRottenWood;
 import net.xlea99.lifeguard.entry.srm_personality_snow.SrmPersonalitySnow;
 import net.xlea99.lifeguard.entry.sleep_tight_spawn_events.SleepTightSpawnEvents;
 import net.xlea99.lifeguard.entry.supplementaries_grouper_open_sides.SupplementariesGrouperOpenSides;
 import net.xlea99.lifeguard.entry.supps_blue_bomb_dispensing.SuppsBlueBombDispensing;
+import net.xlea99.lifeguard.entry.supps_soap_keeps_trims.SuppsSoapKeepsTrims;
 import net.xlea99.lifeguard.entry.supps_soap_lore_first.SuppsSoapLoreFirst;
 import net.xlea99.lifeguard.entry.supps_soap_washes_etcetera_labels.SuppsSoapWashesEtceteraLabels;
 import net.xlea99.lifeguard.entry.supps_soap_washes_labels.SuppsSoapWashesLabels;
@@ -151,12 +188,9 @@ import net.xlea99.lifeguard.entry.supps_faucet_toggle.SuppsFaucetToggle;
 import net.xlea99.lifeguard.entry.supps_gunpowder_lights_nuke.SuppsGunpowderLightsNuke;
 import net.xlea99.lifeguard.entry.supps_lumisene_burn_time.SuppsLumiseneBurnTime;
 import net.xlea99.lifeguard.entry.supps_moved_block_entities.SuppsMovedBlockEntities;
-import net.xlea99.lifeguard.entry.supps_moved_cauldron_filling.SuppsMovedCauldronFilling;
 import net.xlea99.lifeguard.entry.supps_moving_block_contents.SuppsMovingBlockContents;
 import net.xlea99.lifeguard.entry.supps_notice_board_comparator.SuppsNoticeBoardComparator;
 import net.xlea99.lifeguard.entry.supps_pedestal_compat.SuppsPedestalCompat;
-import net.xlea99.lifeguard.entry.supps_plunderer_raid_weapon.SuppsPlundererRaidWeapon;
-import net.xlea99.lifeguard.entry.supps_respects_mob_griefing.SuppsRespectsMobGriefing;
 import net.xlea99.lifeguard.entry.supps_slice_maps_keep_the_altimeter.SuppsSliceMapsKeepTheAltimeter;
 import net.xlea99.lifeguard.entry.themed_candle_holder_flames.ThemedCandleHolderFlames;
 import net.xlea99.lifeguard.entry.zeta_instance_race.ZetaInstanceRace;
@@ -192,7 +226,33 @@ public final class Catalog {
         AcIrisBiomeLight.class,
         AcThornwoodVerySlightlyLighterPlanks.class,
         AcInfiniteSoda.class,
+        AcFlytrapEatsFlies.class,
         AmLavaBottleDupe.class,
+        AmSlightlySexierGrizzlyBear.class,
+        AmSlightlySexierRoadrunner.class,
+        AmSlightlySexierGazelle.class,
+        AmGazelleStepHeight.class,
+        AmGazelleMovement.class,
+        AmSlightlySexierCrocodile.class,
+        AmCrocodileAmbush.class,
+        AmCrocodileBaskingPoses.class,
+        AmCrocodileGrabTurn.class,
+        AmSlightlySexierBoneSerpent.class,
+        AmBoneSerpentDeadTargets.class,
+        AmGrizzlyTempting.class,
+        AmGrizzlyTameCubs.class,
+        AmHummingbirdFixes.class,
+        AmHummingbirdZipsAway.class,
+        AmGorillasForageNeapolitanBananas.class,
+        AmGorillaSilverbacks.class,
+        AmSlightlySexierGorilla.class,
+        AmGorillaPathing.class,
+        AmCrimsonMosquitoFixes.class,
+        AmSlightlySexierCrimsonMosquito.class,
+        AmRattlesnakeFixes.class,
+        AmSlightlySexierRattlesnake.class,
+        QuarkHollowLogPaths.class,
+        NoDeadlyMemes.class,
         AmLavaVisionFallback.class,
         AmendmentsCakeSlicing.class,
         AmendmentsCauldronDispensing.class,
@@ -251,12 +311,15 @@ public final class Catalog {
         JukeboxSyncedPlayback.class,
         JukeboxProgressSignal.class,
         JukeboxPlaylists.class,
+        KeyframePartLookup.class,
+        ModelPartWalk.class,
         JukeboxRecordScratch.class,
         SuppsJukeboxSpeakers.class,
         HauntedHarvestPumpkinCompat.class,
         HauntedHarvestTorchLanterns.class,
         HauntedHarvestUnifiedCarvedPumpkin.class,
         EnchantingTablesKeepLapis.class,
+        BigPolarBears.class,
         EndermanHeadReach.class,
         IceStopsCrops.class,
         IrisFireworkFade.class,
@@ -273,6 +336,7 @@ public final class Catalog {
         LithiumNavigationSwaps.class,
         MapAtlasesFixes.class,
         ExtendedMetalBars.class,
+        FireResistanceNoFireOverlay.class,
         MoonlightJadeContents.class,
         MoonlightRegistrationRaces.class,
         NeapolitanAmendmentsMilkshakes.class,
@@ -307,10 +371,17 @@ public final class Catalog {
         SpeciesSwapperResetsFall.class,
         SpeciesSoapWashesStackaticks.class,
         SpeciesWickedSparesPets.class,
+        MaggotySpawnFlies.class,
+        SoundsMaggotPlops.class,
+        SpawnFliesRoamScreen.class,
+        SpawnFrogsEatFlies.class,
+        SpawnFliesShovelSwatter.class,
+        SpawnStewRepelsFlies.class,
         SpawnRuPineifyRottenWood.class,
         SrmPersonalitySnow.class,
         SupplementariesGrouperOpenSides.class,
         SuppsBlueBombDispensing.class,
+        SuppsSoapKeepsTrims.class,
         SuppsSoapLoreFirst.class,
         SuppsSoapWashesEtceteraLabels.class,
         SuppsSoapWashesLabels.class,
@@ -326,12 +397,9 @@ public final class Catalog {
         SuppsGunpowderLightsNuke.class,
         SuppsLumiseneBurnTime.class,
         SuppsMovedBlockEntities.class,
-        SuppsMovedCauldronFilling.class,
         SuppsMovingBlockContents.class,
         SuppsNoticeBoardComparator.class,
         SuppsPedestalCompat.class,
-        SuppsPlundererRaidWeapon.class,
-        SuppsRespectsMobGriefing.class,
         SuppsSliceMapsKeepTheAltimeter.class,
         ThemedCandleHolderFlames.class,
         TwigsBloodstoneObelisks.class,

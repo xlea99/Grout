@@ -1,0 +1,19 @@
+{
+  "values": [
+    "minecraft:dead_bush",
+    { "id": "minecraft:short_dry_grass", "required": false },
+    { "id": "minecraft:tall_dry_grass", "required": false },
+    { "id": "minecraft:bush", "required": false },
+    { "id": "minecraft:firefly_bush", "required": false },
+    { "id": "farmersdelight:sandy_shrub", "required": false },
+    { "id": "regions_unexplored:dead_shrub", "required": false },
+    { "id": "regions_unexplored:steppe_shrub", "required": false },
+    { "id": "regions_unexplored:joshua_shrub", "required": false },
+    { "id": "regions_unexplored:short_dead_grass", "required": false },
+    { "id": "regions_unexplored:tall_dead_grass", "required": false },
+    { "id": "regions_unexplored:acacia_shrub", "required": false },
+    { "id": "regions_unexplored:baobab_shrub", "required": false },
+    { "id": "regions_unexplored:palm_shrub", "required": false },
+    { "id": "regions_unexplored:socotra_shrub", "required": false }
+  ]
+}
