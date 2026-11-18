@@ -5,12 +5,12 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import net.xlea99.lifeguard.Lifeguard;
+import net.xlea99.lifeguard.core.Library;
 
-/** Lifeguard's datapack conditions. */
+/** The machinery's datapack conditions, under its own namespace ({@link Library#ID}). */
 public final class DataConditions {
     private static final DeferredRegister<MapCodec<? extends ICondition>> CONDITIONS =
-        DeferredRegister.create(NeoForgeRegistries.Keys.CONDITION_CODECS, Lifeguard.MODID);
+        DeferredRegister.create(NeoForgeRegistries.Keys.CONDITION_CODECS, Library.ID);
 
     static {
         CONDITIONS.register("entry", () -> EntryCondition.CODEC);

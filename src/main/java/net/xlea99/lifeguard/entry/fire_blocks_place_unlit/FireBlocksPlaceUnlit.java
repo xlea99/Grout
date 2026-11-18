@@ -1,5 +1,6 @@
 package net.xlea99.lifeguard.entry.fire_blocks_place_unlit;
 
+import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.core.Entries;
 import net.xlea99.lifeguard.core.Entry;
 import net.xlea99.lifeguard.core.Restart;
@@ -12,7 +13,7 @@ public final class FireBlocksPlaceUnlit {
      * switch the server synced. Campfires as Forgery's {@code campfires_place_unlit} had them (every CampfireBlock); the
      * children bring other mods' fire blocks along.
      */
-    public static final Entry ENTRY = Entries.feature("fire_blocks_place_unlit", Taste.STRONG).home(Entry.LIFEGUARD)
+    public static final Entry ENTRY = Entries.feature("fire_blocks_place_unlit", Taste.STRONG).home(Lifeguard.MODID)
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();
 

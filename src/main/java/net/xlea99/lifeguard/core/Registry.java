@@ -14,7 +14,8 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 /**
- * Every declared entry, and the state they resolve against: one profile per side and which mods are installed.
+ * Every declared entry, and the state they resolve against: the auto rule's setting per side and which mods are
+ * installed.
  *
  * <p>Entries add themselves when they're declared. {@link #freeze} then validates the whole tree at once and fails
  * loudly, listing every problem, before anything can ask an entry whether it is active. A declaration that is wrong
@@ -36,38 +37,68 @@ public final class Registry implements SettingsView {
     private final List<Entry> declared = new ArrayList<>();
     private final Map<String, Entry> byId = new LinkedHashMap<>();
     private final List<Entry> topLevel = new ArrayList<>();
-    private final EnumMap<Side, Profile> profiles = new EnumMap<>(Side.class);
+    // The owner's AutoRule setting per side; empty when its rule has none.
+    private final EnumMap<Side, String> ruleChoices = new EnumMap<>(Side.class);
     private Predicate<String> modPresent = modId -> false;
+    private volatile ModSpec owner;
     private volatile boolean frozen;
     private volatile int generation;
 
-    public Registry() {
-        for (Side side : Side.values())
-            profiles.put(side, Profile.DEFAULT);
+    // --- whose entries -------------------------------------------------------------------------------------------------
+
+    /**
+     * The mod these entries belong to, set once at startup ({@code Boot.start}), before anything reads an entry's texts,
+     * group or mixins. Entries may be declared before it; nothing about them depends on it until the freeze.
+     */
+    public void claim(ModSpec spec) {
+        java.util.Objects.requireNonNull(spec);
+        ModSpec current = owner;
+        if (current != null && !current.equals(spec))
+            throw new IllegalStateException("these entries already belong to " + current.id() + ", not " + spec.id());
+        if (current == null) {
+            AutoRule.Setting setting = spec.autoRule().setting();
+            if (setting != null)
+                for (Side side : Side.values())
+                    ruleChoices.put(side, setting.defaultChoice());
+        }
+        owner = spec;
+    }
+
+    /** The mod these entries belong to ({@link #claim}). */
+    public ModSpec owner() {
+        ModSpec current = owner;
+        if (current == null)
+            throw new IllegalStateException("no mod has claimed these entries yet: Boot.start(spec) comes first");
+        return current;
+    }
+
+    /** What Auto means for these entries: the owner's {@link ModSpec#autoRule}. */
+    public AutoRule rule() {
+        return owner().autoRule();
     }
 
     // --- declaring -----------------------------------------------------------------------------------------------------
 
-    public Entry feature(String id, Taste taste) {
-        return declare(id, EntryClass.FEATURE, taste);
+    public Entry feature(String id) {
+        return declare(id, EntryClass.FEATURE);
     }
 
-    public Entry tweak(String id, Taste taste) {
-        return declare(id, EntryClass.TWEAK, taste);
+    public Entry tweak(String id) {
+        return declare(id, EntryClass.TWEAK);
     }
 
-    public Entry compat(String id, Taste taste) {
-        return declare(id, EntryClass.COMPAT, taste);
+    public Entry compat(String id) {
+        return declare(id, EntryClass.COMPAT);
     }
 
-    public Entry fix(String id, Taste taste) {
-        return declare(id, EntryClass.FIX, taste);
+    public Entry fix(String id) {
+        return declare(id, EntryClass.FIX);
     }
 
-    private Entry declare(String id, EntryClass kind, Taste taste) {
+    private Entry declare(String id, EntryClass kind) {
         if (frozen)
             throw new IllegalStateException(id + ": declared after startup; every entry must exist before the freeze");
-        Entry entry = new Entry(this, id, kind, taste);
+        Entry entry = new Entry(this, id, kind);
         declared.add(entry);
         return entry;
     }
@@ -75,8 +106,8 @@ public final class Registry implements SettingsView {
     // --- the freeze ----------------------------------------------------------------------------------------------------
 
     /**
-     * Validates every declaration and locks them. {@code langKeys} are the keys in Lifeguard's {@code en_us.json};
-     * every entry needs its name and description there.
+     * Validates every declaration and locks them. {@code langKeys} are the keys in the owning mod's {@code en_us.json};
+     * every entry needs its name and description there. The registry must be {@link #claim claimed} first.
      *
      * @throws EntryValidationException listing every problem found, not just the first
      */
@@ -85,9 +116,10 @@ public final class Registry implements SettingsView {
             throw new IllegalStateException("the registry is already frozen");
         // An entry's home is read through the entries it's shown under, so a loop there has to be caught before
         // anything asks for one; past this point every chain ends.
+        String modName = owner().name();
         List<String> loops = shownUnderLoops();
         if (!loops.isEmpty())
-            throw new EntryValidationException(loops);
+            throw new EntryValidationException(modName, loops);
         List<String> problems = new ArrayList<>();
         Set<Entry> declaredSet = new HashSet<>(declared);
 
@@ -105,7 +137,7 @@ public final class Registry implements SettingsView {
             checkLang(entry, langKeys, problems);
 
         if (!problems.isEmpty())
-            throw new EntryValidationException(problems);
+            throw new EntryValidationException(modName, problems);
 
         byId.putAll(ids);
         for (Entry entry : declared) {
@@ -123,13 +155,18 @@ public final class Registry implements SettingsView {
         if (!NAME.matcher(id).matches())
             problems.add(id + ": ids are lowercase letters, digits and underscores, starting with a letter");
         if (RESERVED_IDS.contains(id))
-            problems.add(id + ": '" + id + "' is reserved for Lifeguard's own mixin packages");
+            problems.add(id + ": '" + id + "' is reserved for " + owner().name() + "'s own mixin packages");
         if (JAVA_KEYWORDS.contains(id))
             problems.add(id + ": '" + id + "' is a Java keyword, and entry ids are mixin package names");
         if (entry.side() == null)
             problems.add(id + ": no side declared (client or server)");
         if (entry.restart() == null)
             problems.add(id + ": no restart declared (game or world)");
+        if (!entry.hasDefault())
+            problems.add(id + ": no default declared (on or off)");
+        String ruleProblem = rule().check(entry);
+        if (ruleProblem != null)
+            problems.add(ruleProblem);
         if (entry.isRegistryShaping()) {
             if (entry.side() != null && entry.side() != Side.SERVER)
                 problems.add(id + ": registry-shaping entries are server entries (the server decides; clients must match)");
@@ -171,11 +208,12 @@ public final class Registry implements SettingsView {
         Entry shownUnder = entry.shownUnder();
         if (shownUnder == null) {
             String home = entry.declaredHome();
+            String own = owner().id();
             if (home == null)
-                problems.add(id + ": no home declared (the menu group: a mod it requires, Entry.LIFEGUARD or Entry.MINECRAFT),"
+                problems.add(id + ": no home declared (the menu group: a mod it requires, " + own + " itself or Entry.MINECRAFT),"
                     + " and not shown under another entry");
-            else if (!home.equals(Entry.LIFEGUARD) && !home.equals(Entry.MINECRAFT) && !entry.requiredMods().contains(home))
-                problems.add(id + ": home '" + home + "' isn't a mod it requires, Entry.LIFEGUARD or Entry.MINECRAFT");
+            else if (!home.equals(own) && !home.equals(Entry.MINECRAFT) && !entry.requiredMods().contains(home))
+                problems.add(id + ": home '" + home + "' isn't a mod it requires, " + own + " itself or Entry.MINECRAFT");
         } else {
             if (entry.declaredHome() != null)
                 problems.add(id + ": declares a home and is shown under " + shownUnder.id()
@@ -270,7 +308,7 @@ public final class Registry implements SettingsView {
                     problems.add(entry.id() + ": a sub-value can't be called 'enabled' (that's the switch's key)");
     }
 
-    private static void checkLang(Entry entry, Set<String> langKeys, List<String> problems) {
+    private void checkLang(Entry entry, Set<String> langKeys, List<String> problems) {
         if (!langKeys.contains(entry.nameKey()))
             problems.add(entry.id() + ": no name in en_us.json (" + entry.nameKey() + ")");
         if (!langKeys.contains(entry.descKey()))
@@ -280,8 +318,8 @@ public final class Registry implements SettingsView {
                 problems.add(entry.id() + "." + value.name() + ": no name in en_us.json (" + value.nameKey() + ")");
         // The menu groups entries under their mods' names, falling back to the bare mod id ("scholar").
         for (String modId : entry.requiredMods())
-            if (!langKeys.contains("lifeguard.mod." + modId))
-                problems.add(entry.id() + ": no name for required mod " + modId + " in en_us.json (lifeguard.mod." + modId + ")");
+            if (!langKeys.contains(owner().modNameKey(modId)))
+                problems.add(entry.id() + ": no name for required mod " + modId + " in en_us.json (" + owner().modNameKey(modId) + ")");
     }
 
     // --- reading -------------------------------------------------------------------------------------------------------
@@ -354,13 +392,23 @@ public final class Registry implements SettingsView {
     }
 
     @Override
-    public Profile profile(Side side) {
-        return profiles.get(side);
+    public String ruleChoice(Side side) {
+        return ruleChoices.get(side);
     }
 
-    public void setProfile(Side side, Profile profile) {
-        if (profiles.put(side, profile) != profile)
+    public void setRuleChoice(Side side, String choice) {
+        checkChoice(choice);
+        if (!choice.equals(ruleChoices.put(side, choice)))
             changed();
+    }
+
+    /** Refuses a value the owner's rule setting doesn't take (or any value, when its rule has no setting). */
+    void checkChoice(String choice) {
+        AutoRule.Setting setting = rule().setting();
+        if (setting == null)
+            throw new IllegalStateException(owner().id() + "'s auto rule has no setting");
+        if (!setting.accepts(choice))
+            throw new IllegalArgumentException("'" + choice + "' isn't a " + setting.key() + "; one of " + setting.choices());
     }
 
     /** Which mods are installed. Set once at startup from the mod loader; tests pass a set. */

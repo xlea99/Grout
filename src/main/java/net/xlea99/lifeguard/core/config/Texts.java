@@ -13,9 +13,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
+import net.xlea99.lifeguard.core.ModSpec;
 
 /**
- * The words the config file's comments are made of: Lifeguard's own lang text and the names of other mods.
+ * The words the config file's comments are made of: the owning mod's lang text and the names of other mods.
  *
  * <p>Read straight from {@code en_us.json} in the jar rather than through the game's language system, which a dedicated
  * server doesn't load for mods and which isn't running yet when the config is first read.
@@ -53,13 +54,13 @@ public final class Texts {
 
     /**
      * A mod's display name from its id, e.g. {@code supplementaries} to {@code Supplementaries}: the installed mod's own
-     * name, or, when it isn't installed (exactly when "needs X" matters), {@code lifeguard.mod.<id>} from our lang file,
+     * name, or, when it isn't installed (exactly when "needs X" matters), {@code <owner>.mod.<id>} from its lang file,
      * or the id itself as a last resort.
      */
-    public String modName(String modId) {
+    public String modName(ModSpec owner, String modId) {
         String name = modNames.apply(modId);
         if (name == null || name.isBlank())
-            name = lang.get("lifeguard.mod." + modId);
+            name = lang.get(owner.modNameKey(modId));
         return name == null || name.isBlank() ? modId : name;
     }
 }

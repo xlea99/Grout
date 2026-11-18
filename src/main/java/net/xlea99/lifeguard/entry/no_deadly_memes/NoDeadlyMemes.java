@@ -1,5 +1,6 @@
 package net.xlea99.lifeguard.entry.no_deadly_memes;
 
+import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.core.Entries;
 import net.xlea99.lifeguard.core.Entry;
 import net.xlea99.lifeguard.core.Restart;
@@ -12,7 +13,7 @@ public final class NoDeadlyMemes {
      * end on one), or are just eye-rollingly stupid, are gone. A harmless joke isn't a deadly meme. Does nothing itself: it's the one
      * decision, and each mod's child only extends it, which is why they carry no taste of their own.
      */
-    public static final Entry ENTRY = Entries.tweak("no_deadly_memes", Taste.DEEP_END).home(Entry.LIFEGUARD)
+    public static final Entry ENTRY = Entries.tweak("no_deadly_memes", Taste.DEEP_END).home(Lifeguard.MODID)
         .side(Side.SERVER).restart(Restart.GAME);
 
     /**

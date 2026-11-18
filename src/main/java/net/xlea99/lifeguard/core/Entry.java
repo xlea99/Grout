@@ -15,9 +15,9 @@ import java.util.function.BooleanSupplier;
  * menu, mixin gating, the mod page) reads from that declaration:
  *
  * <pre>{@code
- * Entry JUKEBOX = Entries.feature("jukebox", Taste.LIGHT).home(Entry.MINECRAFT)
+ * Entry JUKEBOX = registry.feature("jukebox").defaultOn(true).home(Entry.MINECRAFT)
  *     .side(Side.SERVER).restart(Restart.GAME);
- * Entry JUKEBOX_SPEAKERS = Entries.compat("jukebox_speakers", Taste.LIGHT)
+ * Entry JUKEBOX_SPEAKERS = registry.compat("jukebox_speakers").defaultOn(true)
  *     .requiresEntries(JUKEBOX).requiresMods("supplementaries").shownUnder(JUKEBOX)
  *     .side(Side.SERVER).restart(Restart.GAME)
  *     .values(MAX_SPEAKERS);
@@ -27,21 +27,22 @@ import java.util.function.BooleanSupplier;
  * ({@link #home}, {@link #shownUnder}) is only presentation, and its id is neither: moving an entry in the menu never
  * touches its id, its config key or its files.
  *
- * <p>Nothing about an entry is implied: side, restart and its place in the menu have no defaults, and its words live in
- * the lang file under {@link #nameKey()} and {@link #descKey()}. The declaration methods only work until the registry is
- * frozen at startup; after that the declaration is fixed and only the switch changes.
+ * <p>Nothing about an entry is implied: side, restart, on-or-off by default and its place in the menu are all declared,
+ * and its words live in the lang file under {@link #nameKey()} and {@link #descKey()}. The declaration methods only work
+ * until the registry is frozen at startup; after that the declaration is fixed and only the switch changes.
  */
 public final class Entry {
-    /** {@link #home} for Lifeguard's own content (no other mod's idea it extends): the menu's first group. */
-    public static final String LIFEGUARD = "lifeguard";
+    // A mod's own content (no other mod's idea it extends) has the declaring mod's own id as its home: the menu's first
+    // group. There's no constant for it here; each mod names itself.
     /** {@link #home} for entries about Minecraft itself. */
     public static final String MINECRAFT = "minecraft";
 
     private final Registry registry;
     private final String id;
     private final EntryClass kind;
-    private final Taste taste;
 
+    private Boolean defaultOn;
+    private Object modData;
     private String home;
     private Entry shownUnder;
     private Side side;
@@ -68,23 +69,39 @@ public final class Entry {
     private volatile String serverBrokenReason;
 
     // active() is asked from hot paths (runtime-gated mixins), so its answer is cached until the registry's generation
-    // moves, which happens whenever a switch, a profile or mod presence changes. The generation is written after the
+    // moves, which happens whenever a switch, the auto rule's setting or mod presence changes. The generation is written after the
     // value and read before it, so a reader that sees the new generation also sees the new value.
     private boolean cachedActive;
     private volatile int cachedGeneration = -1;
 
-    Entry(Registry registry, String id, EntryClass kind, Taste taste) {
+    Entry(Registry registry, String id, EntryClass kind) {
         this.registry = registry;
         this.id = Objects.requireNonNull(id);
         this.kind = Objects.requireNonNull(kind);
-        this.taste = Objects.requireNonNull(taste);
     }
 
     // --- declaration ---------------------------------------------------------------------------------------------------
 
+    /** What Auto means for this entry under the plain rule ({@link AutoRule#PLAIN}): on or off. */
+    public Entry defaultOn(boolean on) {
+        declaring();
+        this.defaultOn = on;
+        return this;
+    }
+
     /**
-     * The menu group a top-level entry is listed under: a mod it requires (the one it extends), {@link #LIFEGUARD} or
-     * {@link #MINECRAFT}. Presentation only. An entry {@link #shownUnder shown under} another lives in that one's group.
+     * The owning mod's own data about this entry, for its {@link AutoRule} and its own code to read (Lifeguard keeps the
+     * entry's taste here). The machinery never looks inside.
+     */
+    public Entry modData(Object data) {
+        declaring();
+        this.modData = Objects.requireNonNull(data);
+        return this;
+    }
+
+    /**
+     * The menu group a top-level entry is listed under: a mod it requires (the one it extends), the declaring mod's own
+     * id ({@link ModSpec#id}) or {@link #MINECRAFT}. Presentation only. An entry {@link #shownUnder shown under} another lives in that one's group.
      */
     public Entry home(String modId) {
         declaring();
@@ -237,8 +254,21 @@ public final class Entry {
         return kind;
     }
 
-    public Taste taste() {
-        return taste;
+    /** Its declared default: what Auto means under the plain rule. */
+    public boolean defaultOn() {
+        if (defaultOn == null)
+            throw new IllegalStateException(id + ": no default declared");
+        return defaultOn;
+    }
+
+    /** Whether a default was declared (the freeze refuses an entry without one). */
+    boolean hasDefault() {
+        return defaultOn != null;
+    }
+
+    /** The owning mod's own data ({@link #modData(Object)}), or null. */
+    public Object modData() {
+        return modData;
     }
 
     /** The menu group it's listed under: its own {@link #home}, or that of the entry it's shown under. */
@@ -327,18 +357,23 @@ public final class Entry {
         return Collections.unmodifiableList(values);
     }
 
-    /** {@code lifeguard.entry.<id>}: the entry's display name. */
+    /** {@code <mod id>.entry.<id>}: the entry's display name, in its mod's lang file. */
     public String nameKey() {
-        return "lifeguard.entry." + id();
+        return registry.owner().entryKeyPrefix() + id();
     }
 
-    /** {@code lifeguard.entry.<id>.desc}: what it does, and why each required mod is needed. */
+    /** {@code <mod id>.entry.<id>.desc}: what it does, and why each required mod is needed. */
     public String descKey() {
         return nameKey() + ".desc";
     }
 
     Registry registry() {
         return registry;
+    }
+
+    /** Every entry that requires this one, directly or through others: what goes dark when it does. */
+    public List<Entry> dependents() {
+        return registry.dependents(this);
     }
 
     void addShownBelow(Entry entry) {
@@ -396,7 +431,7 @@ public final class Entry {
         }
     }
 
-    /** Whether the live switch says on: an override, or Auto with the side's profile reaching this entry's taste. */
+    /** Whether the live switch says on: an override, or Auto with the mod's {@link AutoRule} saying on. */
     public boolean switchedOn() {
         return switchedOnUnder(registry);
     }
@@ -406,7 +441,7 @@ public final class Entry {
         return switch (view.setting(this)) {
             case ON -> true;
             case OFF -> false;
-            case AUTO -> view.profile(side).turnsOn(taste);
+            case AUTO -> registry.rule().autoOn(this, view.ruleChoice(side));
         };
     }
 

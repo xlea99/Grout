@@ -1,8 +1,9 @@
 package net.xlea99.lifeguard.sync;
 
 import java.util.List;
-import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.core.Entries;
+import net.xlea99.lifeguard.boot.Boot;
+import net.xlea99.lifeguard.core.AutoRule;
+import net.xlea99.lifeguard.core.Library;
 import net.xlea99.lifeguard.core.ServerSnapshot;
 import net.xlea99.lifeguard.core.Settings;
 import net.xlea99.lifeguard.core.Side;
@@ -26,20 +27,22 @@ public final class RemoteServer {
 
     static synchronized void follow(ServerSnapshot snapshot) {
         if (beforeJoin == null)
-            beforeJoin = Settings.copyOf(Entries.REGISTRY);
-        List<String> problems = snapshot.applyTo(Entries.REGISTRY);
+            beforeJoin = Settings.copyOf(Boot.registry());
+        List<String> problems = snapshot.applyTo(Boot.registry());
         for (String problem : problems)
-            Lifeguard.LOGGER.warn("Lifeguard: {}", problem);
-        Lifeguard.LOGGER.info("Lifeguard: following the server's settings (profile {}, {} server entries)",
-            Entries.REGISTRY.profile(Side.SERVER).id(), snapshot.entries().size());
+            Library.LOGGER.warn("{}: {}", Library.NAME, problem);
+        AutoRule.Setting setting = Boot.registry().rule().setting();
+        String choice = setting == null ? "" : setting.key() + " " + Boot.registry().ruleChoice(Side.SERVER) + ", ";
+        Library.LOGGER.info("{}: following the server's settings ({}{} server entries)", Library.NAME, choice,
+            snapshot.entries().size());
     }
 
     static synchronized void stopFollowing() {
         if (beforeJoin == null)
             return;
-        beforeJoin.applyTo(Entries.REGISTRY);
-        Entries.REGISTRY.clearServerBroken();
+        beforeJoin.applyTo(Boot.registry());
+        Boot.registry().clearServerBroken();
         beforeJoin = null;
-        Lifeguard.LOGGER.info("Lifeguard: back to this game's own settings");
+        Library.LOGGER.info("{}: back to this game's own settings", Library.NAME);
     }
 }

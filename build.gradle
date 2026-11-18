@@ -245,11 +245,11 @@ dependencies {
 
 // GameTests live in the private workspace too (workspace/gametests): real multiplayer checks with mock server players,
 // run by `gradlew runGameTestServer`. Only dev runs load them; they never reach the jar.
-if (file('workspace/gametests/java').isDirectory()) {
+if (file('../DeepEndWorkspace/gametests/java').isDirectory()) {
     sourceSets {
         gametest {
-            java.srcDir 'workspace/gametests/java'
-            resources.srcDir 'workspace/gametests/resources'
+            java.srcDir '../DeepEndWorkspace/gametests/java'
+            resources.srcDir '../DeepEndWorkspace/gametests/resources'
             compileClasspath += sourceSets.main.output
             runtimeClasspath += sourceSets.main.output
         }
@@ -270,11 +270,11 @@ if (file('workspace/gametests/java').isDirectory()) {
 
 // Tests live in the private workspace, never in this repo. A clone without it builds normally; with it, `gradlew test`
 // runs the core's JUnit tests. They never reach the jar either way.
-if (file('workspace/tests/java').isDirectory()) {
+if (file('../DeepEndWorkspace/tests/java').isDirectory()) {
     repositories {
         mavenCentral()
     }
-    sourceSets.test.java.srcDir 'workspace/tests/java'
+    sourceSets.test.java.srcDir '../DeepEndWorkspace/tests/java'
     dependencies {
         testImplementation platform('org.junit:junit-bom:5.11.3')
         testImplementation 'org.junit.jupiter:junit-jupiter'

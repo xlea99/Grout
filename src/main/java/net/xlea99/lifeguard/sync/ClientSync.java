@@ -5,11 +5,11 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
-import net.xlea99.lifeguard.Lifeguard;
+import net.xlea99.lifeguard.core.Library;
 import net.xlea99.lifeguard.boot.Boot;
 
 /** Leaving a server puts the client back on its own settings, so the menu at the title screen shows the local file. */
-@EventBusSubscriber(modid = Lifeguard.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Library.ID, value = Dist.CLIENT)
 public final class ClientSync {
     private ClientSync() {
     }
@@ -23,8 +23,8 @@ public final class ClientSync {
         boolean answered = RegistryShape.takeReceived();
         if (answered || event.getConnection().isMemoryConnection() || Boot.loadedRegistryShapers().isEmpty())
             return;
-        event.getConnection().disconnect(Component.translatable("lifeguard.disconnect.registry_shape.no_lifeguard",
-            String.join(", ", Boot.loadedRegistryShapers())));
+        event.getConnection().disconnect(Component.translatable("guppylib.disconnect.registry_shape.no_mod",
+            Boot.registry().owner().name(), String.join(", ", Boot.loadedRegistryShapers())));
     }
 
     @SubscribeEvent

@@ -211,7 +211,8 @@ import net.xlea99.lifeguard.entry.zetter_tooltips.ZetterTooltips;
 import net.xlea99.lifeguard.entry.zettify_all_paintings.ZettifyAllPaintings;
 
 /**
- * Every class that declares entries. Startup loads each one so its constants register before the freeze.
+ * Every class that declares Lifeguard's entries, handed to the machinery in {@link LifeguardSpec#CATALOG}. Startup loads
+ * each one so its constants register before the freeze.
  *
  * <p>These classes are read before Minecraft's classes are safe to load, so a declaration class holds only its entry
  * and sub-value constants: no Minecraft, NeoForge or other mods' imports. Its gameplay code lives beside it in other
@@ -434,16 +435,5 @@ public final class Catalog {
 
     public static List<Class<?>> declarations() {
         return DECLARATIONS;
-    }
-
-    /** Runs each declaration class's static initializer, which is where its entries register. */
-    static void load() {
-        for (Class<?> declarations : DECLARATIONS) {
-            try {
-                Class.forName(declarations.getName(), true, declarations.getClassLoader());
-            } catch (ClassNotFoundException e) {
-                throw new IllegalStateException("Lifeguard couldn't load its declarations in " + declarations.getName(), e);
-            }
-        }
     }
 }

@@ -10,7 +10,6 @@ import net.xlea99.lifeguard.core.EntryClass;
 import net.xlea99.lifeguard.core.Settings;
 import net.xlea99.lifeguard.core.Side;
 import net.xlea99.lifeguard.core.Switch;
-import net.xlea99.lifeguard.core.Taste;
 
 /**
  * What the filter column has ticked. Within a group any ticked chip matches; across groups all of them must; a group
@@ -23,8 +22,10 @@ import net.xlea99.lifeguard.core.Taste;
 final class Filters {
     enum State { ON, OFF, OVERRIDDEN }
 
+    private final MenuRule rule;
     final Set<EntryClass> classes = EnumSet.noneOf(EntryClass.class);
-    final Set<Taste> tastes = EnumSet.noneOf(Taste.class);
+    /** Ticked badge ids ({@link MenuRule.Badge#id()}). */
+    final Set<String> badges = new HashSet<>();
     final Set<Side> sides = EnumSet.noneOf(Side.class);
     final Set<State> states = EnumSet.noneOf(State.class);
     final Set<String> mods = new HashSet<>();
@@ -32,14 +33,18 @@ final class Filters {
     /** A viewing preference rather than a filter: Clear leaves it alone. */
     boolean includeMissing;
 
+    Filters(MenuRule rule) {
+        this.rule = rule;
+    }
+
     boolean any() {
-        return !classes.isEmpty() || !tastes.isEmpty() || !sides.isEmpty() || !states.isEmpty() || !mods.isEmpty()
+        return !classes.isEmpty() || !badges.isEmpty() || !sides.isEmpty() || !states.isEmpty() || !mods.isEmpty()
             || !search.isBlank();
     }
 
     void clear() {
         classes.clear();
-        tastes.clear();
+        badges.clear();
         sides.clear();
         states.clear();
         mods.clear();
@@ -66,7 +71,7 @@ final class Filters {
             return false;
         if (!classes.isEmpty() && !classes.contains(entry.kind()))
             return false;
-        if (!tastes.isEmpty() && !tastes.contains(entry.taste()))
+        if (!badges.isEmpty() && !badges.contains(badgeId(entry)))
             return false;
         if (!sides.isEmpty() && !sides.contains(entry.side()))
             return false;
@@ -75,6 +80,11 @@ final class Filters {
         if (!states.isEmpty() && !matchesState(entry, draft, installed))
             return false;
         return search.isBlank() || matchesSearch(entry);
+    }
+
+    private String badgeId(Entry entry) {
+        MenuRule.Badge badge = rule.badge(entry);
+        return badge == null ? null : badge.id();
     }
 
     /** Whether this entry was asked for directly: a ticked mod it (or one it's listed under) needs, or a search hit. */

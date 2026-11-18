@@ -17,16 +17,16 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.xlea99.lifeguard.boot.Boot;
 import net.xlea99.lifeguard.core.Entry;
-import net.xlea99.lifeguard.core.Profile;
 import net.xlea99.lifeguard.core.Side;
 import net.xlea99.lifeguard.core.Switch;
-import net.xlea99.lifeguard.core.Taste;
 import org.lwjgl.glfw.GLFW;
 
 /**
- * Lifeguard's menu: a profile bar across the top, the filters on the left, the entries in the middle, the selected
- * entry's details on the right, Done and Cancel at the bottom.
+ * A mod's menu: its auto rule's setting across the top (Lifeguard: the profile bar; none for a plain mod), the filters on
+ * the left, the entries in the middle, the selected entry's details on the right, Done and Cancel at the bottom. What
+ * the mod's rule adds (badges, the bar's names, questions asked first) comes from its {@link MenuRule}.
  *
  * <p>Everything edits a draft. Done (or Esc, as in vanilla's own option screens) writes it to the config files and
  * Cancel throws it away; either way nothing changes until the next restart, and the status line says when one would.
@@ -35,15 +35,20 @@ public final class LifeguardScreen extends Screen {
     private static final int BAR_TOP = 22;
     private static final int STATUS_TOP = 48;
     private static final int BODY_TOP = 62;
+    // Without a setting there's no bar: the status line and the body move up into its place.
+    private static final int NO_BAR_SHIFT = STATUS_TOP - BAR_TOP;
     private static final int FOOTER = 36;
     private static final int GAP = 6;
 
     private final Screen parent;
+    private final MenuRule rule;
     private final MenuModel model = new MenuModel();
-    private final List<Button> profileButtons = new ArrayList<>();
+    private final List<Button> choiceButtons = new ArrayList<>();
     private final DetailsPane details = new DetailsPane(this);
-    private final Filters filters = new Filters();
-    private final FilterPane filterPane = new FilterPane(this, filters);
+    private final Filters filters;
+    private final FilterPane filterPane;
+    private int statusTop;
+    private int bodyTop;
     private EntryList list;
     private Button resetButton;
     private Entry selected;
@@ -51,13 +56,20 @@ public final class LifeguardScreen extends Screen {
     // "/" focuses the search box on key press; the character that follows must not land in it.
     private boolean swallowSlash;
 
-    public LifeguardScreen(Screen parent) {
-        super(Component.translatable("lifeguard.menu.title"));
+    public LifeguardScreen(Screen parent, MenuRule rule) {
+        super(Component.translatable(Boot.registry().owner().menuTitleKey()));
         this.parent = parent;
+        this.rule = rule;
+        this.filters = new Filters(rule);
+        this.filterPane = new FilterPane(this, filters);
     }
 
     MenuModel model() {
         return model;
+    }
+
+    MenuRule rule() {
+        return rule;
     }
 
     Font font() {
@@ -70,34 +82,37 @@ public final class LifeguardScreen extends Screen {
 
     @Override
     protected void init() {
-        profileButtons.clear();
-        Profile[] profiles = Profile.values();
+        choiceButtons.clear();
+        List<String> choices = model.ruleChoices();
+        int shift = choices.isEmpty() ? NO_BAR_SHIFT : 0;
+        statusTop = STATUS_TOP - shift;
+        bodyTop = BODY_TOP - shift;
         int gap = 4;
-        int buttonWidth = Math.min(110, (width - 40 - gap * (profiles.length - 1)) / profiles.length);
-        int barLeft = (width - (buttonWidth * profiles.length + gap * (profiles.length - 1))) / 2;
-        for (int i = 0; i < profiles.length; i++) {
-            Profile profile = profiles[i];
-            profileButtons.add(addRenderableWidget(Button.builder(profileName(profile), button -> pickProfile(profile))
+        int buttonWidth = choices.isEmpty() ? 0 : Math.min(110, (width - 40 - gap * (choices.size() - 1)) / choices.size());
+        int barLeft = (width - (buttonWidth * choices.size() + gap * (choices.size() - 1))) / 2;
+        for (int i = 0; i < choices.size(); i++) {
+            String choice = choices.get(i);
+            choiceButtons.add(addRenderableWidget(Button.builder(rule.choiceName(choice), button -> pickChoice(choice))
                 .bounds(barLeft + i * (buttonWidth + gap), BAR_TOP, buttonWidth, 20).build()));
         }
 
         // Three panes: filters, entries, details. The entries get whatever the other two leave.
-        int bodyHeight = height - BODY_TOP - FOOTER;
+        int bodyHeight = height - bodyTop - FOOTER;
         int filtersWidth = Math.max(96, Math.min(140, (int) (width * 0.2)));
         int detailsWidth = Math.max(150, Math.min(280, (int) (width * 0.3)));
         int listWidth = width - filtersWidth - detailsWidth - GAP * 4;
-        filterPane.layout(GAP, BODY_TOP, filtersWidth, bodyHeight);
+        filterPane.layout(GAP, bodyTop, filtersWidth, bodyHeight);
         // The column header is pinned above the rows; the list itself starts below it and scrolls under it.
         list = addRenderableWidget(new EntryList(minecraft, listWidth, bodyHeight - EntryList.HEADER_HEIGHT,
-            BODY_TOP + EntryList.HEADER_HEIGHT, this));
+            bodyTop + EntryList.HEADER_HEIGHT, this));
         list.setX(GAP * 2 + filtersWidth);
-        details.setBounds(width - detailsWidth - GAP, BODY_TOP, detailsWidth, bodyHeight);
+        details.setBounds(width - detailsWidth - GAP, bodyTop, detailsWidth, bodyHeight);
         rebuildRows();
         details.show(selected);
 
         int footerWidth = 104;
         int footerLeft = width / 2 - (footerWidth * 3 + 8) / 2;
-        resetButton = addRenderableWidget(Button.builder(Component.translatable("lifeguard.menu.reset"),
+        resetButton = addRenderableWidget(Button.builder(Component.translatable("guppylib.menu.reset"),
             button -> confirmReset()).bounds(footerLeft, height - 28, footerWidth, 20).build());
         addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, button -> onClose())
             .bounds(footerLeft + footerWidth + 4, height - 28, footerWidth, 20).build());
@@ -108,32 +123,30 @@ public final class LifeguardScreen extends Screen {
 
     // --- choices that ask first ---------------------------------------------------------------------------------------
 
-    /** Off the Deep End names what it would turn on before it does; every other profile applies at once. */
-    private void pickProfile(Profile profile) {
-        List<Entry> turningOn = model.wouldTurnOn(profile);
-        if (profile != Profile.OFF_THE_DEEP_END || turningOn.isEmpty()) {
-            applyProfile(profile);
+    /** A choice applies at once unless the rule asks first (Lifeguard: Off the Deep End names what it would turn on). */
+    private void pickChoice(String choice) {
+        MenuRule.Confirmation question = rule.confirmChoice(choice, model.wouldTurnOn(choice));
+        if (question == null) {
+            applyChoice(choice);
             return;
         }
-        MutableComponent names = Component.empty();
-        int shown = Math.min(turningOn.size(), 8);
-        for (int i = 0; i < shown; i++)
-            names.append(i == 0 ? "" : ", ").append(Component.translatable(turningOn.get(i).nameKey()));
-        if (turningOn.size() > shown)
-            names.append(Component.translatable("lifeguard.menu.confirm.and_more", turningOn.size() - shown));
-        minecraft.setScreen(new ConfirmScreen(yes -> {
-            if (yes)
-                applyProfile(profile);
-            minecraft.setScreen(this);
-        }, Component.translatable("lifeguard.menu.confirm.deep_end.title"),
-            Component.translatable("lifeguard.menu.confirm.deep_end.message", turningOn.size(), names)));
+        ask(question, () -> applyChoice(choice));
     }
 
-    private void applyProfile(Profile profile) {
+    private void applyChoice(String choice) {
         Map<Entry, Boolean> before = activeNow();
-        model.pickProfile(profile);
+        model.pickChoice(choice);
         startRipple(before);
         refresh();
+    }
+
+    /** Asks, and on yes does it; either way back to the menu. */
+    private void ask(MenuRule.Confirmation question, Runnable onYes) {
+        minecraft.setScreen(new ConfirmScreen(yes -> {
+            if (yes)
+                onYes.run();
+            minecraft.setScreen(this);
+        }, question.title(), question.message()));
     }
 
     /** One step of an entry's switch: forward from a left click or the space bar, backward from a right click. */
@@ -142,21 +155,19 @@ public final class LifeguardScreen extends Screen {
     }
 
     /**
-     * Every change to a switch comes through here. Landing a dangerous entry on On asks first, quoting its warning,
-     * whichever way the player got there: it's the only way such an entry is ever on.
+     * Every change to a switch comes through here, so a rule's question before landing on On (Lifeguard: a dangerous
+     * entry, quoting its warning) is asked whichever way the player got there.
      */
     void setSwitch(Entry entry, Switch target) {
         if (model.locked(entry))
             return;
-        if (entry.taste() == Taste.DANGEROUS && target == Switch.ON && model.draft().setting(entry) != Switch.ON) {
-            minecraft.setScreen(new ConfirmScreen(yes -> {
-                if (yes) {
-                    model.set(entry, target);
-                    refresh();
-                }
-                minecraft.setScreen(this);
-            }, Component.translatable("lifeguard.menu.confirm.dangerous.title", Component.translatable(entry.nameKey())),
-                Component.translatable(entry.descKey())));
+        MenuRule.Confirmation question = target == Switch.ON && model.draft().setting(entry) != Switch.ON
+            ? rule.confirmOn(entry) : null;
+        if (question != null) {
+            ask(question, () -> {
+                model.set(entry, target);
+                refresh();
+            });
             return;
         }
         model.set(entry, target);
@@ -175,8 +186,7 @@ public final class LifeguardScreen extends Screen {
                 refresh();
             }
             minecraft.setScreen(this);
-        }, Component.translatable("lifeguard.menu.confirm.reset.title"),
-            Component.translatable("lifeguard.menu.confirm.reset.message", count)));
+        }, Component.translatable("guppylib.menu.confirm.reset.title"), rule.resetMessage(count)));
     }
 
     // --- the ripple ---------------------------------------------------------------------------------------------------
@@ -267,31 +277,27 @@ public final class LifeguardScreen extends Screen {
         removeWidget(widget);
     }
 
-    /** Re-labels what depends on the draft: the profile buttons (the picked one highlighted). Rows redraw themselves. */
+    /** Re-labels what depends on the draft: the setting's buttons (the picked one highlighted). Rows redraw themselves. */
     void refresh() {
-        Optional<Profile> shown = model.shownProfile();
-        Profile[] profiles = Profile.values();
-        for (int i = 0; i < profiles.length; i++) {
-            MutableComponent name = profileName(profiles[i]);
-            if (shown.isPresent() && shown.get() == profiles[i])
+        Optional<String> shown = model.shownChoice();
+        List<String> choices = model.ruleChoices();
+        for (int i = 0; i < choices.size(); i++) {
+            MutableComponent name = rule.choiceName(choices.get(i)).copy();
+            if (shown.isPresent() && shown.get().equals(choices.get(i)))
                 name = Component.literal("▶ ").append(name).append(" ◀")
                     .withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD);
-            profileButtons.get(i).setMessage(name);
+            choiceButtons.get(i).setMessage(name);
         }
         resetButton.active = model.resettableOverrides() > 0;
         saveProblem = null;
-    }
-
-    private static MutableComponent profileName(Profile profile) {
-        return Component.translatable("lifeguard.profile." + profile.id());
     }
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         super.render(graphics, mouseX, mouseY, partialTick);
         graphics.drawCenteredString(font, title, width / 2, 8, 0xFFFFFFFF);
-        graphics.drawCenteredString(font, status(), width / 2, STATUS_TOP, 0xFFB0B0B0);
-        list.renderHeader(graphics, BODY_TOP, mouseX, mouseY);
+        graphics.drawCenteredString(font, status(), width / 2, statusTop, 0xFFB0B0B0);
+        list.renderHeader(graphics, bodyTop, mouseX, mouseY);
         filterPane.render(graphics, mouseX, mouseY);
         details.render(graphics, mouseX, mouseY);
     }
@@ -396,18 +402,23 @@ public final class LifeguardScreen extends Screen {
     private Component status() {
         if (saveProblem != null)
             return saveProblem;
-        MutableComponent line = model.shownProfile()
-            .<MutableComponent>map(LifeguardScreen::profileName)
-            .orElseGet(() -> Component.translatable("lifeguard.menu.status.mixed",
-                profileName(model.draft().profile(Side.CLIENT)), profileName(model.draft().profile(Side.SERVER))));
-        line = Component.translatable("lifeguard.menu.status", line, model.activeCount(), model.overrides());
+        MutableComponent line;
+        if (model.hasRuleSetting()) {
+            Component choice = model.shownChoice()
+                .map(rule::choiceName)
+                .orElseGet(() -> Component.translatable("guppylib.menu.status.mixed",
+                    rule.choiceName(model.draft().ruleChoice(Side.CLIENT)), rule.choiceName(model.draft().ruleChoice(Side.SERVER))));
+            line = Component.translatable("guppylib.menu.status", choice, model.activeCount(), model.overrides());
+        } else {
+            line = Component.translatable("guppylib.menu.status.plain", model.activeCount(), model.overrides());
+        }
         if (model.following())
-            line.append(" · ").append(Component.translatable("lifeguard.menu.following"));
+            line.append(" · ").append(Component.translatable("guppylib.menu.following"));
         Optional<String> broken = model.brokenFile(Side.SERVER).or(() -> model.brokenFile(Side.CLIENT));
         if (broken.isPresent())
-            line.append(" · ").append(Component.translatable("lifeguard.menu.broken", broken.get()).withStyle(ChatFormatting.RED));
+            line.append(" · ").append(Component.translatable("guppylib.menu.broken", broken.get()).withStyle(ChatFormatting.RED));
         else if (model.restartPending())
-            line.append(" · ").append(Component.translatable("lifeguard.menu.restart").withStyle(ChatFormatting.YELLOW));
+            line.append(" · ").append(Component.translatable("guppylib.menu.restart").withStyle(ChatFormatting.YELLOW));
         return line;
     }
 
@@ -419,7 +430,7 @@ public final class LifeguardScreen extends Screen {
     public void onClose() {
         Optional<String> problem = model.save();
         if (problem.isPresent()) {
-            saveProblem = Component.translatable("lifeguard.menu.save_failed", problem.get()).withStyle(ChatFormatting.RED);
+            saveProblem = Component.translatable("guppylib.menu.save_failed", problem.get()).withStyle(ChatFormatting.RED);
             return;
         }
         MenuModel.Summary summary = model.summary();

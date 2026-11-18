@@ -31,33 +31,29 @@ final class RestartSummaryScreen extends Screen {
     private int scroll;
 
     RestartSummaryScreen(LifeguardScreen menu, Screen parent, MenuModel.Summary summary) {
-        super(Component.translatable("lifeguard.menu.summary.title"));
+        super(Component.translatable("guppylib.menu.summary.title"));
         this.menu = menu;
         this.parent = parent;
         build(summary);
     }
 
     private void build(MenuModel.Summary summary) {
-        for (Side side : summary.profileSides())
-            parts.add(Component.translatable("lifeguard.menu.summary.profile",
-                Component.translatable("lifeguard.side." + side.id()),
-                Component.translatable("lifeguard.profile." + menu.model().liveProfile(side).id()),
-                Component.translatable("lifeguard.profile." + menu.model().draft().profile(side).id())
-                    .withStyle(ChatFormatting.YELLOW)));
+        for (Side side : summary.choiceSides())
+            parts.add(menu.rule().settingChange(side, menu.model().liveChoice(side), menu.model().draft().ruleChoice(side)));
         if (!summary.turningOn().isEmpty()) {
-            parts.add(Component.translatable("lifeguard.menu.summary.on", summary.turningOn().size())
+            parts.add(Component.translatable("guppylib.menu.summary.on", summary.turningOn().size())
                 .withStyle(ChatFormatting.GREEN));
             for (Entry entry : summary.turningOn())
                 parts.add(Component.literal("  + ").append(Component.translatable(entry.nameKey())).withStyle(ChatFormatting.GREEN));
         }
         if (!summary.turningOff().isEmpty()) {
-            parts.add(Component.translatable("lifeguard.menu.summary.off", summary.turningOff().size())
+            parts.add(Component.translatable("guppylib.menu.summary.off", summary.turningOff().size())
                 .withStyle(ChatFormatting.RED));
             for (Entry entry : summary.turningOff())
                 parts.add(Component.literal("  − ").append(Component.translatable(entry.nameKey())).withStyle(ChatFormatting.RED));
         }
         if (!summary.values().isEmpty()) {
-            parts.add(Component.translatable("lifeguard.menu.summary.values").withStyle(ChatFormatting.AQUA));
+            parts.add(Component.translatable("guppylib.menu.summary.values").withStyle(ChatFormatting.AQUA));
             for (MenuModel.ValueChange change : summary.values()) {
                 MutableComponent line = Component.literal("  ").append(Component.translatable(change.entry().nameKey()))
                     .append(" › ").append(Component.translatable(change.value().nameKey()))
@@ -78,11 +74,11 @@ final class RestartSummaryScreen extends Screen {
         int buttonWidth = 110;
         int y = height - 28;
         int x = width / 2 - (buttonWidth * 3 + 8) / 2;
-        addRenderableWidget(Button.builder(Component.translatable("lifeguard.menu.summary.quit"), button -> quitGame())
+        addRenderableWidget(Button.builder(Component.translatable("guppylib.menu.summary.quit"), button -> quitGame())
             .bounds(x, y, buttonWidth, 20).build());
-        addRenderableWidget(Button.builder(Component.translatable("lifeguard.menu.summary.later"),
+        addRenderableWidget(Button.builder(Component.translatable("guppylib.menu.summary.later"),
             button -> minecraft.setScreen(parent)).bounds(x + buttonWidth + 4, y, buttonWidth, 20).build());
-        addRenderableWidget(Button.builder(Component.translatable("lifeguard.menu.summary.keep_editing"),
+        addRenderableWidget(Button.builder(Component.translatable("guppylib.menu.summary.keep_editing"),
             button -> minecraft.setScreen(menu)).bounds(x + (buttonWidth + 4) * 2, y, buttonWidth, 20).build());
     }
 
@@ -107,7 +103,7 @@ final class RestartSummaryScreen extends Screen {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         super.render(graphics, mouseX, mouseY, partialTick);
         graphics.drawCenteredString(font, title, width / 2, 12, 0xFFFFFFFF);
-        graphics.drawCenteredString(font, Component.translatable("lifeguard.menu.summary.subtitle"), width / 2, 26, 0xFFA0A0A0);
+        graphics.drawCenteredString(font, Component.translatable("guppylib.menu.summary.subtitle"), width / 2, 26, 0xFFA0A0A0);
         int left = width / 2 - Math.min(width - 40, 420) / 2;
         int bottom = height - 36;
         graphics.enableScissor(0, LIST_TOP, width, bottom);

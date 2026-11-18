@@ -10,6 +10,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.xlea99.lifeguard.boot.Boot;
 import net.xlea99.lifeguard.core.EntryClass;
 import net.xlea99.lifeguard.core.Side;
 import net.xlea99.lifeguard.core.Switch;
@@ -190,18 +191,18 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
         graphics.fill(getX(), top + HEADER_HEIGHT - 1, getRight(), top + HEADER_HEIGHT, RULE);
         int y = top + 2;
         int color = 0xFF8A8A8A;
-        Component entryTitle = Component.translatable("lifeguard.menu.col.entry");
+        Component entryTitle = Component.translatable("guppylib.menu.col.entry");
         graphics.drawString(font, entryTitle, glyphLeft(), y, color, false);
         // Expand all and collapse all, after the title: they act on the mod groups below.
         boolean usable = !screen.collapseIgnored();
         expandAllLeft = glyphLeft() + font.width(entryTitle) + 8;
         collapseAllLeft = expandAllLeft + font.width(EXPAND_ALL) + 6;
         headerTop = top;
-        drawHeaderButton(graphics, EXPAND_ALL, expandAllLeft, y, usable, mouseX, mouseY, "lifeguard.menu.expand_all");
-        drawHeaderButton(graphics, COLLAPSE_ALL, collapseAllLeft, y, usable, mouseX, mouseY, "lifeguard.menu.collapse_all");
-        graphics.drawString(font, Component.translatable("lifeguard.menu.col.class"), classLeft(left, width), y, color, false);
-        graphics.drawString(font, Component.translatable("lifeguard.menu.col.side"), sideLeft(left, width) + 2, y, color, false);
-        graphics.drawString(font, Component.translatable("lifeguard.menu.col.switch"), switchLeft(left, width) + 2, y, color, false);
+        drawHeaderButton(graphics, EXPAND_ALL, expandAllLeft, y, usable, mouseX, mouseY, "guppylib.menu.expand_all");
+        drawHeaderButton(graphics, COLLAPSE_ALL, collapseAllLeft, y, usable, mouseX, mouseY, "guppylib.menu.collapse_all");
+        graphics.drawString(font, Component.translatable("guppylib.menu.col.class"), classLeft(left, width), y, color, false);
+        graphics.drawString(font, Component.translatable("guppylib.menu.col.side"), sideLeft(left, width) + 2, y, color, false);
+        graphics.drawString(font, Component.translatable("guppylib.menu.col.switch"), switchLeft(left, width) + 2, y, color, false);
     }
 
     private static final String EXPAND_ALL = "▾▾";
@@ -263,12 +264,12 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
         Heading(MenuModel.Line line) {
             mod = line.headingMod();
             boolean installed = mod.equals(net.xlea99.lifeguard.core.Entry.MINECRAFT)
-                || mod.equals(net.xlea99.lifeguard.core.Entry.LIFEGUARD)
+                || mod.equals(Boot.registry().owner().id())
                 || screen.model().modInstalled(mod);
             MutableComponent name = Component.literal(MenuModel.modName(mod))
                 .append(Component.literal("  " + line.count()).withColor(0xFF7A7A7A));
             if (!installed)
-                name.append(Component.translatable("lifeguard.menu.group.not_installed").withColor(0xFF7A7A7A));
+                name.append(Component.translatable("guppylib.menu.group.not_installed").withColor(0xFF7A7A7A));
             text = name;
             color = installed ? 0xFFE0C060 : 0xFF8A7A50;
         }
@@ -333,12 +334,17 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
                 graphics.fill(getX(), top, getX() + getWidth() - 7, top + height, ripple);
             int textY = top + 2;
 
-            // Tree guides, then the taste glyph indented by depth, the collapse arrow, the name, and an aside if it fits.
+            // Tree guides, then the rule's badge (Lifeguard: the taste) indented by depth, the collapse arrow, the name,
+            // and an aside if it fits. A rule without badges puts the arrow where the badge would be.
             int base = glyphLeft();
             int glyphX = base + depth * INDENT;
             renderGuides(graphics, base, glyphX, top);
-            TasteGlyphs.draw(graphics, font, entry.taste(), glyphX, top + (height - TasteGlyphs.HEIGHT) / 2 + 1);
-            arrowLeft = glyphX + TasteGlyphs.width(font) + 3;
+            MenuRule rule = screen.rule();
+            MenuRule.Badge badge = rule.badge(entry);
+            int badgeWidth = Badges.width(font, rule);
+            if (badge != null)
+                Badges.draw(graphics, font, rule, badge, glyphX, top + (height - Badges.HEIGHT) / 2 + 1);
+            arrowLeft = glyphX + (badgeWidth == 0 ? 0 : badgeWidth + 3);
             if (!entry.shownBelow().isEmpty())
                 graphics.drawString(font, model.collapsed(entry) && !screen.collapseIgnored() ? "▸" : "▾", arrowLeft,
                     textY, 0xFF9A9A9A, false);
@@ -352,13 +358,13 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
             Component name = Component.translatable(entry.nameKey());
             graphics.drawString(font, font.substrByWidth(name, nameRight - textX).getString(), textX, textY, nameColor, false);
             boolean broken = MenuModel.brokenReason(entry) != null;
-            Component aside = broken ? Component.translatable("lifeguard.menu.entry_broken") : aside(missing);
+            Component aside = broken ? Component.translatable("guppylib.menu.entry_broken") : aside(missing);
             int afterName = textX + font.width(name) + 6;
             if (aside != null && afterName + font.width(aside) < nameRight)
                 graphics.drawString(font, aside, afterName, textY, broken ? 0xFFD07C7C : 0xFF666666, false);
 
             // Class and side cells.
-            String classCode = Component.translatable("lifeguard.class." + entry.kind().id() + ".code").getString();
+            String classCode = Component.translatable("guppylib.class." + entry.kind().id() + ".code").getString();
             graphics.fill(classX, top + 1, classX + CLASS_WIDTH, top + height - 1, classColor(entry.kind()));
             graphics.drawString(font, classCode, classX + (CLASS_WIDTH - font.width(classCode) + 1) / 2, textY, 0xFFFFFFFF, false);
             int sideX = sideLeft(left, width);
@@ -373,17 +379,17 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
 
             if (!hovering)
                 return;
-            if (mouseX >= glyphX && mouseX < glyphX + TasteGlyphs.width(font))
-                screen.setTooltipForNextRenderPass(Component.translatable("lifeguard.taste." + entry.taste().id()));
+            if (badge != null && mouseX >= glyphX && mouseX < glyphX + badgeWidth)
+                screen.setTooltipForNextRenderPass(badge.tooltip());
             else if (mouseX >= classX && mouseX < classX + CLASS_WIDTH)
-                screen.setTooltipForNextRenderPass(Component.translatable("lifeguard.class." + entry.kind().id()));
+                screen.setTooltipForNextRenderPass(Component.translatable("guppylib.class." + entry.kind().id()));
             else if (mouseX >= sideX && mouseX < sideX + SIDE_WIDTH)
                 screen.setTooltipForNextRenderPass(Component.translatable(serverLocked
-                    ? "lifeguard.menu.locked.server" : "lifeguard.side." + entry.side().id()));
+                    ? "guppylib.menu.locked.server" : "guppylib.side." + entry.side().id()));
             else if (mouseX >= switchX && model.locked(entry))
                 screen.setTooltipForNextRenderPass(lockReason(model));
             else if (mouseX >= switchX)
-                screen.setTooltipForNextRenderPass(Component.translatable("lifeguard.menu.switch.tooltip"));
+                screen.setTooltipForNextRenderPass(rule.switchTooltip());
         }
 
         /**
@@ -402,7 +408,7 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
             }
         }
 
-        /** Auto in dim gray (saying what the profile makes it), On in green, Off in red; dimmer still when locked. */
+        /** Auto in dim gray (saying what Auto makes it), On in green, Off in red; dimmer still when locked. */
         private void renderSwitch(GuiGraphics graphics, Font font, MenuModel model, int top, int height, int mouseX,
                                   int mouseY) {
             Switch setting = model.draft().setting(entry);
@@ -416,9 +422,9 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
             };
             String label = switch (setting) {
                 case AUTO -> Component.translatable(entry.switchedOnUnder(model.draft())
-                    ? "lifeguard.menu.switch.auto_on" : "lifeguard.menu.switch.auto_off").getString();
-                case ON -> Component.translatable("lifeguard.menu.switch.on").getString();
-                case OFF -> Component.translatable("lifeguard.menu.switch.off").getString();
+                    ? "guppylib.menu.switch.auto_on" : "guppylib.menu.switch.auto_off").getString();
+                case ON -> Component.translatable("guppylib.menu.switch.on").getString();
+                case OFF -> Component.translatable("guppylib.menu.switch.off").getString();
             };
             graphics.fill(switchX, top + 1, switchX + SWITCH_WIDTH, top + height - 1, locked ? 0xFF2A2A2A : fill);
             int textColor = locked ? 0xFF6A6A6A : setting == Switch.AUTO ? 0xFFB8B8B8 : 0xFFFFFFFF;
@@ -434,7 +440,7 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
                         names.append(", ");
                     names.append(Component.literal(MenuModel.modName(mods.get(i))));
                 }
-                return Component.translatable("lifeguard.menu.needs", names);
+                return Component.translatable("guppylib.menu.needs", names);
             }
             return null;
         }
@@ -445,9 +451,9 @@ final class EntryList extends ContainerObjectSelectionList<EntryList.Row> {
 
         private Component lockReason(MenuModel model) {
             return model.brokenFile(entry.side())
-                .<Component>map(file -> Component.translatable("lifeguard.menu.locked.broken", file))
+                .<Component>map(file -> Component.translatable("guppylib.menu.locked.broken", file))
                 .orElseGet(() -> Component.translatable(entry.side() == Side.SERVER
-                    ? "lifeguard.menu.locked.server" : "lifeguard.menu.locked.client"));
+                    ? "guppylib.menu.locked.server" : "guppylib.menu.locked.client"));
         }
 
         @Override

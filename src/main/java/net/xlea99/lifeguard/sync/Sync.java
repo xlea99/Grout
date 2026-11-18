@@ -15,9 +15,8 @@ import net.neoforged.neoforge.network.configuration.ICustomConfigurationTask;
 import net.neoforged.neoforge.network.event.RegisterConfigurationTasksEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
-import net.xlea99.lifeguard.Lifeguard;
+import net.xlea99.lifeguard.core.Library;
 import net.xlea99.lifeguard.boot.Boot;
-import net.xlea99.lifeguard.core.Entries;
 import net.xlea99.lifeguard.core.ServerSnapshot;
 
 /**
@@ -30,9 +29,9 @@ import net.xlea99.lifeguard.core.ServerSnapshot;
  */
 public final class Sync {
     private static final ConfigurationTask.Type TASK = new ConfigurationTask.Type(
-        ResourceLocation.fromNamespaceAndPath(Lifeguard.MODID, "send_server_entries"));
+        ResourceLocation.fromNamespaceAndPath(Library.ID, "send_server_entries"));
     private static final ConfigurationTask.Type SHAPE_TASK = new ConfigurationTask.Type(
-        ResourceLocation.fromNamespaceAndPath(Lifeguard.MODID, "check_registry_shape"));
+        ResourceLocation.fromNamespaceAndPath(Library.ID, "check_registry_shape"));
 
     private Sync() {
     }
@@ -89,19 +88,20 @@ public final class Sync {
         for (String id : local)
             if (!server.contains(id))
                 localOnly.add(entryName(id));
-        MutableComponent message = Component.translatable("lifeguard.disconnect.registry_shape");
+        String mod = Boot.registry().owner().name();
+        MutableComponent message = Component.translatable("guppylib.disconnect.registry_shape", mod);
         if (!serverOnly.isEmpty())
-            message.append("\n\n").append(Component.translatable("lifeguard.disconnect.registry_shape.server_only",
+            message.append("\n\n").append(Component.translatable("guppylib.disconnect.registry_shape.server_only",
                 joined(serverOnly)));
         if (!localOnly.isEmpty())
-            message.append("\n\n").append(Component.translatable("lifeguard.disconnect.registry_shape.local_only",
+            message.append("\n\n").append(Component.translatable("guppylib.disconnect.registry_shape.local_only",
                 joined(localOnly)));
-        return message.append("\n\n").append(Component.translatable("lifeguard.disconnect.registry_shape.fix"));
+        return message.append("\n\n").append(Component.translatable("guppylib.disconnect.registry_shape.fix", mod));
     }
 
     /** The entry's display name, or its raw id when this version doesn't have it (a newer server). */
     private static Component entryName(String id) {
-        return Entries.REGISTRY.get(id).<Component>map(entry -> Component.translatable(entry.nameKey()))
+        return Boot.registry().get(id).<Component>map(entry -> Component.translatable(entry.nameKey()))
             .orElse(Component.literal(id));
     }
 
@@ -118,7 +118,7 @@ public final class Sync {
     private record SendTask(ServerConfigurationPacketListener listener) implements ICustomConfigurationTask {
         @Override
         public void run(Consumer<CustomPacketPayload> sender) {
-            sender.accept(new SyncPayload(ServerSnapshot.capture(Entries.REGISTRY)));
+            sender.accept(new SyncPayload(ServerSnapshot.capture(Boot.registry())));
             // Nothing to wait for: the client applies it before the play phase starts, since packets arrive in order.
             listener.finishCurrentTask(TASK);
         }
@@ -148,9 +148,9 @@ public final class Sync {
         @Override
         public void run(Consumer<CustomPacketPayload> sender) {
             // Plain English: this client may not have Lifeguard's lang file.
-            listener.disconnect(Component.literal("This server runs Lifeguard entries that change blocks ("
+            listener.disconnect(Component.literal("This server runs " + Library.NAME + " entries that change blocks ("
                 + String.join(", ", Boot.loadedRegistryShapers())
-                + "), so it needs a client with an up-to-date Lifeguard and the same entries on."));
+                + "), so it needs a client with an up-to-date " + Library.NAME + " and the same entries on."));
         }
 
         @Override

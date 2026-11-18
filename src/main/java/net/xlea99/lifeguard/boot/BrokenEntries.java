@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.fml.loading.moddiscovery.ModInfo;
-import net.xlea99.lifeguard.core.Entries;
 import net.xlea99.lifeguard.core.Entry;
+import net.xlea99.lifeguard.core.Library;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Switches an entry off for the session because its code no longer fits what it hooks, and says so loudly: one ERROR
@@ -18,7 +17,7 @@ import org.slf4j.LoggerFactory;
  * <p>Runs in the mixin plugin, before Minecraft's classes may load: keep Minecraft out of this class.
  */
 public final class BrokenEntries {
-    private static final Logger LOGGER = LoggerFactory.getLogger("Lifeguard");
+    private static final Logger LOGGER = Library.LOGGER;
 
     private BrokenEntries() {
     }
@@ -28,15 +27,16 @@ public final class BrokenEntries {
         if (entry.broken()) {
             // Runtime code can find the same thing on every call: say it once.
             if (!what.equals(entry.brokenReason()))
-                LOGGER.error("Lifeguard: {} is also broken by: {}", entry.id(), what);
+                LOGGER.error("{}: {} is also broken by: {}", Library.NAME, entry.id(), what);
             return;
         }
         entry.markBroken(what);
         List<String> dark = new ArrayList<>();
-        for (Entry dependent : Entries.REGISTRY.dependents(entry))
+        // Asked of the entry itself, not of Boot: the preflight marks entries while Boot is still starting.
+        for (Entry dependent : entry.dependents())
             dark.add(dependent.id());
-        LOGGER.error("Lifeguard: {} is BROKEN, so it's off this session: {} ({}).{} Its setting is kept: it comes back"
-                + " once a version that fits is installed.", entry.id(), what, versions(entry),
+        LOGGER.error("{}: {} is BROKEN, so it's off this session: {} ({}).{} Its setting is kept: it comes back"
+                + " once a version that fits is installed.", Library.NAME, entry.id(), what, versions(entry),
             dark.isEmpty() ? "" : " Off with it, since they need it: " + String.join(", ", dark) + ".");
     }
 

@@ -20,22 +20,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import net.xlea99.lifeguard.core.AutoRule;
 import net.xlea99.lifeguard.core.Entry;
 import net.xlea99.lifeguard.core.EntryClass;
-import net.xlea99.lifeguard.core.Profile;
 import net.xlea99.lifeguard.core.Registry;
 import net.xlea99.lifeguard.core.Settings;
 import net.xlea99.lifeguard.core.SettingsView;
 import net.xlea99.lifeguard.core.Side;
 import net.xlea99.lifeguard.core.SubValue;
 import net.xlea99.lifeguard.core.Switch;
-import net.xlea99.lifeguard.core.Taste;
 
 /**
- * One side's config file: {@code lifeguard-client.toml} or {@code lifeguard-server.toml}. Both are global, never per
+ * One side's config file: {@code <mod id>-client.toml} or {@code <mod id>-server.toml}. Both are global, never per
  * world.
  *
- * <p>The file holds the side's profile and one tri-state switch per entry, plus any sub-values. Its text is generated
+ * <p>The file holds the side's choice of the mod's {@link AutoRule} setting (when its rule has one, e.g.
+ * {@code profile = "tasteful"}) and one tri-state switch per entry, plus any sub-values. The rule supplies its own words
+ * for the comments. Its text is generated
  * from the declarations every time, comments included, so the comments can't drift from the code; only the values are
  * the player's. Each entry is one table, {@code [<class section>.<id>]}: where the menu lists an entry plays no part, so
  * moving it there never moves the player's choice. Reading looks for an entry under every class section, so re-classing
@@ -46,7 +47,6 @@ import net.xlea99.lifeguard.core.Taste;
  * problem is reported, and the file waits for the player to fix it.
  */
 public final class EntryConfig {
-    static final String PROFILE_KEY = "profile";
     static final String ENABLED_KEY = "enabled";
     private static final int WRAP = 110;
 
@@ -81,7 +81,7 @@ public final class EntryConfig {
 
     // --- reading -------------------------------------------------------------------------------------------------------
 
-    /** Startup: reads the file into the live registry (this side's profile, switches and sub-values). */
+    /** Startup: reads the file into the live registry (this side's rule setting, switches and sub-values). */
     public List<String> load() throws IOException {
         Settings settings = Settings.copyOf(registry);
         List<String> warnings = readInto(settings);
@@ -106,7 +106,7 @@ public final class EntryConfig {
             new TomlParser().parse(new StringReader(text), root, ParsingMode.REPLACE);
         } catch (ParsingException e) {
             broken = true;
-            return List.of(file.getFileName() + " isn't valid TOML, so Lifeguard is using defaults this session and"
+            return List.of(file.getFileName() + " isn't valid TOML, so " + registry.owner().name() + " is using defaults this session and"
                 + " won't touch the file until it's fixed: " + e.getMessage());
         }
         return apply(root, target);
@@ -116,15 +116,16 @@ public final class EntryConfig {
         List<String> warnings = new ArrayList<>();
         Set<List<String>> consumed = new HashSet<>();
 
-        Object profileValue = root.getRaw(List.of(PROFILE_KEY));
-        if (profileValue != null) {
-            consumed.add(List.of(PROFILE_KEY));
-            Optional<Profile> profile = profileValue instanceof String id ? Profile.byId(id) : Optional.empty();
-            if (profile.isPresent())
-                target.setProfile(side, profile.get());
+        // A rule without a setting has no line here; one left in the file (from a rule that had one) is kept as unknown.
+        AutoRule.Setting setting = registry.rule().setting();
+        Object chosen = setting == null ? null : root.getRaw(List.of(setting.key()));
+        if (chosen != null) {
+            consumed.add(List.of(setting.key()));
+            if (chosen instanceof String id && setting.accepts(id))
+                target.setRuleChoice(side, id);
             else
-                warnings.add("profile = " + Toml.value(profileValue) + " isn't a profile; using "
-                    + Profile.DEFAULT.id() + ". Pick one of: " + profileIds());
+                warnings.add(setting.key() + " = " + Toml.value(chosen) + " isn't a " + setting.key() + "; using "
+                    + setting.defaultChoice() + ". Pick one of: " + choices(setting));
         }
 
         for (Entry entry : sideEntries())
@@ -133,7 +134,7 @@ public final class EntryConfig {
         collectUnknown(root, new ArrayList<>(), consumed);
         for (Map.Entry<List<String>, Map<String, Object>> table : unknown.entrySet())
             for (String key : table.getValue().keySet())
-                warnings.add(dotted(table.getKey(), key) + " isn't a setting of this version of Lifeguard; kept as is");
+                warnings.add(dotted(table.getKey(), key) + " isn't a setting of this version of " + registry.owner().name() + "; kept as is");
         return warnings;
     }
 
@@ -234,13 +235,20 @@ public final class EntryConfig {
     }
 
     public String render(SettingsView view) {
+        AutoRule rule = registry.rule();
+        AutoRule.Setting setting = rule.setting();
         StringBuilder out = new StringBuilder();
-        out.append("# Lifeguard ").append(side.id()).append(" settings").append('\n');
-        out.append("# Each entry's \"enabled\" is auto, on or off. Auto follows the profile; on and off override it.").append('\n');
+        out.append("# ").append(registry.owner().name()).append(' ').append(side.id()).append(" settings").append('\n');
+        out.append("# Each entry's \"enabled\" is auto, on or off. Auto follows ").append(rule.autoFollows())
+            .append("; on and off override it.").append('\n');
         out.append("# Comments are rewritten from the mod on every start; only the values are yours. Changes apply after a restart.").append('\n');
-        out.append('\n');
-        out.append("# ").append(profileIds()).append('\n');
-        out.append(PROFILE_KEY).append(" = ").append(Toml.string(view.profile(side).id())).append('\n');
+        if (setting != null) {
+            out.append('\n');
+            out.append("# ").append(choices(setting)).append('\n');
+            out.append(Toml.key(setting.key())).append(" = ").append(Toml.string(view.ruleChoice(side))).append('\n');
+        } else if (unknown.containsKey(List.of())) {
+            out.append('\n');
+        }
         writeUnknown(out, List.of(), 0);
 
         Set<List<String>> written = new HashSet<>();
@@ -255,7 +263,7 @@ public final class EntryConfig {
             if (written.contains(path))
                 continue;
             if (!header) {
-                out.append('\n').append("# Not settings of this version of Lifeguard. Kept so a later version can use them.").append('\n');
+                out.append('\n').append("# Not settings of this version of " + registry.owner().name() + ". Kept so a later version can use them.").append('\n');
                 header = true;
             }
             out.append('\n').append('[').append(Toml.tablePath(path)).append(']').append('\n');
@@ -287,7 +295,7 @@ public final class EntryConfig {
             return;
         String indent = "\t".repeat(depth);
         for (Map.Entry<String, Object> leaf : leaves.entrySet()) {
-            comment(out, indent, "Not a setting of this version of Lifeguard; kept.");
+            comment(out, indent, "Not a setting of this version of " + registry.owner().name() + "; kept.");
             out.append(indent).append(Toml.key(leaf.getKey())).append(" = ").append(Toml.value(leaf.getValue())).append('\n');
         }
     }
@@ -299,24 +307,21 @@ public final class EntryConfig {
         } else {
             List<String> names = new ArrayList<>();
             for (String modId : entry.requiredMods())
-                names.add(texts.modName(modId));
+                names.add(texts.modName(registry.owner(), modId));
             needs = "needs " + String.join(", ", names);
         }
-        return capitalized(entry.kind().id()) + " · " + entry.taste().id().replace('_', ' ') + " · " + needs;
+        String tag = registry.rule().summaryTag(entry);
+        return capitalized(entry.kind().id()) + (tag == null ? "" : " · " + tag) + " · " + needs;
     }
 
     private String autoNote(Entry entry, SettingsView view) {
-        String note;
-        if (entry.taste() == Taste.DANGEROUS)
-            note = "auto = always off: only \"on\" turns a dangerous entry on";
-        else
-            note = "auto = " + (view.profile(side).turnsOn(entry.taste()) ? "on" : "off") + " under this profile";
+        String note = registry.rule().autoNote(entry, view.ruleChoice(side));
         List<String> asides = new ArrayList<>();
         List<String> missing = entry.missingMods();
         if (!missing.isEmpty()) {
             List<String> names = new ArrayList<>();
             for (String modId : missing)
-                names.add(texts.modName(modId));
+                names.add(texts.modName(registry.owner(), modId));
             asides.add("does nothing: " + String.join(", ", names) + (names.size() == 1 ? " isn't" : " aren't") + " installed");
         }
         return asides.isEmpty() ? note : note + " (" + String.join("; ", asides) + ")";
@@ -398,11 +403,8 @@ public final class EntryConfig {
         return path.isEmpty() ? key : Toml.tablePath(path) + "." + Toml.key(key);
     }
 
-    private static String profileIds() {
-        List<String> ids = new ArrayList<>();
-        for (Profile profile : Profile.values())
-            ids.add(profile.id());
-        return String.join(" | ", ids);
+    private static String choices(AutoRule.Setting setting) {
+        return String.join(" | ", setting.choices());
     }
 
     private static String capitalized(String text) {

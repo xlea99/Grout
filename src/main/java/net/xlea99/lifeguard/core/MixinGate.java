@@ -3,14 +3,14 @@ package net.xlea99.lifeguard.core;
 import java.util.List;
 
 /**
- * Which of Lifeguard's mixins get applied. Every mixin lives in its entry's package, named after the entry's id:
- * {@code net.xlea99.lifeguard.mixin.supps_jukebox_speakers.SpeakerBlockMixin} belongs to {@code supps_jukebox_speakers}.
+ * Which of a mod's mixins get applied. Every mixin lives in its entry's package under the mod's mixin root
+ * ({@link ModSpec#mixinRoot}), named after the entry's id: {@code <root>supps_jukebox_speakers.SpeakerBlockMixin}
+ * belongs to {@code supps_jukebox_speakers}.
  * The package is the whole link, so nothing has to be declared twice and a mixin can't end up ungated by accident.
  *
  * <p>Kept free of the mixin library itself so the rule can be tested without a game; the mixin plugin only asks it.
  */
 public final class MixinGate {
-    public static final String MIXIN_ROOT = "net.xlea99.lifeguard.mixin.";
     /** Mixins in {@code mixin.core} are infrastructure, always applied. */
     public static final String CORE_PACKAGE = "core";
     /** Mixins in {@code mixin.shared.<group>} serve every entry that {@link Entry#sharesMixins shares} the group. */
@@ -35,7 +35,7 @@ public final class MixinGate {
      * @throws IllegalStateException for a mixin outside any entry's package: every mixin belongs to an entry
      */
     public static boolean shouldApply(String mixinClassName, Registry registry, boolean dedicatedServer) {
-        String entryPackage = entryPackage(mixinClassName);
+        String entryPackage = entryPackage(registry.owner().mixinRoot(), mixinClassName);
         if (entryPackage.equals(CORE_PACKAGE) || entryPackage.startsWith(CORE_PACKAGE + "."))
             return true;
         if (entryPackage.startsWith(SHARED_PACKAGE + ".")) {
@@ -60,10 +60,10 @@ public final class MixinGate {
      * it on.
      */
     public static boolean couldApply(String mixinClassName, Registry registry, boolean dedicatedServer) {
-        if (isCore(mixinClassName))
+        if (isCore(mixinClassName, registry))
             return true;
         for (Entry owner : owners(mixinClassName, registry)) {
-            String entryPackage = entryPackage(mixinClassName);
+            String entryPackage = entryPackage(registry.owner().mixinRoot(), mixinClassName);
             boolean groupModsThere = !entryPackage.startsWith(SHARED_PACKAGE + ".") || owner.sharedMixins()
                 .get(entryPackage.substring(SHARED_PACKAGE.length() + 1)).stream().allMatch(registry::modPresent);
             if (groupModsThere && owner.installed() && !(dedicatedServer && owner.side() == Side.CLIENT))
@@ -73,16 +73,16 @@ public final class MixinGate {
     }
 
     /** Whether a mixin is always-on infrastructure ({@code mixin.core}): owned by no entry. */
-    public static boolean isCore(String mixinClassName) {
-        String entryPackage = entryPackage(mixinClassName);
+    public static boolean isCore(String mixinClassName, Registry registry) {
+        String entryPackage = entryPackage(registry.owner().mixinRoot(), mixinClassName);
         return entryPackage.equals(CORE_PACKAGE) || entryPackage.startsWith(CORE_PACKAGE + ".");
     }
 
     /** The entries a mixin belongs to: its own entry, or every entry sharing its group. Empty for a core mixin. */
     public static List<Entry> owners(String mixinClassName, Registry registry) {
-        if (isCore(mixinClassName))
+        if (isCore(mixinClassName, registry))
             return List.of();
-        String entryPackage = entryPackage(mixinClassName);
+        String entryPackage = entryPackage(registry.owner().mixinRoot(), mixinClassName);
         if (entryPackage.startsWith(SHARED_PACKAGE + ".")) {
             String group = entryPackage.substring(SHARED_PACKAGE.length() + 1);
             return registry.entries().stream().filter(e -> e.sharedMixins().containsKey(group)).toList();
@@ -114,14 +114,14 @@ public final class MixinGate {
         return false;
     }
 
-    /** {@code net.xlea99.lifeguard.mixin.supps_jukebox_speakers.SpeakerBlockMixin} to {@code supps_jukebox_speakers}. */
-    static String entryPackage(String mixinClassName) {
-        if (!mixinClassName.startsWith(MIXIN_ROOT))
-            throw new IllegalStateException(mixinClassName + " isn't under " + MIXIN_ROOT);
-        String rest = mixinClassName.substring(MIXIN_ROOT.length());
+    /** {@code <root>supps_jukebox_speakers.SpeakerBlockMixin} to {@code supps_jukebox_speakers}. */
+    static String entryPackage(String root, String mixinClassName) {
+        if (!mixinClassName.startsWith(root))
+            throw new IllegalStateException(mixinClassName + " isn't under " + root);
+        String rest = mixinClassName.substring(root.length());
         int lastDot = rest.lastIndexOf('.');
         if (lastDot < 0)
-            throw new IllegalStateException(mixinClassName + " sits directly in " + MIXIN_ROOT
+            throw new IllegalStateException(mixinClassName + " sits directly in " + root
                 + " instead of in its entry's package");
         return rest.substring(0, lastDot);
     }

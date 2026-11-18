@@ -8,6 +8,7 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.boot.Setups;
 import net.xlea99.lifeguard.client.menu.LifeguardScreen;
+import net.xlea99.lifeguard.client.menu.TasteMenu;
 
 /**
  * Lifeguard's client-only entry point: the menu, opened from the Config button in NeoForge's Mods list, the client
@@ -16,7 +17,7 @@ import net.xlea99.lifeguard.client.menu.LifeguardScreen;
 @Mod(value = Lifeguard.MODID, dist = Dist.CLIENT)
 public final class LifeguardClient {
     public LifeguardClient(IEventBus modEventBus, ModContainer container) {
-        container.registerExtensionPoint(IConfigScreenFactory.class, (mod, parent) -> new LifeguardScreen(parent));
+        container.registerExtensionPoint(IConfigScreenFactory.class, (mod, parent) -> new LifeguardScreen(parent, TasteMenu.INSTANCE));
         EntryPacks.register(modEventBus, container);
         ClientChecks.register(modEventBus);
         RecolorPack.register(modEventBus);

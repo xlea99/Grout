@@ -12,11 +12,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import net.minecraft.client.resources.language.I18n;
-import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.boot.Boot;
-import net.xlea99.lifeguard.core.Entries;
 import net.xlea99.lifeguard.core.Entry;
-import net.xlea99.lifeguard.core.Profile;
+import net.xlea99.lifeguard.core.Library;
+import net.xlea99.lifeguard.core.ModSpec;
 import net.xlea99.lifeguard.core.Registry;
 import net.xlea99.lifeguard.core.Settings;
 import net.xlea99.lifeguard.core.Side;
@@ -32,7 +31,7 @@ import net.xlea99.lifeguard.sync.RemoteServer;
 final class MenuModel {
     /**
      * One line of the list: a group heading (an entry's {@link Entry#home()}: a mod id, {@link Entry#MINECRAFT} or
-     * {@link Entry#LIFEGUARD}), or an entry at some depth in its tree. A context line is an entry shown only because
+     * the owning mod's own id), or an entry at some depth in its tree. A context line is an entry shown only because
      * something listed under it matches the filters.
      */
     record Line(String headingMod, int count, Entry entry, int depth, boolean context) {
@@ -41,7 +40,12 @@ final class MenuModel {
         }
     }
 
-    private final Registry registry = Entries.REGISTRY;
+    private final Registry registry = Boot.registry();
+
+    /** The mod whose entries these are. */
+    ModSpec owner() {
+        return registry.owner();
+    }
     private final Settings draft;
     private final Set<Entry> collapsed = new HashSet<>();
     private final Set<String> collapsedMods = new HashSet<>();
@@ -66,9 +70,9 @@ final class MenuModel {
     private void read(EntryConfig config) {
         try {
             for (String warning : config.readInto(draft))
-                Lifeguard.LOGGER.warn("Lifeguard {}: {}", config.file().getFileName(), warning);
+                Library.LOGGER.warn("{} {}: {}", registry.owner().name(), config.file().getFileName(), warning);
         } catch (IOException e) {
-            Lifeguard.LOGGER.error("Lifeguard couldn't read {}", config.file().getFileName(), e);
+            Library.LOGGER.error("{} couldn't read {}", registry.owner().name(), config.file().getFileName(), e);
         }
     }
 
@@ -89,9 +93,9 @@ final class MenuModel {
     /** Why a side can't be edited, or empty when it can. */
     Optional<String> brokenFile(Side side) {
         if (side == Side.SERVER && serverBroken)
-            return Optional.of("lifeguard-server.toml");
+            return Optional.of(registry.owner().serverConfigFile());
         if (side == Side.CLIENT && clientBroken)
-            return Optional.of("lifeguard-client.toml");
+            return Optional.of(registry.owner().clientConfigFile());
         return Optional.empty();
     }
 
@@ -109,24 +113,34 @@ final class MenuModel {
             draft.set(entry, setting);
     }
 
-    // --- profiles ------------------------------------------------------------------------------------------------------
+    // --- the auto rule's setting (Lifeguard: the profile) ---------------------------------------------------------------
 
-    /** The profile the bar shows as picked, or empty when the two sides differ (a hand-edited file). */
-    Optional<Profile> shownProfile() {
-        Profile client = draft.profile(Side.CLIENT);
-        if (following)
-            return Optional.of(client);
-        return client == draft.profile(Side.SERVER) ? Optional.of(client) : Optional.empty();
+    /** Whether the mod's auto rule has a setting, so the menu has a bar of its choices. */
+    boolean hasRuleSetting() {
+        return registry.rule().setting() != null;
+    }
+
+    /** The rule's choices, in order (empty without a setting). */
+    List<String> ruleChoices() {
+        return hasRuleSetting() ? registry.rule().setting().choices() : List.of();
+    }
+
+    /** The choice the bar shows as picked, or empty when the two sides differ (a hand-edited file) or there's none. */
+    Optional<String> shownChoice() {
+        String client = draft.ruleChoice(Side.CLIENT);
+        if (client == null || following)
+            return Optional.ofNullable(client);
+        return client.equals(draft.ruleChoice(Side.SERVER)) ? Optional.of(client) : Optional.empty();
     }
 
     /** In singleplayer the bar sets both sides; on a remote server, only the player's own. */
-    void pickProfile(Profile profile) {
+    void pickChoice(String choice) {
         for (Side side : Side.values())
-            if (canEditProfile(side))
-                draft.setProfile(side, profile);
+            if (canEditChoice(side))
+                draft.setRuleChoice(side, choice);
     }
 
-    private boolean canEditProfile(Side side) {
+    private boolean canEditChoice(Side side) {
         return side == Side.SERVER ? !following && !serverBroken : !clientBroken;
     }
 
@@ -159,19 +173,19 @@ final class MenuModel {
         return count;
     }
 
-    /** Every editable switch back to Auto. Sub-values stay: they aren't overrides of the profile. */
+    /** Every editable switch back to Auto. Sub-values stay: they aren't overrides of Auto. */
     void resetOverrides() {
         for (Entry entry : registry.entries())
             if (!locked(entry))
                 draft.set(entry, Switch.AUTO);
     }
 
-    /** What picking a profile would switch on, in list order: for the confirmation Off the Deep End asks for. */
-    List<Entry> wouldTurnOn(Profile profile) {
+    /** What picking a choice would switch on, in list order: for a rule's confirmation (Off the Deep End's). */
+    List<Entry> wouldTurnOn(String choice) {
         Settings preview = draft.copy();
         for (Side side : Side.values())
-            if (canEditProfile(side))
-                preview.setProfile(side, profile);
+            if (canEditChoice(side))
+                preview.setRuleChoice(side, choice);
         List<Entry> turningOn = new ArrayList<>();
         for (Entry entry : Settings.changedEntries(draft, preview, registry))
             if (entry.activeUnder(preview))
@@ -185,16 +199,16 @@ final class MenuModel {
     }
 
     /** What a restart would change: this session's live state against the draft about to be saved. */
-    record Summary(List<Side> profileSides, List<Entry> turningOn, List<Entry> turningOff, List<ValueChange> values) {
+    record Summary(List<Side> choiceSides, List<Entry> turningOn, List<Entry> turningOff, List<ValueChange> values) {
         boolean empty() {
-            return profileSides.isEmpty() && turningOn.isEmpty() && turningOff.isEmpty() && values.isEmpty();
+            return choiceSides.isEmpty() && turningOn.isEmpty() && turningOff.isEmpty() && values.isEmpty();
         }
     }
 
     Summary summary() {
         List<Side> sides = new ArrayList<>();
         for (Side side : Side.values())
-            if (registry.profile(side) != draft.profile(side))
+            if (!Objects.equals(registry.ruleChoice(side), draft.ruleChoice(side)))
                 sides.add(side);
         List<Entry> on = new ArrayList<>();
         List<Entry> off = new ArrayList<>();
@@ -208,8 +222,8 @@ final class MenuModel {
         return new Summary(sides, on, off, values);
     }
 
-    Profile liveProfile(Side side) {
-        return registry.profile(side);
+    String liveChoice(Side side) {
+        return registry.ruleChoice(side);
     }
 
     // --- the list ------------------------------------------------------------------------------------------------------
@@ -271,11 +285,11 @@ final class MenuModel {
                 return new Reason(false, required.broken() || required.serverBrokenReason() != null
                     ? Reason.Kind.REQUIRED_BROKEN : Reason.Kind.REQUIRED_OFF, required);
         boolean on = entry.switchedOnUnder(draft);
-        return new Reason(on, draft.setting(entry) == Switch.AUTO ? Reason.Kind.PROFILE : Reason.Kind.OVERRIDE, null);
+        return new Reason(on, draft.setting(entry) == Switch.AUTO ? Reason.Kind.AUTO : Reason.Kind.OVERRIDE, null);
     }
 
     record Reason(boolean active, Kind kind, Entry because) {
-        enum Kind { BROKEN, BROKEN_HERE, BROKEN_ON_SERVER, MISSING_MODS, REQUIRED_BROKEN, REQUIRED_OFF, PROFILE, OVERRIDE }
+        enum Kind { BROKEN, BROKEN_HERE, BROKEN_ON_SERVER, MISSING_MODS, REQUIRED_BROKEN, REQUIRED_OFF, AUTO, OVERRIDE }
     }
 
     void toggleCollapsed(Entry entry) {
@@ -304,7 +318,8 @@ final class MenuModel {
         for (Entry top : registry.topLevel())
             topByGroup.computeIfAbsent(top.home(), group -> new ArrayList<>()).add(top);
         List<String> groups = new ArrayList<>(topByGroup.keySet());
-        groups.sort(Comparator.comparing((String group) -> !group.equals(Entry.LIFEGUARD))
+        String own = registry.owner().id();
+        groups.sort(Comparator.comparing((String group) -> !group.equals(own))
             .thenComparing(group -> !group.equals(Entry.MINECRAFT))
             .thenComparing(group -> modName(group).toLowerCase(Locale.ROOT)));
 
@@ -328,13 +343,14 @@ final class MenuModel {
         return lines;
     }
 
-    /** A group's display name: Lifeguard and Minecraft from our menu words, a mod from our lang file, else its id. */
+    /** A group's display name: Minecraft from the menu's words, the mod's own group and other mods from its lang file, else the id. */
     static String modName(String modId) {
+        ModSpec owner = Boot.registry().owner();
         if (modId.equals(Entry.MINECRAFT))
-            return I18n.get("lifeguard.menu.group.minecraft");
-        if (modId.equals(Entry.LIFEGUARD))
-            return I18n.get("lifeguard.menu.group.lifeguard");
-        String key = "lifeguard.mod." + modId;
+            return I18n.get("guppylib.menu.group.minecraft");
+        if (modId.equals(owner.id()))
+            return I18n.get(owner.ownGroupKey());
+        String key = owner.modNameKey(modId);
         return I18n.exists(key) ? I18n.get(key) : modId;
     }
 
@@ -409,7 +425,7 @@ final class MenuModel {
                 Boot.serverConfig().save(draft);
             return Optional.empty();
         } catch (IOException e) {
-            Lifeguard.LOGGER.error("Lifeguard couldn't save its settings", e);
+            Library.LOGGER.error("{} couldn't save its settings", registry.owner().name(), e);
             return Optional.of(e.getMessage() == null ? e.getClass().getSimpleName() : e.getMessage());
         }
     }

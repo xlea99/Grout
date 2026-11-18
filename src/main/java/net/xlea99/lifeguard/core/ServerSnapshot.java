@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
- * The server's half of the registry as one value: its profile, and every server entry's switch, sub-values and
- * whether it's broken on the server.
+ * The server's half of the registry as one value: its choice of the auto rule's setting (null when the rule has none),
+ * and every server entry's switch, sub-values and whether it's broken on the server.
  *
  * <p>A server sends this to each client as it joins. The client applies it over its own server-side state, so the
  * menu shows what the server actually enforces and runtime-gated code follows the server instead of the player's local
  * file. Client entries are never part of it: those are each player's own.
  */
-public record ServerSnapshot(String profile, Map<String, EntryState> entries) {
+public record ServerSnapshot(String ruleChoice, Map<String, EntryState> entries) {
 
     /** One entry as the server has it. Sub-values are Integer, Double or Boolean; {@code broken} is null when it isn't. */
     public record EntryState(Switch setting, Map<String, Object> values, String broken) {
@@ -33,7 +32,7 @@ public record ServerSnapshot(String profile, Map<String, EntryState> entries) {
                 values.put(value.name(), value.get());
             entries.put(entry.id(), new EntryState(entry.setting(), values, entry.brokenReason()));
         }
-        return new ServerSnapshot(registry.profile(Side.SERVER).id(), entries);
+        return new ServerSnapshot(registry.ruleChoice(Side.SERVER), entries);
     }
 
     /**
@@ -50,10 +49,13 @@ public record ServerSnapshot(String profile, Map<String, EntryState> entries) {
      */
     public List<String> applyTo(Registry registry) {
         List<String> problems = new ArrayList<>();
-        Optional<Profile> serverProfile = Profile.byId(profile);
-        if (serverProfile.isEmpty())
-            problems.add("the server's profile '" + profile + "' isn't one this version knows; using " + Profile.DEFAULT.id());
-        registry.setProfile(Side.SERVER, serverProfile.orElse(Profile.DEFAULT));
+        AutoRule.Setting setting = registry.rule().setting();
+        if (setting != null) {
+            if (!setting.accepts(ruleChoice))
+                problems.add("the server's " + setting.key() + " '" + ruleChoice + "' isn't one this version knows; using "
+                    + setting.defaultChoice());
+            registry.setRuleChoice(Side.SERVER, setting.accepts(ruleChoice) ? ruleChoice : setting.defaultChoice());
+        }
 
         for (Entry entry : registry.entries()) {
             if (entry.side() != Side.SERVER)

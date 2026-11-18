@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import net.neoforged.neoforge.common.conditions.ICondition;
-import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.core.Entries;
+import net.xlea99.lifeguard.boot.Boot;
+import net.xlea99.lifeguard.core.Library;
 import net.xlea99.lifeguard.core.Entry;
 import net.xlea99.lifeguard.core.Side;
 
@@ -35,7 +35,7 @@ public record EntryCondition(String entry, List<Dynamic<?>> and) implements ICon
 
     @Override
     public boolean test(IContext context) {
-        Optional<Entry> found = Entries.REGISTRY.get(entry);
+        Optional<Entry> found = Boot.registry().get(entry);
         if (found.isEmpty())
             return report("names an entry that doesn't exist");
         if (found.get().side() != Side.SERVER)
@@ -44,7 +44,7 @@ public record EntryCondition(String entry, List<Dynamic<?>> and) implements ICon
             return false;
         for (Dynamic<?> condition : and) {
             ICondition inner = ICondition.CODEC.parse(condition)
-                .getOrThrow(problem -> new IllegalStateException("lifeguard:entry '" + entry + "': " + problem));
+                .getOrThrow(problem -> new IllegalStateException(Library.ID + ":entry '" + entry + "': " + problem));
             if (!inner.test(context))
                 return false;
         }
@@ -54,7 +54,7 @@ public record EntryCondition(String entry, List<Dynamic<?>> and) implements ICon
     private boolean report(String problem) {
         synchronized (REPORTED) {
             if (REPORTED.add(entry))
-                Lifeguard.LOGGER.error("Lifeguard data condition lifeguard:entry '{}' {}; that data stays off", entry, problem);
+                Library.LOGGER.error("{} data condition {}:entry '{}' {}; that data stays off", Library.NAME, Library.ID, entry, problem);
         }
         return false;
     }

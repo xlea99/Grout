@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * A copy of everything a player can set: a profile per side, a switch per entry, a value per sub-value. Editing it
- * changes nothing live.
+ * A copy of everything a player can set: the auto rule's setting per side, a switch per entry, a value per sub-value.
+ * Editing it changes nothing live.
  *
  * <p>The menu edits one of these and writes it to the config files; the game picks it up at the next restart. Nothing
  * applies half-live: mixins were decided at startup, so a live change would reach runtime-gated code and not
@@ -17,7 +17,7 @@ import java.util.Objects;
  */
 public final class Settings implements SettingsView {
     private final Registry registry;
-    private final EnumMap<Side, Profile> profiles = new EnumMap<>(Side.class);
+    private final EnumMap<Side, String> ruleChoices = new EnumMap<>(Side.class);
     private final Map<Entry, Switch> switches = new HashMap<>();
     private final Map<SubValue<?>, Object> values = new HashMap<>();
 
@@ -33,7 +33,7 @@ public final class Settings implements SettingsView {
     public static Settings copyOf(Registry registry, SettingsView view) {
         Settings settings = new Settings(registry);
         for (Side side : Side.values())
-            settings.profiles.put(side, view.profile(side));
+            settings.ruleChoices.put(side, view.ruleChoice(side));
         for (Entry entry : registry.entries()) {
             settings.switches.put(entry, view.setting(entry));
             for (SubValue<?> value : entry.values())
@@ -51,8 +51,8 @@ public final class Settings implements SettingsView {
     }
 
     @Override
-    public Profile profile(Side side) {
-        return profiles.get(side);
+    public String ruleChoice(Side side) {
+        return ruleChoices.get(side);
     }
 
     @Override
@@ -66,8 +66,9 @@ public final class Settings implements SettingsView {
         return (T) values.get(value);
     }
 
-    public void setProfile(Side side, Profile profile) {
-        profiles.put(side, Objects.requireNonNull(profile));
+    public void setRuleChoice(Side side, String choice) {
+        registry.checkChoice(choice);
+        ruleChoices.put(side, choice);
     }
 
     public void set(Entry entry, Switch setting) {
@@ -88,9 +89,10 @@ public final class Settings implements SettingsView {
         return parsed.problem();
     }
 
-    /** Puts one side back to its defaults: the default profile, every switch on auto, every value at its default. */
+    /** Puts one side back to its defaults: the rule setting's default, every switch on auto, every value at its default. */
     public void resetSide(Side side) {
-        profiles.put(side, Profile.DEFAULT);
+        AutoRule.Setting setting = registry.rule().setting();
+        ruleChoices.put(side, setting == null ? null : setting.defaultChoice());
         for (Entry entry : registry.entries()) {
             if (entry.side() != side)
                 continue;
@@ -102,8 +104,9 @@ public final class Settings implements SettingsView {
 
     /** Makes the live state match this. Only for startup and for leaving a remote server, never from the menu. */
     public void applyTo(Registry target) {
-        for (Side side : Side.values())
-            target.setProfile(side, profiles.get(side));
+        if (target.rule().setting() != null)
+            for (Side side : Side.values())
+                target.setRuleChoice(side, ruleChoices.get(side));
         for (Entry entry : target.entries()) {
             entry.set(switches.get(entry));
             for (SubValue<?> value : entry.values())
@@ -115,7 +118,7 @@ public final class Settings implements SettingsView {
         value.set(value(value));
     }
 
-    /** Entries of one side set to On or Off instead of following the profile. */
+    /** Entries of one side set to On or Off instead of following Auto. */
     public int overrides(Side side) {
         int count = 0;
         for (Entry entry : registry.entries())
@@ -145,7 +148,7 @@ public final class Settings implements SettingsView {
     /** Whether anything a player can set differs, including switches and values that don't change who's active. */
     public boolean sameAs(SettingsView other) {
         for (Side side : Side.values())
-            if (profiles.get(side) != other.profile(side))
+            if (!Objects.equals(ruleChoices.get(side), other.ruleChoice(side)))
                 return false;
         for (Entry entry : registry.entries()) {
             if (switches.get(entry) != other.setting(entry))

@@ -71,27 +71,28 @@ final class DetailsPane {
         int[] y = {top + PAD};
 
         text(font, Component.translatable(entry.nameKey()).withStyle(ChatFormatting.BOLD), x, y, inner, 0xFFFFFFFF, null);
-        text(font, Component.translatable("lifeguard.menu.details.meta",
-            Component.translatable("lifeguard.class." + entry.kind().id()),
-            Component.translatable("lifeguard.taste." + entry.taste().id() + ".name"),
-            Component.translatable("lifeguard.side." + entry.side().id())), x, y, inner, 0xFFA0A0A0, null);
+        Component kind = Component.translatable("guppylib.class." + entry.kind().id());
+        Component side = Component.translatable("guppylib.side." + entry.side().id());
+        MenuRule.Badge badge = screen.rule().badge(entry);
+        text(font, badge == null ? Component.translatable("guppylib.menu.details.meta.plain", kind, side)
+            : Component.translatable("guppylib.menu.details.meta", kind, badge.name(), side), x, y, inner, 0xFFA0A0A0, null);
         reserveReason(x, y);
         y[0] += 4;
         text(font, Component.translatable(entry.descKey()), x, y, inner, 0xFFD8D8D8, null);
         String broken = MenuModel.brokenReason(entry);
         if (broken != null)
-            text(font, Component.translatable("lifeguard.menu.details.broken", broken), x, y, inner, 0xFFD07C7C, null);
+            text(font, Component.translatable("guppylib.menu.details.broken", broken), x, y, inner, 0xFFD07C7C, null);
         if (model.locked(entry))
             text(font, Component.translatable(model.brokenFile(entry.side()).isPresent()
-                ? "lifeguard.menu.details.broken_note" : "lifeguard.menu.details.server_note"), x, y, inner, 0xFFE0A040, null);
+                ? "guppylib.menu.details.broken_note" : "guppylib.menu.details.server_note"), x, y, inner, 0xFFE0A040, null);
 
         for (SubValue<?> value : entry.values())
             valueEditor(font, model, value, x, y, inner);
 
         y[0] += 4;
         mods(font, x, y, inner);
-        links(font, "lifeguard.menu.details.requires", entry.requiredEntries(), x, y, inner);
-        links(font, "lifeguard.menu.details.required_by", model.requiredBy(entry), x, y, inner);
+        links(font, "guppylib.menu.details.requires", entry.requiredEntries(), x, y, inner);
+        links(font, "guppylib.menu.details.required_by", model.requiredBy(entry), x, y, inner);
     }
 
     /** Reserves the line for "why it's on or off". It's drawn live: it changes as switches flip, the layout doesn't. */
@@ -103,25 +104,24 @@ final class DetailsPane {
 
     private Component reasonText(MenuModel.Reason reason) {
         return switch (reason.kind()) {
-            case BROKEN -> Component.translatable("lifeguard.menu.details.why.broken");
-            case BROKEN_HERE -> Component.translatable("lifeguard.menu.details.why.broken_here");
-            case BROKEN_ON_SERVER -> Component.translatable("lifeguard.menu.details.why.broken_on_server");
-            case REQUIRED_BROKEN -> Component.translatable("lifeguard.menu.details.why.required_broken",
+            case BROKEN -> Component.translatable("guppylib.menu.details.why.broken");
+            case BROKEN_HERE -> Component.translatable("guppylib.menu.details.why.broken_here");
+            case BROKEN_ON_SERVER -> Component.translatable("guppylib.menu.details.why.broken_on_server");
+            case REQUIRED_BROKEN -> Component.translatable("guppylib.menu.details.why.required_broken",
                 Component.translatable(reason.because().nameKey()));
-            case MISSING_MODS -> Component.translatable("lifeguard.menu.details.why.missing_mods", modNames(entry.missingMods()));
-            case REQUIRED_OFF -> Component.translatable("lifeguard.menu.details.why.required_off",
+            case MISSING_MODS -> Component.translatable("guppylib.menu.details.why.missing_mods", modNames(entry.missingMods()));
+            case REQUIRED_OFF -> Component.translatable("guppylib.menu.details.why.required_off",
                 Component.translatable(reason.because().nameKey()));
-            case PROFILE -> Component.translatable(reason.active()
-                ? "lifeguard.menu.details.why.profile_on" : "lifeguard.menu.details.why.profile_off");
+            case AUTO -> screen.rule().autoReason(reason.active());
             case OVERRIDE -> Component.translatable(reason.active()
-                ? "lifeguard.menu.details.why.override_on" : "lifeguard.menu.details.why.override_off");
+                ? "guppylib.menu.details.why.override_on" : "guppylib.menu.details.why.override_off");
         };
     }
 
     private void valueEditor(Font font, MenuModel model, SubValue<?> value, int x, int[] y, int inner) {
         y[0] += 4;
         text(font, Component.translatable(value.nameKey())
-            .append(Component.literal("  ").append(Component.translatable("lifeguard.menu.details.default",
+            .append(Component.literal("  ").append(Component.translatable("guppylib.menu.details.default",
                 String.valueOf(value.defaultValue()))).withStyle(ChatFormatting.DARK_GRAY)), x, y, inner, 0xFFD8D8D8, null);
         int editorWidth = inner - 24;
         AbstractWidget editor;
@@ -144,7 +144,7 @@ final class DetailsPane {
                 editorFinal.setMessage(boolLabel(flag));
             screen.refresh();
         }).bounds(x + editorWidth + 4, y[0], 20, 20).build();
-        reset.setTooltip(Tooltip.create(Component.translatable("lifeguard.menu.details.reset")));
+        reset.setTooltip(Tooltip.create(Component.translatable("guppylib.menu.details.reset")));
         boolean editable = !model.locked(entry);
         editor.active = editable;
         reset.active = editable;
@@ -159,20 +159,20 @@ final class DetailsPane {
 
     private Component boolLabel(SubValue.Bool flag) {
         return Component.translatable(screen.model().draft().value(flag)
-            ? "lifeguard.menu.details.yes" : "lifeguard.menu.details.no");
+            ? "guppylib.menu.details.yes" : "guppylib.menu.details.no");
     }
 
     private void mods(Font font, int x, int[] y, int inner) {
         if (entry.requiredMods().isEmpty()) {
-            text(font, Component.translatable("lifeguard.menu.details.needs_nothing"), x, y, inner, 0xFF909090, null);
+            text(font, Component.translatable("guppylib.menu.details.needs_nothing"), x, y, inner, 0xFF909090, null);
             return;
         }
-        text(font, Component.translatable("lifeguard.menu.details.needs"), x, y, inner, 0xFFA0A0A0, null);
+        text(font, Component.translatable("guppylib.menu.details.needs"), x, y, inner, 0xFFA0A0A0, null);
         List<String> missing = entry.missingMods();
         for (String modId : entry.requiredMods()) {
             boolean installed = !missing.contains(modId);
             MutableComponent line = Component.literal(installed ? "✔ " : "✘ ")
-                .append(Component.translatableWithFallback("lifeguard.mod." + modId, modId));
+                .append(Component.translatableWithFallback(screen.model().owner().modNameKey(modId), modId));
             text(font, line, x + 6, y, inner - 6, installed ? 0xFF7CD07C : 0xFFD07C7C, null);
         }
     }
@@ -186,12 +186,12 @@ final class DetailsPane {
                 0xFF80B0FF, target);
     }
 
-    private static Component modNames(List<String> modIds) {
+    private Component modNames(List<String> modIds) {
         MutableComponent names = Component.empty();
         for (int i = 0; i < modIds.size(); i++) {
             if (i > 0)
                 names.append(", ");
-            names.append(Component.translatableWithFallback("lifeguard.mod." + modIds.get(i), modIds.get(i)));
+            names.append(Component.translatableWithFallback(screen.model().owner().modNameKey(modIds.get(i)), modIds.get(i)));
         }
         return names;
     }
@@ -217,7 +217,7 @@ final class DetailsPane {
     void render(GuiGraphics graphics, int mouseX, int mouseY) {
         Font font = screen.font();
         if (entry == null) {
-            graphics.drawCenteredString(font, Component.translatable("lifeguard.menu.details.empty"), left + width / 2,
+            graphics.drawCenteredString(font, Component.translatable("guppylib.menu.details.empty"), left + width / 2,
                 top + height / 2 - 4, 0xFF808080);
             return;
         }

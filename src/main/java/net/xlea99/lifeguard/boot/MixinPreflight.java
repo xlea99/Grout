@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import net.xlea99.lifeguard.core.Entry;
+import net.xlea99.lifeguard.core.Library;
 import net.xlea99.lifeguard.core.MixinGate;
+import net.xlea99.lifeguard.core.ModSpec;
 import net.xlea99.lifeguard.core.Registry;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -31,7 +33,6 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.TypeInsnNode;
 import org.objectweb.asm.tree.VarInsnNode;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.service.IClassBytecodeProvider;
 import org.spongepowered.asm.service.MixinService;
 import org.spongepowered.asm.util.Locals;
@@ -51,8 +52,7 @@ import org.spongepowered.asm.util.Locals;
  * fails the dev checks instead of slipping past them.
  */
 final class MixinPreflight {
-    private static final Logger LOGGER = LoggerFactory.getLogger("Lifeguard");
-    private static final String CONFIG = "lifeguard.mixins.json";
+    private static final Logger LOGGER = Library.LOGGER;
 
     private static final String MIXIN = "Lorg/spongepowered/asm/mixin/Mixin;";
     private static final String SHADOW = "Lorg/spongepowered/asm/mixin/Shadow;";
@@ -100,16 +100,19 @@ final class MixinPreflight {
     }
 
     /** Checks every mixin that would apply on this side and breaks the entries whose mixins don't fit. */
-    static void run(Registry registry, boolean dedicatedServer) {
+    static void run(ModCatalog mod, boolean dedicatedServer) {
         long start = System.nanoTime();
+        Registry registry = mod.registry();
         IClassBytecodeProvider bytecode = MixinService.getService().getBytecodeProvider();
-        int checked = new MixinPreflight(name -> bytecode.getClassNode(name, true)).check(registry, dedicatedServer);
-        LOGGER.info("Lifeguard preflight: {} mixins checked in {} ms, {} entries broken", checked,
+        int checked = new MixinPreflight(name -> bytecode.getClassNode(name, true)).check(mod, dedicatedServer);
+        // The workspace's launch checks read this line's wording ("<Library.NAME> preflight: ...").
+        LOGGER.info("{} preflight: {} mixins checked in {} ms, {} entries broken", Library.NAME, checked,
             (System.nanoTime() - start) / 1_000_000, registry.broken().size());
     }
 
-    private int check(Registry registry, boolean dedicatedServer) {
-        JsonObject config = readConfig();
+    private int check(ModCatalog mod, boolean dedicatedServer) {
+        Registry registry = mod.registry();
+        JsonObject config = readConfig(mod);
         String root = config.get("package").getAsString() + ".";
         int checked = 0;
         for (String side : dedicatedServer ? List.of("mixins", "server") : List.of("mixins", "client", "server")) {
@@ -129,9 +132,10 @@ final class MixinPreflight {
                 if (problems.isEmpty())
                     continue;
                 String what = simple(mixin) + ": " + String.join("; ", problems);
-                if (MixinGate.isCore(mixin))
-                    throw new IllegalStateException("Lifeguard's core mixin " + what + ". Core mixins are always on, so"
-                        + " this stops the game: this Lifeguard doesn't fit this Minecraft or NeoForge.");
+                if (MixinGate.isCore(mixin, registry))
+                    throw new IllegalStateException(registry.owner().name() + "'s core mixin " + what + ". Core mixins"
+                        + " are always on, so this stops the game: this " + registry.owner().name()
+                        + " doesn't fit this Minecraft or NeoForge.");
                 for (Entry owner : MixinGate.owners(mixin, registry))
                     if (owner.installed())
                         BrokenEntries.mark(owner, what);
@@ -148,13 +152,15 @@ final class MixinPreflight {
         return checked;
     }
 
-    private static JsonObject readConfig() {
-        try (InputStream in = MixinPreflight.class.getClassLoader().getResourceAsStream(CONFIG)) {
+    private static JsonObject readConfig(ModCatalog mod) {
+        ModSpec spec = mod.spec();
+        String config = spec.mixinConfig();
+        try (InputStream in = mod.openResource("/" + config)) {
             if (in == null)
-                throw new IllegalStateException(CONFIG + " isn't in Lifeguard's jar");
+                throw new IllegalStateException(config + " isn't in " + spec.name() + "'s jar");
             return JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
         } catch (java.io.IOException e) {
-            throw new IllegalStateException("Lifeguard couldn't read " + CONFIG, e);
+            throw new IllegalStateException(spec.name() + " couldn't read " + config, e);
         }
     }
 

@@ -1,6 +1,9 @@
 package net.xlea99.lifeguard.core;
 
-/** Where entries are declared: {@code Entries.feature("jukebox_playlists", Taste.LIGHT)} adds to Lifeguard's one registry. */
+/**
+ * Where Lifeguard's entries are declared: {@code Entries.feature("jukebox_playlists", Taste.LIGHT)} adds to Lifeguard's
+ * one registry, taste included ({@link Tastes}).
+ */
 public final class Entries {
     public static final Registry REGISTRY = new Registry();
 
@@ -8,18 +11,18 @@ public final class Entries {
     }
 
     public static Entry feature(String id, Taste taste) {
-        return REGISTRY.feature(id, taste);
+        return Tastes.feature(REGISTRY, id, taste);
     }
 
     public static Entry tweak(String id, Taste taste) {
-        return REGISTRY.tweak(id, taste);
+        return Tastes.tweak(REGISTRY, id, taste);
     }
 
     public static Entry compat(String id, Taste taste) {
-        return REGISTRY.compat(id, taste);
+        return Tastes.compat(REGISTRY, id, taste);
     }
 
     public static Entry fix(String id, Taste taste) {
-        return REGISTRY.fix(id, taste);
+        return Tastes.fix(REGISTRY, id, taste);
     }
 }

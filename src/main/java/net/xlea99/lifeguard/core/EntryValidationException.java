@@ -6,8 +6,8 @@ import java.util.List;
 public final class EntryValidationException extends RuntimeException {
     private final List<String> problems;
 
-    public EntryValidationException(List<String> problems) {
-        super(problems.size() + " problem(s) in Lifeguard's entry declarations:\n  - " + String.join("\n  - ", problems));
+    public EntryValidationException(String modName, List<String> problems) {
+        super(problems.size() + " problem(s) in " + modName + "'s entry declarations:\n  - " + String.join("\n  - ", problems));
         this.problems = List.copyOf(problems);
     }
 

@@ -7,14 +7,14 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.xlea99.lifeguard.Lifeguard;
+import net.xlea99.lifeguard.core.Library;
 import net.xlea99.lifeguard.core.ServerSnapshot;
 import net.xlea99.lifeguard.core.Switch;
 
 /** The server's entry settings, sent to a joining client during configuration. */
 public record SyncPayload(ServerSnapshot snapshot) implements CustomPacketPayload {
     public static final Type<SyncPayload> TYPE =
-        new Type<>(ResourceLocation.fromNamespaceAndPath(Lifeguard.MODID, "server_entries"));
+        new Type<>(ResourceLocation.fromNamespaceAndPath(Library.ID, "server_entries"));
     public static final StreamCodec<FriendlyByteBuf, SyncPayload> STREAM_CODEC =
         StreamCodec.ofMember(SyncPayload::write, SyncPayload::read);
 
@@ -23,7 +23,7 @@ public record SyncPayload(ServerSnapshot snapshot) implements CustomPacketPayloa
     private static final byte BOOL = 2;
 
     private void write(FriendlyByteBuf buf) {
-        buf.writeUtf(snapshot.profile());
+        buf.writeNullable(snapshot.ruleChoice(), FriendlyByteBuf::writeUtf);   // null: the mod's rule has no setting
         buf.writeVarInt(snapshot.entries().size());
         for (Map.Entry<String, ServerSnapshot.EntryState> entry : snapshot.entries().entrySet()) {
             buf.writeUtf(entry.getKey());
@@ -54,7 +54,7 @@ public record SyncPayload(ServerSnapshot snapshot) implements CustomPacketPayloa
     }
 
     private static SyncPayload read(FriendlyByteBuf buf) {
-        String profile = buf.readUtf();
+        String ruleChoice = buf.readNullable(FriendlyByteBuf::readUtf);
         int entryCount = buf.readVarInt();
         Map<String, ServerSnapshot.EntryState> entries = new LinkedHashMap<>();
         for (int i = 0; i < entryCount; i++) {
@@ -70,12 +70,12 @@ public record SyncPayload(ServerSnapshot snapshot) implements CustomPacketPayloa
                     case INT -> buf.readInt();
                     case DECIMAL -> buf.readDouble();
                     case BOOL -> buf.readBoolean();
-                    default -> throw new DecoderException("Lifeguard: unknown sub-value kind " + kind + " for " + id + "." + name);
+                    default -> throw new DecoderException(Library.NAME + ": unknown sub-value kind " + kind + " for " + id + "." + name);
                 });
             }
             entries.put(id, new ServerSnapshot.EntryState(setting, values, broken));
         }
-        return new SyncPayload(new ServerSnapshot(profile, entries));
+        return new SyncPayload(new ServerSnapshot(ruleChoice, entries));
     }
 
     @Override

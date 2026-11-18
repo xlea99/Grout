@@ -9,8 +9,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.xlea99.lifeguard.boot.Boot;
 import net.xlea99.lifeguard.boot.BrokenEntries;
-import net.xlea99.lifeguard.core.Entries;
 import net.xlea99.lifeguard.core.Entry;
 
 /**
@@ -26,7 +26,7 @@ public final class UsedIds {
     }
 
     private static void check(FMLCommonSetupEvent event) {
-        for (Entry entry : Entries.REGISTRY.entries()) {
+        for (Entry entry : Boot.registry().entries()) {
             if (entry.usedIds().isEmpty() || !entry.installed())
                 continue;
             List<String> gone = new ArrayList<>();

@@ -1,8 +1,9 @@
 package net.xlea99.lifeguard.boot;
 
 import net.neoforged.bus.api.IEventBus;
+import net.xlea99.lifeguard.core.Library;
 
-/** Runs every entry's {@link EntrySetup}, found by name beside each declaration in the {@link Catalog}. */
+/** Runs every entry's {@link EntrySetup}, found by name beside each declaration class the started mod handed over. */
 public final class Setups {
     /** {@code <Declaration>Setup}: runs on both sides. */
     public static final String COMMON_SUFFIX = "Setup";
@@ -23,7 +24,7 @@ public final class Setups {
 
     private static void run(IEventBus modBus, String suffix) {
         Wiring wiring = new Wiring(modBus);
-        for (Class<?> declarations : Catalog.declarations()) {
+        for (Class<?> declarations : Boot.mod().declarations()) {
             String name = declarations.getName() + suffix;
             Class<?> setupClass;
             try {
@@ -36,7 +37,7 @@ public final class Setups {
             try {
                 ((EntrySetup) setupClass.getDeclaredConstructor().newInstance()).setup(wiring);
             } catch (ReflectiveOperationException e) {
-                throw new IllegalStateException("Lifeguard couldn't run " + name, e);
+                throw new IllegalStateException(Library.NAME + " couldn't run " + name, e);
             }
         }
     }

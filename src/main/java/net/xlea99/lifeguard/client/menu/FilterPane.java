@@ -12,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
 import net.xlea99.lifeguard.core.EntryClass;
 import net.xlea99.lifeguard.core.Side;
-import net.xlea99.lifeguard.core.Taste;
 
 /**
  * The left-hand column: search at the top, chips for taste, class, side, state and mod in the middle, and a footer
@@ -58,8 +57,8 @@ final class FilterPane {
         this.width = width;
         this.height = height;
         search = new EditBox(screen.font(), left + PAD, top + PAD, width - 2 * PAD, SEARCH_HEIGHT,
-            Component.translatable("lifeguard.menu.filters.search"));
-        search.setHint(Component.translatable("lifeguard.menu.filters.search_hint"));
+            Component.translatable("guppylib.menu.filters.search"));
+        search.setHint(Component.translatable("guppylib.menu.filters.search_hint"));
         search.setValue(filters.search);
         search.setResponder(text -> {
             filters.search = text;
@@ -99,23 +98,26 @@ final class FilterPane {
         cursorY = chipsTop() - scroll;
         cursorX = left + PAD;
 
-        section(graphics, font, "lifeguard.menu.filters.taste");
-        for (Taste taste : Taste.values())
-            tasteChip(graphics, font, taste, mouseX, mouseY);
-        section(graphics, font, "lifeguard.menu.filters.class");
+        MenuRule rule = screen.rule();
+        if (!rule.badges().isEmpty()) {
+            section(graphics, font, rule.badgeFilterTitle());
+            for (MenuRule.Badge badge : rule.badges())
+                badgeChip(graphics, font, rule, badge, mouseX, mouseY);
+        }
+        section(graphics, font, "guppylib.menu.filters.class");
         for (EntryClass kind : EntryClass.values())
-            chip(graphics, font, Component.translatable("lifeguard.class." + kind.id() + ".plural"),
+            chip(graphics, font, Component.translatable("guppylib.class." + kind.id() + ".plural"),
                 filters.classes.contains(kind), EntryList.classColor(kind), () -> toggle(filters.classes, kind), null,
                 mouseX, mouseY);
-        section(graphics, font, "lifeguard.menu.filters.side");
+        section(graphics, font, "guppylib.menu.filters.side");
         for (Side side : Side.values())
-            chip(graphics, font, Component.translatable("lifeguard.side." + side.id()), filters.sides.contains(side),
+            chip(graphics, font, Component.translatable("guppylib.side." + side.id()), filters.sides.contains(side),
                 0xFF555555, () -> toggle(filters.sides, side), null, mouseX, mouseY);
-        section(graphics, font, "lifeguard.menu.filters.state");
+        section(graphics, font, "guppylib.menu.filters.state");
         for (Filters.State state : Filters.State.values())
-            chip(graphics, font, Component.translatable("lifeguard.menu.filters.state." + state.name().toLowerCase(Locale.ROOT)),
+            chip(graphics, font, Component.translatable("guppylib.menu.filters.state." + state.name().toLowerCase(Locale.ROOT)),
                 filters.states.contains(state), 0xFF555555, () -> toggle(filters.states, state), null, mouseX, mouseY);
-        section(graphics, font, "lifeguard.menu.filters.mod");
+        section(graphics, font, "guppylib.menu.filters.mod");
         for (String modId : screen.model().referencedMods()) {
             // A mod that isn't installed reads dimmer, and says so on hover.
             boolean installed = screen.model().modInstalled(modId);
@@ -123,7 +125,7 @@ final class FilterPane {
                 .withColor(installed ? 0xFFA8A8A8 : 0xFF6A6A6A)
                 .append(Component.literal(" " + screen.model().entriesRequiring(modId)).withColor(0xFF707070));
             chip(graphics, font, name, filters.mods.contains(modId), 0xFF555555, () -> toggle(filters.mods, modId),
-                installed ? null : Component.translatable("lifeguard.menu.filters.not_installed"), mouseX, mouseY);
+                installed ? null : Component.translatable("guppylib.menu.filters.not_installed"), mouseX, mouseY);
         }
         newLine();
         contentHeight = cursorY + scroll - chipsTop();
@@ -133,9 +135,13 @@ final class FilterPane {
     }
 
     private void section(GuiGraphics graphics, Font font, String key) {
+        section(graphics, font, Component.translatable(key));
+    }
+
+    private void section(GuiGraphics graphics, Font font, Component title) {
         newLine();
         cursorY += 3;
-        graphics.drawString(font, Component.translatable(key), left + PAD, cursorY, 0xFFE0C060, false);
+        graphics.drawString(font, title, left + PAD, cursorY, 0xFFE0C060, false);
         cursorY += 11;
         cursorX = left + PAD;
     }
@@ -147,20 +153,19 @@ final class FilterPane {
         }
     }
 
-    /** A taste chip looks like its glyph: filled in its color when ticked, the letter in its color when not. */
-    private void tasteChip(GuiGraphics graphics, Font font, Taste taste, int mouseX, int mouseY) {
-        int chipWidth = TasteGlyphs.width(font) + 2;
+    /** A badge chip looks like its badge: filled in its color when ticked, the letter in its color when not. */
+    private void badgeChip(GuiGraphics graphics, Font font, MenuRule rule, MenuRule.Badge badge, int mouseX, int mouseY) {
+        int chipWidth = Badges.width(font, rule) + 2;
         place(chipWidth);
-        boolean on = filters.tastes.contains(taste);
-        int color = TasteGlyphs.color(taste);
+        boolean on = filters.badges.contains(badge.id());
+        int color = badge.color();
         graphics.fill(cursorX, cursorY, cursorX + chipWidth, cursorY + CHIP_HEIGHT, on ? color : 0xFF262626);
         if (!on)
             graphics.renderOutline(cursorX, cursorY, chipWidth, CHIP_HEIGHT, color);
-        String letter = TasteGlyphs.letter(taste);
+        String letter = badge.letter();
         graphics.drawString(font, letter, cursorX + (chipWidth - font.width(letter) + 1) / 2, cursorY + 2,
             on ? 0xFFFFFFFF : color, false);
-        record(chipWidth, () -> toggle(filters.tastes, taste),
-            Component.translatable("lifeguard.taste." + taste.id() + ".name"), mouseX, mouseY);
+        record(chipWidth, () -> toggle(filters.badges, badge.id()), badge.name(), mouseX, mouseY);
     }
 
     private void chip(GuiGraphics graphics, Font font, Component label, boolean on, int onColor, Runnable toggle,
@@ -208,7 +213,7 @@ final class FilterPane {
 
     private Component checkboxLabel() {
         int hidden = filters.includeMissing ? 0 : screen.model().hiddenByMissingMods(filters);
-        Component label = Component.translatable("lifeguard.menu.filters.include_missing");
+        Component label = Component.translatable("guppylib.menu.filters.include_missing");
         return hidden == 0 ? label : Component.empty().append(label)
             .append(Component.literal(" (+" + hidden + ")").withColor(0xFF808080));
     }
@@ -219,7 +224,7 @@ final class FilterPane {
         int x = left + PAD;
         int y = footerTop;
 
-        graphics.drawString(font, Component.translatable("lifeguard.menu.filters.showing",
+        graphics.drawString(font, Component.translatable("guppylib.menu.filters.showing",
             screen.model().matching(filters).size(), screen.model().totalEntries()), x, y, 0xFF909090, false);
         y += LINE + 4;
 
@@ -238,7 +243,7 @@ final class FilterPane {
         y += boxHeight + 4;
 
         // Clear filters: always there, inactive with nothing to clear.
-        Component clear = Component.translatable("lifeguard.menu.filters.clear");
+        Component clear = Component.translatable("guppylib.menu.filters.clear");
         int clearWidth = Math.min(font.width(clear) + 6, width - 2 * PAD);
         boolean active = filters.any();
         drawChip(graphics, font, clear, x, y, clearWidth, false, 0, active);

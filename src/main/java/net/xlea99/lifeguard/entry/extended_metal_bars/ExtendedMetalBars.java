@@ -1,5 +1,6 @@
 package net.xlea99.lifeguard.entry.extended_metal_bars;
 
+import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.core.Entries;
 import net.xlea99.lifeguard.core.Entry;
 import net.xlea99.lifeguard.core.Restart;
@@ -12,7 +13,7 @@ public final class ExtendedMetalBars {
      * whenever its mod is installed, never by the switch (a world may hold them); off, they leave the creative tab and
      * can't be crafted. See Bars.
      */
-    public static final Entry ENTRY = Entries.feature("extended_metal_bars", Taste.STRONG).home(Entry.LIFEGUARD)
+    public static final Entry ENTRY = Entries.feature("extended_metal_bars", Taste.STRONG).home(Lifeguard.MODID)
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();
 
