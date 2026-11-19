@@ -1,9 +1,9 @@
-package net.xlea99.grout.entry.am_slightly_sexier_rattlesnake;
+package net.xlea99.grout.entry.am_slightly_sexier_rattlesnake_motion;
 
 import java.util.Arrays;
 
 /**
- * How a Rattlesnake moves ({@link AmSlightlySexierRattlesnake}), added after Alex's Mobs has posed its model. Pure arithmetic
+ * How a Rattlesnake moves ({@link AmSlightlySexierRattlesnakeMotion#ENTRY}), added after Alex's Mobs has posed its model. Pure arithmetic
  * on a {@link Pose}.
  *
  * <p>The body is five segments head to tail: second neck, first neck, body (the model's root), first tail, second tail. Each

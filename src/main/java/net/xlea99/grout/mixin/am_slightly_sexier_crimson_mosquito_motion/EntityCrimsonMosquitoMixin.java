@@ -1,7 +1,7 @@
 package net.xlea99.grout.mixin.am_slightly_sexier_crimson_mosquito_motion;
 
 import net.minecraft.world.entity.Entity;
-import net.xlea99.grout.entry.am_slightly_sexier_crimson_mosquito.MosquitoBody;
+import net.xlea99.grout.entry.am_slightly_sexier_crimson_mosquito_motion.MosquitoBody;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;

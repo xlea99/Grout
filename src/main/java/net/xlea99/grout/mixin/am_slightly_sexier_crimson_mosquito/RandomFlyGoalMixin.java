@@ -20,11 +20,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * is either a cruise (6 to 14 blocks, close to the way it faces) or, more often, a dart (2 to 6 blocks, swung up to about 115 degrees off,
  * faster, sometimes jinking a block up or down), and after hops, more often after darts, it stops and hangs a moment. Long
  * cruises alone lost the zip Alex clearly meant (the user, 2026-11-08): in a trial, 4 turns of over 45 degrees a minute
- * against Alex's 66. When a plan runs out it may instead land: one hop down to the ground. Which way is the fix's business
- * ({@code am_crimson_mosquito_fixes}, which this entry requires). Sick Mosquitoes keep Alex's low hops. Targeted by name.
+ * against Alex's 66. When a plan runs out it may instead land: one hop down to the ground. Sick Mosquitoes keep Alex's low
+ * hops. Targeted by name.
+ *
+ * <p>And every spot is ahead of it. Alex's angle is half a turn round from the way it faces, so the offset it builds
+ * (distance times the sine and the cosine) points behind, and each hop turned back the way it came (in a trial, 0 of 1042
+ * spots ahead); turning both round points it ahead, the same as the negative distance his Tarantula Hawk uses. This was
+ * {@code am_crimson_mosquito_fixes}' until 2026-11-19 (the user: "this is NOT a bugfix at all"), so the behavior stands on
+ * its own; the fix keeps the water escape.
  */
 @Mixin(targets = "com.github.alexthe666.alexsmobs.entity.EntityCrimsonMosquito$RandomFlyGoal")
 public abstract class RandomFlyGoalMixin {
+    @ModifyExpressionValue(method = "getBlockInViewMosquito", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;sin(F)F"))
+    private float grout$aheadX(float sin) {
+        return -sin;
+    }
+
+    @ModifyExpressionValue(method = "getBlockInViewMosquito", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/Mth;cos(F)F"))
+    private float grout$aheadZ(float cos) {
+        return -cos;
+    }
+
     /** Cruises: blocks on, least and most, and how much of Alex's spread of headings (about 57 degrees either way) is kept. */
     @Unique
     private static final int grout$CRUISE_NEAREST = 6, grout$CRUISE_FURTHEST = 14;

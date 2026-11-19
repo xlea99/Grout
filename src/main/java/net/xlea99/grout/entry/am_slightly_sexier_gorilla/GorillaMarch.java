@@ -73,16 +73,12 @@ public final class GorillaMarch {
     static final double TROOP_HEIGHT = 16.0;
 
     /** The Gorilla mixin, so this code can reach Alex's members without being built against Alex's Mobs. */
-    public interface Holder {
+    public interface Holder extends GorillaState {
         GorillaMarch grout$march();
-
-        boolean grout$isSilverback();
 
         boolean grout$isSitting();
 
         boolean grout$isEating();
-
-        boolean grout$forcedSit();
     }
 
     final TamableAnimal gorilla;

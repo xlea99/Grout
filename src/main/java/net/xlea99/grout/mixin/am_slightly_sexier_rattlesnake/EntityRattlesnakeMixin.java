@@ -103,7 +103,7 @@ public abstract class EntityRattlesnakeMixin extends Animal implements Rattlesna
      * the turn into the neck.
      */
     public int getMaxHeadYRot() {
-        return this.isCurled() ? net.xlea99.grout.entry.am_slightly_sexier_rattlesnake.SnakeMotion.COIL_HEAD_REACH : 75;
+        return this.isCurled() ? SnakeMind.COIL_HEAD_REACH : 75;
     }
 
     @Inject(method = "registerGoals", at = @At("TAIL"))

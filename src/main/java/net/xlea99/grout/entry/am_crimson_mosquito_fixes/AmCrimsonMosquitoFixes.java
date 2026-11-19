@@ -8,11 +8,9 @@ import net.xlea99.grout.core.Taste;
 
 public final class AmCrimsonMosquitoFixes {
     /**
-     * A Crimson Mosquito's wandering flight picked every spot behind it: Alex's angle turns half round, which his other fliers
-     * (the Tarantula Hawk) undo with a negative distance, and the Mosquito's distance is positive. So each hop it turned and
-     * flew back the way it came, and never got anywhere (in a trial, 0 of 1042 spots ahead of it). Its spots are now ahead of
-     * it, as the goal's name ("in view") says. And one that ended up in water hung there for good, aiming at more water and
-     * unable to drown: now it buzzes up out of it. (Alex's Mobs 1.22.9.)
+     * A Crimson Mosquito that ended up in water hung there for good, aiming at more water and unable to drown: now it buzzes
+     * up out of it. (Alex's Mobs 1.22.9.) Picking its wandering spots ahead instead of behind was here too until 2026-11-19;
+     * that's the Lively Crimson Mosquito behavior's now (the user: "this is NOT a bugfix at all").
      */
     public static final Entry ENTRY = Entries.fix("grout:am_crimson_mosquito_fixes", Taste.NONE).home("alexsmobs")
         .requiresMods("alexsmobs")

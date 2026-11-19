@@ -1,4 +1,4 @@
-package net.xlea99.grout.entry.am_slightly_sexier_crimson_mosquito;
+package net.xlea99.grout.entry.am_slightly_sexier_crimson_mosquito_motion;
 
 /**
  * One Mosquito's flight, eased and sprung over time ({@link MosquitoMotion}): how far it's banked and pitched, and where its

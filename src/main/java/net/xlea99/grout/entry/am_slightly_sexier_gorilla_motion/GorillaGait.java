@@ -1,4 +1,4 @@
-package net.xlea99.grout.entry.am_slightly_sexier_gorilla;
+package net.xlea99.grout.entry.am_slightly_sexier_gorilla_motion;
 
 /**
  * One Gorilla's gait, eased over time ({@link GorillaMotion}). Being hit sets a mob's walk amount straight to 1.5 for a few

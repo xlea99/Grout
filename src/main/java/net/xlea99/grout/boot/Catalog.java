@@ -35,17 +35,21 @@ import net.xlea99.grout.entry.am_grizzly_tempting.AmGrizzlyTempting;
 import net.xlea99.grout.entry.am_hummingbird_fixes.AmHummingbirdFixes;
 import net.xlea99.grout.entry.am_crimson_mosquito_fixes.AmCrimsonMosquitoFixes;
 import net.xlea99.grout.entry.am_slightly_sexier_crimson_mosquito.AmSlightlySexierCrimsonMosquito;
+import net.xlea99.grout.entry.am_slightly_sexier_crimson_mosquito_motion.AmSlightlySexierCrimsonMosquitoMotion;
 import net.xlea99.grout.entry.am_rattlesnake_fixes.AmRattlesnakeFixes;
 import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake.AmSlightlySexierRattlesnake;
+import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake_motion.AmSlightlySexierRattlesnakeMotion;
 import net.xlea99.grout.entry.am_hummingbird_zips_away.AmHummingbirdZipsAway;
 import net.xlea99.grout.entry.am_gorillas_forage_neapolitan_bananas.AmGorillasForageNeapolitanBananas;
 import net.xlea99.grout.entry.am_gorilla_silverbacks.AmGorillaSilverbacks;
 import net.xlea99.grout.entry.am_slightly_sexier_gorilla.AmSlightlySexierGorilla;
+import net.xlea99.grout.entry.am_slightly_sexier_gorilla_motion.AmSlightlySexierGorillaMotion;
 import net.xlea99.grout.entry.am_gorilla_pathing.AmGorillaPathing;
 import net.xlea99.grout.entry.quark_hollow_log_paths.QuarkHollowLogPaths;
 import net.xlea99.grout.entry.am_lava_bottle_dupe.AmLavaBottleDupe;
 import net.xlea99.grout.entry.am_lava_vision_fallback.AmLavaVisionFallback;
 import net.xlea99.grout.entry.am_slightly_sexier_bone_serpent.AmSlightlySexierBoneSerpent;
+import net.xlea99.grout.entry.am_slightly_sexier_bone_serpent_jaw.AmSlightlySexierBoneSerpentJaw;
 import net.xlea99.grout.entry.am_slightly_sexier_crocodile.AmSlightlySexierCrocodile;
 import net.xlea99.grout.entry.am_slightly_sexier_gazelle.AmSlightlySexierGazelle;
 import net.xlea99.grout.entry.am_slightly_sexier_grizzly_bear.AmSlightlySexierGrizzlyBear;
@@ -230,6 +234,7 @@ public final class Catalog {
         AmCrocodileBaskingPoses.class,
         AmCrocodileGrabTurn.class,
         AmSlightlySexierBoneSerpent.class,
+        AmSlightlySexierBoneSerpentJaw.class,
         AmBoneSerpentDeadTargets.class,
         AmGrizzlyTempting.class,
         AmGrizzlyTameCubs.class,
@@ -238,11 +243,14 @@ public final class Catalog {
         AmGorillasForageNeapolitanBananas.class,
         AmGorillaSilverbacks.class,
         AmSlightlySexierGorilla.class,
+        AmSlightlySexierGorillaMotion.class,
         AmGorillaPathing.class,
         AmCrimsonMosquitoFixes.class,
         AmSlightlySexierCrimsonMosquito.class,
+        AmSlightlySexierCrimsonMosquitoMotion.class,
         AmRattlesnakeFixes.class,
         AmSlightlySexierRattlesnake.class,
+        AmSlightlySexierRattlesnakeMotion.class,
         QuarkHollowLogPaths.class,
         NoDeadlyMemes.class,
         AmLavaVisionFallback.class,

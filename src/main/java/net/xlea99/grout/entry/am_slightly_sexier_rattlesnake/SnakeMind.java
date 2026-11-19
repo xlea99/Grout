@@ -71,6 +71,12 @@ public final class SnakeMind {
     static final float SLEEP_NERVE = 0.5F, STARTLE = 0.35F;
     static final double SLEEP_HEARING = 0.75;
     public static final int ASLEEP = HEAD_STEPS + 1;
+    /**
+     * Coiled, how far its head may turn from its body, in degrees (vanilla's 75 made the body turn after the head: it spun on
+     * the spot). The slithering draws the same reach into the neck ({@code SnakeMotion.COIL_HEAD_REACH}); kept apart so this
+     * server side never names the motion side.
+     */
+    public static final int COIL_HEAD_REACH = 160;
 
     private SnakeTemper temper;
     private final SnakeWarmth warmth = new SnakeWarmth();

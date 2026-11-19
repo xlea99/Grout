@@ -5,7 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
-import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake.SnakeBody;
+import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake.SnakeSleep;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +31,8 @@ public abstract class EntityRattlesnakeMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void grout$snore(CallbackInfo ci) {
         LivingEntity self = (LivingEntity) (Object) this;
-        if (!self.level().isClientSide || !((SnakeBody.Holder) this).grout$snakeBody().asleep)
+        // Asleep as its mind says, through Sleepy eyes (which this entry requires, so every snake carries it).
+        if (!self.level().isClientSide || !((SnakeSleep.Holder) this).grout$sleep().asleep)
             return;
         int beat = (self.tickCount + self.getId()) % 50;
         if (beat != 2 && beat != 10 && beat != 18)

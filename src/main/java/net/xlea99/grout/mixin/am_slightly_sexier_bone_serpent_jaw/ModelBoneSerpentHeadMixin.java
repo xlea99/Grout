@@ -4,7 +4,7 @@ import com.github.alexthe666.citadel.client.model.AdvancedModelBox;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Mob;
-import net.xlea99.grout.entry.am_slightly_sexier_bone_serpent.SerpentMaw;
+import net.xlea99.grout.entry.am_slightly_sexier_bone_serpent_jaw.SerpentMaw;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

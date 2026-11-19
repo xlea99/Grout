@@ -1,9 +1,9 @@
-package net.xlea99.grout.entry.am_slightly_sexier_bone_serpent;
+package net.xlea99.grout.entry.am_slightly_sexier_bone_serpent_jaw;
 
 import com.github.alexthe666.citadel.client.model.AdvancedModelBox;
 import net.minecraft.util.Mth;
 
-/** One Bone Serpent's jaws, over time ({@link AmSlightlySexierBoneSerpent#JAW}). Every number is one dial, in degrees or model pixels (16 to a block). */
+/** One Bone Serpent's jaws, over time ({@link AmSlightlySexierBoneSerpentJaw#ENTRY}). Every number is one dial, in degrees or model pixels (16 to a block). */
 public final class SerpentMaw {
     /** How far open it goes: all the way out of the lava, and only a threat swimming after something below it. */
     private static final float OPEN_LEAPING = 1F;

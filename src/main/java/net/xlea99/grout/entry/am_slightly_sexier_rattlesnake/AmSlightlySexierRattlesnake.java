@@ -23,25 +23,25 @@ public final class AmSlightlySexierRattlesnake {
         .side(Side.SERVER).restart(Restart.GAME);
 
     /**
-     * Alex's Rattlesnake waggled side to side by one swing scaled by its speed, so it lay dead straight whenever it stopped and
-     * barely wriggled when it crept. Now ({@link SnakeMotion}) it slithers: an S wave travels down its body as fast as it moves,
-     * so the body follows the head's path while the head stays pointed where it's going; and it never lies straight, resting in
-     * the S it stopped in, which slowly shifts, its head a little raised. Its coil eases in and out, and its tail lifts into
-     * the rattle and back down rather than jumping. Coiled and resting, its head lies on its tail and lifts as far as the
-     * server says it's watching; asleep, its eyes close (a sleeping texture made from its own, {@link SleepingRattlesnakeTexture})
-     * and it breathes slowly. Client side: without our server entry there, the head lifts for anything near and it never sleeps.
+     * The client half of {@link #ENTRY}, Sleepy eyes: the mind tells each client how far up a snake's head is and whether it
+     * sleeps (an entity event, {@link SnakeMind}), and this keeps it ({@link SnakeSleep}) and closes a sleeping snake's eyes (a
+     * sleeping texture made from its own, {@link SleepingRattlesnakeTexture}). On Alex's own model as much as on the
+     * slithering, which it also tells ({@link SleepCues}). Without our server entry there, nobody tells it and it does nothing.
+     * Its own client entry because client hooks are decided by the client's own switches (2026-11-19).
      */
-    public static final Entry MOTION = Entries.tweak("grout:am_slightly_sexier_rattlesnake_motion", Taste.STRONG).shownUnder(ENTRY)
+    public static final Entry SLEEP = Entries.tweak("grout:am_slightly_sexier_rattlesnake_sleep", Taste.LIGHT).shownUnder(ENTRY)
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 
     /**
      * A sleeping Rattlesnake breathes out Alex's Caves' sleep particles, the little Zs its Gummy Bears sleep with, in the same
-     * burst of three every two and a half seconds. Only drawn on the client, from the sleep {@link #MOTION} is told of, so it
-     * sends nothing and adds nothing to any registry. Its own entry because it needs Alex's Caves too.
+     * burst of three every two and a half seconds, from where its head lies. Only drawn on the client, from the sleep
+     * {@link #SLEEP} keeps, so it sends nothing and adds nothing to any registry; it needs no slithering (2026-11-19: the
+     * user's "requires the animations" dropped once the sleep moved to the behavior side). Its own entry because it needs
+     * Alex's Caves too.
      */
-    public static final Entry ZS = Entries.tweak("grout:am_slightly_sexier_rattlesnake_zs", Taste.LIGHT).shownUnder(MOTION)
-        .requiresMods("alexsmobs", "alexscaves").requiresEntries(MOTION)
+    public static final Entry ZS = Entries.tweak("grout:am_slightly_sexier_rattlesnake_zs", Taste.LIGHT).shownUnder(ENTRY)
+        .requiresMods("alexsmobs", "alexscaves").requiresEntries(SLEEP)
         .usesIds("particle_type", "alexscaves:sleep")
         .side(Side.CLIENT).restart(Restart.GAME);
 

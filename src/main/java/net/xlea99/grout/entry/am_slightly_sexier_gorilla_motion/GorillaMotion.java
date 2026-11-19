@@ -1,9 +1,9 @@
-package net.xlea99.grout.entry.am_slightly_sexier_gorilla;
+package net.xlea99.grout.entry.am_slightly_sexier_gorilla_motion;
 
 import java.util.Arrays;
 
 /**
- * How a Gorilla moves ({@link AmSlightlySexierGorilla#MOTION}), added after Alex's Mobs has posed its model. Pure arithmetic on
+ * How a Gorilla moves ({@link AmSlightlySexierGorillaMotion#ENTRY}), added after Alex's Mobs has posed its model. Pure arithmetic on
  * a {@link Pose}, so that it can be checked without the game: where every hand and foot lands, frame by frame.
  *
  * <p><b>Alex's walk</b> swings all four limbs by one sine, diagonal pairs together like a trotting dog, scaled by the walk

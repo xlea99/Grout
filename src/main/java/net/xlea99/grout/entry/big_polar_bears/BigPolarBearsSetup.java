@@ -16,11 +16,15 @@ public final class BigPolarBearsSetup implements EntrySetup {
 
     @Override
     public void setup(Wiring wiring) {
-        wiring.whenActive(BigPolarBears.ENTRY, (IEventBus modBus) -> modBus.addListener(BigPolarBearsSetup::onAttributes));
+        wiring.whenActive(BigPolarBears.ENTRY, (IEventBus modBus) -> modBus.addListener(BigPolarBearsSetup::onSize));
+        wiring.whenActive(BigPolarBears.TOUGHER, (IEventBus modBus) -> modBus.addListener(BigPolarBearsSetup::onToughness));
     }
 
-    private static void onAttributes(EntityAttributeModificationEvent event) {
+    private static void onSize(EntityAttributeModificationEvent event) {
         event.add(EntityType.POLAR_BEAR, Attributes.SCALE, SCALE);
+    }
+
+    private static void onToughness(EntityAttributeModificationEvent event) {
         event.add(EntityType.POLAR_BEAR, Attributes.MAX_HEALTH, MAX_HEALTH);
         event.add(EntityType.POLAR_BEAR, Attributes.ATTACK_DAMAGE, ATTACK_DAMAGE);
     }

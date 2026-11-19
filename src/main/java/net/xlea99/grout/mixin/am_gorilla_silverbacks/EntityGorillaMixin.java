@@ -29,12 +29,6 @@ public abstract class EntityGorillaMixin implements Silverbacks.Holder {
     @Final
     public static Animation ANIMATION_POUNDCHEST;
     @Shadow
-    public boolean forcedSit;
-
-    @Shadow
-    public abstract boolean isSilverback();
-
-    @Shadow
     public abstract void setSilverback(boolean silver);
 
     @Unique
@@ -48,19 +42,11 @@ public abstract class EntityGorillaMixin implements Silverbacks.Holder {
         return this.grout$silverbacks;
     }
 
-    @Override
-    public boolean grout$isSilverback() {
-        return this.isSilverback();
-    }
+    // grout$isSilverback and grout$forcedSit: the shared mixin (mixin.shared.gorilla_state), one copy for both entries.
 
     @Override
     public void grout$setSilverback(boolean silverback) {
         this.setSilverback(silverback);
-    }
-
-    @Override
-    public boolean grout$forcedSit() {
-        return this.forcedSit;
     }
 
     /** Through Citadel's handler, so watching players see it; only when it isn't already in an animation. */

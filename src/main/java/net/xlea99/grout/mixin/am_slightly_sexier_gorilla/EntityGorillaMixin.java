@@ -20,12 +20,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "com.github.alexthe666.alexsmobs.entity.EntityGorilla")
 public abstract class EntityGorillaMixin implements GorillaMarch.Holder {
     @Shadow
-    public boolean forcedSit;
-
-    @Shadow
-    public abstract boolean isSilverback();
-
-    @Shadow
     public abstract boolean isSitting();
 
     @Shadow
@@ -42,10 +36,7 @@ public abstract class EntityGorillaMixin implements GorillaMarch.Holder {
         return this.grout$march;
     }
 
-    @Override
-    public boolean grout$isSilverback() {
-        return this.isSilverback();
-    }
+    // grout$isSilverback and grout$forcedSit: the shared mixin (mixin.shared.gorilla_state), one copy for both entries.
 
     @Override
     public boolean grout$isSitting() {
@@ -55,11 +46,6 @@ public abstract class EntityGorillaMixin implements GorillaMarch.Holder {
     @Override
     public boolean grout$isEating() {
         return this.isEating();
-    }
-
-    @Override
-    public boolean grout$forcedSit() {
-        return this.forcedSit;
     }
 
     @Inject(method = "registerGoals", at = @At("TAIL"))

@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.WrappedGoal;
 import net.minecraft.world.phys.AABB;
+import net.xlea99.grout.entry.am_slightly_sexier_gorilla.GorillaState;
 
 /**
  * One Gorilla's part in its troop's leadership: rising to Silverback, the fresh window after rising, rivalries and grudges.
@@ -78,14 +79,10 @@ public final class Silverbacks {
     static final int ALERT_GRACE = 100;
 
     /** The Gorilla mixin, so this code can reach Alex's members without being built against Alex's Mobs. */
-    public interface Holder {
+    public interface Holder extends GorillaState {
         Silverbacks grout$silverbacks();
 
-        boolean grout$isSilverback();
-
         void grout$setSilverback(boolean silverback);
-
-        boolean grout$forcedSit();
 
         void grout$poundChest();
     }

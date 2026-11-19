@@ -17,6 +17,7 @@ public final class AmGorillaSilverbacks {
      */
     public static final Entry ENTRY = Entries.tweak("grout:am_gorilla_silverbacks", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
+        .sharesMixins("gorilla_state", "alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 
     private AmGorillaSilverbacks() {

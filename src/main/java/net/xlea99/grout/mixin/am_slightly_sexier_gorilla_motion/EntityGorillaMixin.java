@@ -1,6 +1,6 @@
 package net.xlea99.grout.mixin.am_slightly_sexier_gorilla_motion;
 
-import net.xlea99.grout.entry.am_slightly_sexier_gorilla.GorillaGait;
+import net.xlea99.grout.entry.am_slightly_sexier_gorilla_motion.GorillaGait;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 

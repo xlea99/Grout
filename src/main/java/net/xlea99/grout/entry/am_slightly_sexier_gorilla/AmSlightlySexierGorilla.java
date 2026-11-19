@@ -19,18 +19,8 @@ public final class AmSlightlySexierGorilla {
      */
     public static final Entry ENTRY = Entries.tweak("grout:am_slightly_sexier_gorilla", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
+        .sharesMixins("gorilla_state", "alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
-
-    /**
-     * Alex's Gorilla walks like a trotting dog, its diagonal limbs swinging together by one sine scaled by speed, so at a march
-     * its hands and feet slid and slower it tiptoed. Now it knuckle-walks ({@link GorillaMotion}): a four-beat walk where each
-     * long arm plants and stays planted while the body vaults over it, shoulders rolling and twisting, short hind legs pattering
-     * underneath; a charge is a bounding gallop, and upright it waddles. Client side: it only changes how the model is posed, so
-     * it needs nothing from the server and doesn't require {@link #ENTRY}, only sits under it in the menu.
-     */
-    public static final Entry MOTION = Entries.tweak("grout:am_slightly_sexier_gorilla_motion", Taste.STRONG).shownUnder(ENTRY)
-        .requiresMods("alexsmobs")
-        .side(Side.CLIENT).restart(Restart.GAME);
 
     private AmSlightlySexierGorilla() {
     }

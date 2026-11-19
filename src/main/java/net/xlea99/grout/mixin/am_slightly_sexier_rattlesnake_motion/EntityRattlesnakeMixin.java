@@ -1,14 +1,10 @@
 package net.xlea99.grout.mixin.am_slightly_sexier_rattlesnake_motion;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.level.Level;
-import net.xlea99.guppylib.sync.RemoteServer;
-import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake.AmSlightlySexierRattlesnake;
-import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake.SnakeBody;
-import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake.SnakeMind;
-import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake.SnakeNotice;
+import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake_motion.SnakeBody;
+import net.xlea99.grout.entry.am_slightly_sexier_rattlesnake_motion.SnakeCues;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,9 +12,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Carries each Rattlesnake's {@link SnakeBody} and keeps how far up its head should be: as the server tells it when our
- * server entry runs there ({@link SnakeMind}), else up whenever anything is near enough to notice; and whether it's asleep,
- * as the server tells it. Coiled and resting, no tongue flicks. Client only.
+ * Carries each Rattlesnake's {@link SnakeBody} and keeps how far up its head should be and whether it's asleep, as
+ * {@link SnakeCues} has it: its mind's word when something tells it, else up whenever anything is near enough to notice,
+ * and never asleep. Coiled and resting, no tongue flicks. Client only; it never names the mind.
  */
 @Mixin(targets = "com.github.alexthe666.alexsmobs.entity.EntityRattlesnake")
 public abstract class EntityRattlesnakeMixin extends Animal implements SnakeBody.Holder {
@@ -45,30 +41,19 @@ public abstract class EntityRattlesnakeMixin extends Animal implements SnakeBody
         return this.grout$snakeBody;
     }
 
-    /** Alex's Mobs has no answer to this event of its own to hook, so this adds one. Its numbers come from {@link SnakeMind}. */
-    @Override
-    public void handleEntityEvent(byte id) {
-        int step = id - SnakeMind.HEAD_EVENT;
-        if (step >= 0 && step <= SnakeMind.ASLEEP) {
-            boolean asleep = step == SnakeMind.ASLEEP;
-            this.grout$snakeBody.asleep = asleep;
-            this.grout$snakeBody.told = asleep ? 0F : step / (float) SnakeMind.HEAD_STEPS;
-        } else {
-            super.handleEntityEvent(id);
-        }
-    }
-
     @Inject(method = "tick", at = @At("TAIL"))
     private void grout$notice(CallbackInfo ci) {
         if (!this.level().isClientSide)
             return;
         SnakeBody body = this.grout$snakeBody;
-        if (grout$serverTells()) {
-            body.head = Float.isNaN(body.told) ? 0F : body.told;
+        float told = SnakeCues.told(this);
+        if (!Float.isNaN(told)) {
+            body.head = told;
+            body.asleep = SnakeCues.asleep(this);
         } else {
             body.asleep = false;
             if ((this.tickCount + this.getId()) % 10 == 0)
-                body.head = SnakeNotice.nearest(this) != null ? 1F : 0F;
+                body.head = SnakeCues.anyoneNear(this) ? 1F : 0F;
         }
         EntityRattlesnakeAccessor snake = (EntityRattlesnakeAccessor) this;
         boolean curled = snake.grout$curledNow();
@@ -89,11 +74,5 @@ public abstract class EntityRattlesnakeMixin extends Animal implements SnakeBody
         } else {
             this.grout$coilYaw = Float.NaN;
         }
-    }
-
-    /** Whether the server here runs our entry (its switch, as this client follows it), so it tells each snake's head. */
-    @Unique
-    private static boolean grout$serverTells() {
-        return AmSlightlySexierRattlesnake.ENTRY.active() && (Minecraft.getInstance().hasSingleplayerServer() || RemoteServer.following());
     }
 }

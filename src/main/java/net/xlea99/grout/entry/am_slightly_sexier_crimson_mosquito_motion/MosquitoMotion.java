@@ -1,9 +1,9 @@
-package net.xlea99.grout.entry.am_slightly_sexier_crimson_mosquito;
+package net.xlea99.grout.entry.am_slightly_sexier_crimson_mosquito_motion;
 
 import java.util.Arrays;
 
 /**
- * How a Crimson Mosquito moves ({@link AmSlightlySexierCrimsonMosquito#MOTION}), added after Alex's Mobs has posed its model.
+ * How a Crimson Mosquito moves ({@link AmSlightlySexierCrimsonMosquitoMotion#ENTRY}), added after Alex's Mobs has posed its model.
  * Pure arithmetic on a {@link Pose}.
  *
  * <p>Alex's Mosquito flies level whatever it does, its wings flapping about five times a second and its six legs flapping in
