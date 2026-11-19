@@ -1,0 +1,22 @@
+{
+  "id": "alexscaves:rock_candy",
+  "replace": false,
+  "colors": {
+    "maroon": "grout:rock_candy_maroon",
+    "rose": "grout:rock_candy_rose",
+    "coral": "grout:rock_candy_coral",
+    "indigo": "grout:rock_candy_indigo",
+    "navy": "grout:rock_candy_navy",
+    "slate": "grout:rock_candy_slate",
+    "olive": "grout:rock_candy_olive",
+    "amber": "grout:rock_candy_amber",
+    "beige": "grout:rock_candy_beige",
+    "teal": "grout:rock_candy_teal",
+    "mint": "grout:rock_candy_mint",
+    "aqua": "grout:rock_candy_aqua",
+    "verdant": "grout:rock_candy_verdant",
+    "forest": "grout:rock_candy_forest",
+    "ginger": "grout:rock_candy_ginger",
+    "tan": "grout:rock_candy_tan"
+  }
+}

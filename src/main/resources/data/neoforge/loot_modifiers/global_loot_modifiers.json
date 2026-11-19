@@ -1,7 +1,7 @@
 {
   "replace": false,
   "entries": [
-    "lifeguard:twigs_leaf_twigs",
-    "lifeguard:twigs_gravel_pebbles"
+    "grout:twigs_leaf_twigs",
+    "grout:twigs_gravel_pebbles"
   ]
 }

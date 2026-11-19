@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "grout:block/verdant_sparkler"
+    },
+    "lit=true": {
+      "model": "grout:block/verdant_sparkler_lit"
+    }
+  }
+}

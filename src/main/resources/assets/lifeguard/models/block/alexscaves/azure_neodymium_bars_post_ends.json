@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/iron_bars_post_ends",
-  "render_type": "minecraft:cutout_mipped",
-  "textures": {
-    "particle": "lifeguard:block/alexscaves/azure_neodymium_bars",
-    "bars": "lifeguard:block/alexscaves/azure_neodymium_bars",
-    "edge": "lifeguard:block/alexscaves/azure_neodymium_bars"
-  }
-}

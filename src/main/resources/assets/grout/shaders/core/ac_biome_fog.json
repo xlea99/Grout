@@ -1,0 +1,23 @@
+{
+    "blend": {
+        "func": "add",
+        "srcrgb": "srcalpha",
+        "dstrgb": "1-srcalpha"
+    },
+    "vertex": "grout:ac_biome_fog",
+    "fragment": "grout:ac_biome_fog",
+    "attributes": [
+        "Position"
+    ],
+    "samplers": [
+        { "name": "Sampler0" }
+    ],
+    "uniforms": [
+        { "name": "ClipToCamera", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "BiomeFogStart", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "BiomeFogEnd", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "Cylinder", "type": "float", "count": 1, "values": [ 1.0 ] },
+        { "name": "BiomeFogColor", "type": "float", "count": 3, "values": [ 0.0, 0.0, 0.0 ] },
+        { "name": "Strength", "type": "float", "count": 1, "values": [ 0.0 ] }
+    ]
+}

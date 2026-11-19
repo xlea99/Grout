@@ -1,0 +1,19 @@
+package net.xlea99.grout.entry.boidsify;
+
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Restart;
+import net.xlea99.guppylib.core.Side;
+import net.xlea99.grout.core.Entries;
+import net.xlea99.grout.core.Taste;
+
+public final class Boidsify {
+    /**
+     * Fish AI is the server's. Ships no fish: which species school, and how, comes from datapacks (Deep End keeps its own
+     * in {@code tweaks_deep_end}). Meant to move out of Grout into a mob behavior mod one day. See {@code boids.Boids}.
+     */
+    public static final Entry ENTRY = Entries.feature("boidsify", Taste.LIGHT).home(Entry.MINECRAFT)
+        .side(Side.SERVER).restart(Restart.GAME);
+
+    private Boidsify() {
+    }
+}

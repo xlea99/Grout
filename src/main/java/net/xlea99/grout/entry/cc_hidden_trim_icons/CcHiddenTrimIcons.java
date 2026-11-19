@@ -1,0 +1,17 @@
+package net.xlea99.grout.entry.cc_hidden_trim_icons;
+
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Restart;
+import net.xlea99.guppylib.core.Side;
+import net.xlea99.grout.core.Entries;
+import net.xlea99.grout.core.Taste;
+
+public final class CcHiddenTrimIcons {
+    /** Only which outlines a smithing screen cycles. Deep End's opinion: it hides exactly the two materials it cut. */
+    public static final Entry ENTRY = Entries.tweak("cc_hidden_trim_icons", Taste.DEEP_END).home("caverns_and_chasms")
+        .requiresMods("caverns_and_chasms")
+        .side(Side.CLIENT).restart(Restart.GAME);
+
+    private CcHiddenTrimIcons() {
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "grout:block/ginger_sparkler"
+    },
+    "lit=true": {
+      "model": "grout:block/ginger_sparkler_lit"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "guppylib:entry",
+      "entry": "extended_metal_bars"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "c:ingots/netherite"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 16,
+    "id": "grout:minecraft/netherite_bars"
+  }
+}

@@ -1,0 +1,18 @@
+package net.xlea99.grout.entry.etcetera_label_wash_stacking;
+
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Restart;
+import net.xlea99.guppylib.core.Side;
+import net.xlea99.grout.core.Entries;
+import net.xlea99.grout.core.Taste;
+
+public final class EtceteraLabelWashStacking {
+    /** Runtime-gated: washing at a cauldron runs on both sides. */
+    public static final Entry ENTRY = Entries.fix("etcetera_label_wash_stacking", Taste.NONE).home("etcetera")
+        .requiresMods("etcetera")
+        .side(Side.SERVER).restart(Restart.GAME)
+        .runtimeGated();
+
+    private EtceteraLabelWashStacking() {
+    }
+}

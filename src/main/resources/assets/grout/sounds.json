@@ -1,0 +1,24 @@
+{
+  "maggot.plop": {
+    "subtitle": "grout.subtitles.maggot.plop",
+    "sounds": [
+      "grout:maggot/plop1",
+      "grout:maggot/plop2",
+      "grout:maggot/plop3"
+    ]
+  },
+  "maggot.squirm": {
+    "subtitle": "grout.subtitles.maggot.squirm",
+    "sounds": [
+      "grout:maggot/squirm1",
+      "grout:maggot/squirm2",
+      "grout:maggot/squirm3"
+    ]
+  },
+  "block.jukebox.record_scratch": {
+    "subtitle": "grout.subtitles.block.jukebox.record_scratch",
+    "sounds": [
+      "grout:block/jukebox/record_scratch"
+    ]
+  }
+}

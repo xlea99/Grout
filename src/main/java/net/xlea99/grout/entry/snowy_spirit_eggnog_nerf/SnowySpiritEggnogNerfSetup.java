@@ -1,0 +1,12 @@
+package net.xlea99.grout.entry.snowy_spirit_eggnog_nerf;
+
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
+
+/** Setup for {@link SnowySpiritEggnogNerf}. */
+public final class SnowySpiritEggnogNerfSetup implements EntrySetup {
+    @Override
+    public void setup(Wiring wiring) {
+        wiring.whenActive(SnowySpiritEggnogNerf.ENTRY, EggnogNerf::register);
+    }
+}

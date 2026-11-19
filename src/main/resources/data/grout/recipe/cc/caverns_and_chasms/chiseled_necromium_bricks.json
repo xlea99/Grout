@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "guppylib:entry",
+      "entry": "cc_extended_plated_bricks"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "grout:cc/caverns_and_chasms/necromium_brick_slab"
+    }
+  },
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "grout:cc/caverns_and_chasms/chiseled_necromium_bricks"
+  }
+}

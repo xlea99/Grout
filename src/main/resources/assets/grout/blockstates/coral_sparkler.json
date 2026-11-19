@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "grout:block/coral_sparkler"
+    },
+    "lit=true": {
+      "model": "grout:block/coral_sparkler_lit"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+package net.xlea99.grout.entry.vanilla_backport_resin_trim_icons;
+
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Restart;
+import net.xlea99.guppylib.core.Side;
+import net.xlea99.grout.core.Entries;
+import net.xlea99.grout.core.Taste;
+
+public final class VanillaBackportResinTrimIcons {
+    /**
+     * Vanilla Backport's resin joins Blueprint's generated trim icons, the system Abnormals' own materials use. Client
+     * only, both halves in one entry: the icon sprites (our pack) and the overrides (Blueprint), so off is exactly the
+     * old look, never icons pointing at sprites that aren't there.
+     */
+    public static final Entry ENTRY = Entries.compat("vanilla_backport_resin_trim_icons", Taste.NONE)
+        .home("vanillabackport")
+        .requiresMods("vanillabackport", "blueprint")
+        .side(Side.CLIENT).restart(Restart.GAME)
+        .resourcePack();
+
+    private VanillaBackportResinTrimIcons() {
+    }
+}

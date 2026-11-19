@@ -1,0 +1,18 @@
+package net.xlea99.grout.entry.supps_soap_lore_first;
+
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Restart;
+import net.xlea99.guppylib.core.Side;
+import net.xlea99.grout.core.Entries;
+import net.xlea99.grout.core.Taste;
+
+public final class SuppsSoapLoreFirst {
+    /** Runtime-gated: crafting previews its result on the client. */
+    public static final Entry ENTRY = Entries.fix("supps_soap_lore_first", Taste.NONE).home("supplementaries")
+        .requiresMods("supplementaries")
+        .side(Side.SERVER).restart(Restart.GAME)
+        .runtimeGated();
+
+    private SuppsSoapLoreFirst() {
+    }
+}

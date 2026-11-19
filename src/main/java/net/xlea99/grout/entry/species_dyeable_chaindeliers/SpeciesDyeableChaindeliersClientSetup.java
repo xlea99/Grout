@@ -1,0 +1,12 @@
+package net.xlea99.grout.entry.species_dyeable_chaindeliers;
+
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
+
+/** Client setup for {@link SpeciesDyeableChaindeliers}. */
+public final class SpeciesDyeableChaindeliersClientSetup implements EntrySetup {
+    @Override
+    public void setup(Wiring wiring) {
+        wiring.whenInstalled(SpeciesDyeableChaindeliers.ENTRY, ChaindelierClient::register);
+    }
+}

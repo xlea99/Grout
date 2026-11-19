@@ -11,7 +11,7 @@ plugins {
 }
 
 // GuppyLib, the shared machinery (its own repo, a sibling folder): built from its SOURCE when that folder sits beside this
-// one, so a change there reaches Lifeguard's next build and run with nothing published; else the published version.
+// one, so a change there reaches Grout's next build and run with nothing published; else the published version.
 if (file('../GuppyLib').isDirectory()) {
     includeBuild('../GuppyLib')
 }

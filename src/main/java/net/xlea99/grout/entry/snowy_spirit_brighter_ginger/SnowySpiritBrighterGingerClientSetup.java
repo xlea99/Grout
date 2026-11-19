@@ -1,0 +1,14 @@
+package net.xlea99.grout.entry.snowy_spirit_brighter_ginger;
+
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
+import net.xlea99.grout.client.SpecRecolors;
+
+/** Client setup for {@link SnowySpiritBrighterGinger}. */
+public final class SnowySpiritBrighterGingerClientSetup implements EntrySetup {
+    @Override
+    public void setup(Wiring wiring) {
+        wiring.whenActive(SnowySpiritBrighterGinger.ENTRY, () -> SpecRecolors.register(SnowySpiritBrighterGinger.ENTRY.id(),
+            SpecRecolors.spec("snowy_spirit_ginger"), "snowyspirit"));
+    }
+}

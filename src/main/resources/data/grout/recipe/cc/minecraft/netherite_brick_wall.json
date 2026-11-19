@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "guppylib:entry",
+      "entry": "cc_extended_plated_bricks"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "grout:cc/minecraft/netherite_bricks"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "grout:cc/minecraft/netherite_brick_wall"
+  }
+}

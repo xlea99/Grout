@@ -1,0 +1,12 @@
+package net.xlea99.grout.entry.quark_parrot_egg_dispensing;
+
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
+
+/** Setup for {@link QuarkParrotEggDispensing}. */
+public final class QuarkParrotEggDispensingSetup implements EntrySetup {
+    @Override
+    public void setup(Wiring wiring) {
+        wiring.whenActive(QuarkParrotEggDispensing.ENTRY, ParrotEggDispensers::register);
+    }
+}

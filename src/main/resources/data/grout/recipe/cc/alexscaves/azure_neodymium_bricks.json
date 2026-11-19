@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "guppylib:entry",
+      "entry": "cc_extended_plated_bricks_alexscaves"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "alexscaves:azure_neodymium_ingot"
+    },
+    "X": {
+      "item": "minecraft:deepslate"
+    }
+  },
+  "pattern": [
+    "#X",
+    "X#"
+  ],
+  "result": {
+    "count": 4,
+    "id": "grout:cc/alexscaves/azure_neodymium_bricks"
+  }
+}

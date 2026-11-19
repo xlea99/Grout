@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/iron_bars_post_ends",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "grout:block/minecraft/netherite_bars",
+    "bars": "grout:block/minecraft/netherite_bars",
+    "edge": "grout:block/minecraft/netherite_bars"
+  }
+}

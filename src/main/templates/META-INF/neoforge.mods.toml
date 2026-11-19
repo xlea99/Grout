@@ -25,7 +25,7 @@ displayName = "${mod_name}" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 #displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="lifeguard.png" #optional
+#logoFile="grout.png" #optional
 # A text field displayed in the mod UI
 #credits="" #optional
 # A text field displayed in the mod UI
@@ -67,7 +67,7 @@ side = "BOTH"
 [[dependencies."${mod_id}"]]
 modId = "guppylib"
 type = "required"
-reason = "GuppyLib runs Lifeguard's entries (its config files, its menu, which of its hooks load)."
+reason = "GuppyLib runs Grout's entries (its config files, its menu, which of its hooks load)."
 versionRange = "[0.1.0,)"
 ordering = "AFTER"
 side = "BOTH"
@@ -80,7 +80,7 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-# Load after Moonlight, so the data files Lifeguard corrects in its namespace win over Moonlight's own.
+# Load after Moonlight, so the data files Grout corrects in its namespace win over Moonlight's own.
 [[dependencies."${mod_id}"]]
 modId = "moonlight"
 type = "optional"
@@ -88,7 +88,7 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
-# Load after Supplementaries, so the data files Lifeguard corrects in its namespace win over Supplementaries' own.
+# Load after Supplementaries, so the data files Grout corrects in its namespace win over Supplementaries' own.
 [[dependencies."${mod_id}"]]
 modId = "supplementaries"
 type = "optional"

@@ -1,0 +1,13 @@
+package net.xlea99.grout.entry.cc_storage_duct_span_limit;
+
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
+import net.xlea99.grout.duct.StorageDucts;
+
+/** Setup for {@link CcStorageDuctSpanLimit}. */
+public final class CcStorageDuctSpanLimitSetup implements EntrySetup {
+    @Override
+    public void setup(Wiring wiring) {
+        wiring.whenActive(CcStorageDuctSpanLimit.ENTRY, StorageDucts::registerPlaceWarning);
+    }
+}

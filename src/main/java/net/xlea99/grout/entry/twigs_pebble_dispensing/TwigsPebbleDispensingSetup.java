@@ -1,0 +1,12 @@
+package net.xlea99.grout.entry.twigs_pebble_dispensing;
+
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
+
+/** Setup for {@link TwigsPebbleDispensing}. */
+public final class TwigsPebbleDispensingSetup implements EntrySetup {
+    @Override
+    public void setup(Wiring wiring) {
+        wiring.whenActive(TwigsPebbleDispensing.ENTRY, PebbleDispensers::register);
+    }
+}

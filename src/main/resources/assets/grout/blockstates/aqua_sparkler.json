@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "grout:block/aqua_sparkler"
+    },
+    "lit=true": {
+      "model": "grout:block/aqua_sparkler_lit"
+    }
+  }
+}

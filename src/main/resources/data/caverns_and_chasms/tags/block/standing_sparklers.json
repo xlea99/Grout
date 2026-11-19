@@ -2,67 +2,67 @@
   "replace": false,
   "values": [
     {
-      "id": "lifeguard:maroon_sparkler",
+      "id": "grout:maroon_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:rose_sparkler",
+      "id": "grout:rose_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:coral_sparkler",
+      "id": "grout:coral_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:indigo_sparkler",
+      "id": "grout:indigo_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:navy_sparkler",
+      "id": "grout:navy_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:slate_sparkler",
+      "id": "grout:slate_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:olive_sparkler",
+      "id": "grout:olive_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:amber_sparkler",
+      "id": "grout:amber_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:beige_sparkler",
+      "id": "grout:beige_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:teal_sparkler",
+      "id": "grout:teal_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:mint_sparkler",
+      "id": "grout:mint_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:aqua_sparkler",
+      "id": "grout:aqua_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:verdant_sparkler",
+      "id": "grout:verdant_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:forest_sparkler",
+      "id": "grout:forest_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:ginger_sparkler",
+      "id": "grout:ginger_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:tan_sparkler",
+      "id": "grout:tan_sparkler",
       "required": false
     }
   ]

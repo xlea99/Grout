@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "grout:block/cc/etcetera/bismuth_bricks",
+    "top": "grout:block/cc/etcetera/bismuth_bricks",
+    "side": "grout:block/cc/etcetera/bismuth_bricks"
+  }
+}

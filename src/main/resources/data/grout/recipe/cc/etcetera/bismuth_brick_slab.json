@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "guppylib:entry",
+      "entry": "cc_extended_plated_bricks_etcetera"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "grout:cc/etcetera/bismuth_bricks"
+    }
+  },
+  "pattern": [
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "grout:cc/etcetera/bismuth_brick_slab"
+  }
+}

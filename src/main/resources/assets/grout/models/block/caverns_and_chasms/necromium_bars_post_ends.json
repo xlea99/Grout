@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/iron_bars_post_ends",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "grout:block/caverns_and_chasms/necromium_bars",
+    "bars": "grout:block/caverns_and_chasms/necromium_bars",
+    "edge": "grout:block/caverns_and_chasms/necromium_bars"
+  }
+}

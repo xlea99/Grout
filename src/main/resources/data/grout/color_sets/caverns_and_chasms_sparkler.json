@@ -1,0 +1,22 @@
+{
+  "id": "caverns_and_chasms:sparkler",
+  "replace": false,
+  "colors": {
+    "maroon": "grout:maroon_sparkler",
+    "rose": "grout:rose_sparkler",
+    "coral": "grout:coral_sparkler",
+    "indigo": "grout:indigo_sparkler",
+    "navy": "grout:navy_sparkler",
+    "slate": "grout:slate_sparkler",
+    "olive": "grout:olive_sparkler",
+    "amber": "grout:amber_sparkler",
+    "beige": "grout:beige_sparkler",
+    "teal": "grout:teal_sparkler",
+    "mint": "grout:mint_sparkler",
+    "aqua": "grout:aqua_sparkler",
+    "verdant": "grout:verdant_sparkler",
+    "forest": "grout:forest_sparkler",
+    "ginger": "grout:ginger_sparkler",
+    "tan": "grout:tan_sparkler"
+  }
+}

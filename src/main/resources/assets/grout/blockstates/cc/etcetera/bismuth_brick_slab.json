@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "grout:block/cc/etcetera/bismuth_brick_slab"
+    },
+    "type=top": {
+      "model": "grout:block/cc/etcetera/bismuth_brick_slab_top"
+    },
+    "type=double": {
+      "model": "grout:block/cc/etcetera/bismuth_bricks"
+    }
+  }
+}

@@ -1,6 +1,0 @@
-{
-  "parent": "caverns_and_chasms:block/template_sparkler",
-  "textures": {
-    "sparkler": "lifeguard:block/amber_sparkler"
-  }
-}

@@ -2,67 +2,67 @@
   "replace": false,
   "values": [
     {
-      "id": "lifeguard:maroon_wall_sparkler",
+      "id": "grout:maroon_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:rose_wall_sparkler",
+      "id": "grout:rose_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:coral_wall_sparkler",
+      "id": "grout:coral_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:indigo_wall_sparkler",
+      "id": "grout:indigo_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:navy_wall_sparkler",
+      "id": "grout:navy_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:slate_wall_sparkler",
+      "id": "grout:slate_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:olive_wall_sparkler",
+      "id": "grout:olive_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:amber_wall_sparkler",
+      "id": "grout:amber_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:beige_wall_sparkler",
+      "id": "grout:beige_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:teal_wall_sparkler",
+      "id": "grout:teal_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:mint_wall_sparkler",
+      "id": "grout:mint_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:aqua_wall_sparkler",
+      "id": "grout:aqua_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:verdant_wall_sparkler",
+      "id": "grout:verdant_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:forest_wall_sparkler",
+      "id": "grout:forest_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:ginger_wall_sparkler",
+      "id": "grout:ginger_wall_sparkler",
       "required": false
     },
     {
-      "id": "lifeguard:tan_wall_sparkler",
+      "id": "grout:tan_wall_sparkler",
       "required": false
     }
   ]

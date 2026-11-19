@@ -1,7 +1,7 @@
 {
   "sources": [
     {
-      "type": "lifeguard:pot_trim_palettes",
+      "type": "grout:pot_trim_palettes",
       "materials": [
         {
           "name": "resin",

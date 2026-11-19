@@ -1,7 +1,7 @@
 {
   "sources": [
     {
-      "type": "lifeguard:shimmering_trims",
+      "type": "grout:shimmering_trims",
       "atlas": "minecraft:blocks"
     }
   ]

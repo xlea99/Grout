@@ -1,0 +1,8 @@
+{
+  "parent": "quark:block/vertical_slab",
+  "textures": {
+    "bottom": "grout:block/cc/alexscaves/scarlet_neodymium_bricks",
+    "top": "grout:block/cc/alexscaves/scarlet_neodymium_bricks",
+    "side": "grout:block/cc/alexscaves/scarlet_neodymium_bricks"
+  }
+}

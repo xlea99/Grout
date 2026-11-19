@@ -1,0 +1,12 @@
+package net.xlea99.grout.entry.amendments_cake_slicing;
+
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
+
+/** Setup for {@link AmendmentsCakeSlicing}. */
+public final class AmendmentsCakeSlicingSetup implements EntrySetup {
+    @Override
+    public void setup(Wiring wiring) {
+        wiring.whenActive(AmendmentsCakeSlicing.ENTRY, CakeSlicing::register);
+    }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "grout:block/cc/minecraft/netherite_bricks"
+  }
+}

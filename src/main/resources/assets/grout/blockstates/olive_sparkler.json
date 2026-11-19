@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "grout:block/olive_sparkler"
+    },
+    "lit=true": {
+      "model": "grout:block/olive_sparkler_lit"
+    }
+  }
+}

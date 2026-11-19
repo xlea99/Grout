@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "grout:block/cc/minecraft/netherite_bricks"
+  }
+}

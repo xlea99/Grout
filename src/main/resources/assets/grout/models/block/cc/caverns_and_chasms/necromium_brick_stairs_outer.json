@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "grout:block/cc/caverns_and_chasms/necromium_bricks",
+    "top": "grout:block/cc/caverns_and_chasms/necromium_bricks",
+    "side": "grout:block/cc/caverns_and_chasms/necromium_bricks"
+  }
+}

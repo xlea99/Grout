@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "guppylib:entry",
+      "entry": "cc_extended_plated_bricks_etcetera"
+    }
+  ],
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "grout:cc/etcetera/bismuth_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "grout:cc/etcetera/bismuth_brick_wall"
+  }
+}

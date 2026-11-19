@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "guppylib:entry",
+      "entry": "cc_extended_plated_bricks_alexscaves"
+    }
+  ],
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "grout:cc/alexscaves/azure_neodymium_bricks"
+  },
+  "result": {
+    "count": 1,
+    "id": "grout:cc/alexscaves/chiseled_azure_neodymium_bricks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "grout:block/cc/caverns_and_chasms/necromium_bricks"
+  }
+}

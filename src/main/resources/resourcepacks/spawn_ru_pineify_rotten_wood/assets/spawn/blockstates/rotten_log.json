@@ -8,7 +8,7 @@
         "weight": 3
       },
       {
-        "model": "lifeguard:block/rotten_log_mossy",
+        "model": "grout:block/rotten_log_mossy",
         "x": 90,
         "y": 90,
         "weight": 1
@@ -20,7 +20,7 @@
         "weight": 3
       },
       {
-        "model": "lifeguard:block/rotten_log_mossy",
+        "model": "grout:block/rotten_log_mossy",
         "weight": 1
       }
     ],
@@ -31,7 +31,7 @@
         "weight": 3
       },
       {
-        "model": "lifeguard:block/rotten_log_mossy",
+        "model": "grout:block/rotten_log_mossy",
         "x": 90,
         "weight": 1
       }

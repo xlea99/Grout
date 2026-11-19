@@ -10,7 +10,7 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
-    // Mods Lifeguard has entries for, straight from Modrinth (the same jars as on the mod page).
+    // Mods Grout has entries for, straight from Modrinth (the same jars as on the mod page).
     exclusiveContent {
         forRepository {
             maven {
@@ -22,7 +22,7 @@ repositories {
             includeGroup 'maven.modrinth'
         }
     }
-    // MixinSquared (MIT): mixins into other mods' mixins. Bundled in Lifeguard's jar (jarJar, below).
+    // MixinSquared (MIT): mixins into other mods' mixins. Bundled in Grout's jar (jarJar, below).
     exclusiveContent {
         forRepository {
             maven {
@@ -135,7 +135,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
 dependencies {
-    // Mods with Lifeguard entries. compileOnly to build against them, runtimeOnly so the dev client loads them; none
+    // Mods with Grout entries. compileOnly to build against them, runtimeOnly so the dev client loads them; none
     // becomes a requirement (that's neoforge.mods.toml's business, and every one of them is optional there).
     compileOnly "maven.modrinth:quark:${quark_version}"
     runtimeOnly "maven.modrinth:quark:${quark_version}"
@@ -271,12 +271,12 @@ if (file('../DeepEndWorkspace/gametests/java').isDirectory()) {
 }
 
 // Tests live in the private workspace, never in this repo. A clone without it builds normally; with it, `gradlew test`
-// runs Lifeguard's JUnit tests. They never reach the jar either way.
-if (file('../DeepEndWorkspace/tests/lifeguard/java').isDirectory()) {
+// runs Grout's JUnit tests. They never reach the jar either way.
+if (file('../DeepEndWorkspace/tests/grout/java').isDirectory()) {
     repositories {
         mavenCentral()
     }
-    sourceSets.test.java.srcDir '../DeepEndWorkspace/tests/lifeguard/java'
+    sourceSets.test.java.srcDir '../DeepEndWorkspace/tests/grout/java'
     dependencies {
         testImplementation platform('org.junit:junit-bom:5.11.3')
         testImplementation 'org.junit.jupiter:junit-jupiter'

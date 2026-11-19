@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "lit=false": {
+      "model": "grout:block/slate_sparkler"
+    },
+    "lit=true": {
+      "model": "grout:block/slate_sparkler_lit"
+    }
+  }
+}

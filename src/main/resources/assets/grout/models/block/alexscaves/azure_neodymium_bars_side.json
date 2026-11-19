@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/iron_bars_side",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "grout:block/alexscaves/azure_neodymium_bars",
+    "bars": "grout:block/alexscaves/azure_neodymium_bars",
+    "edge": "grout:block/alexscaves/azure_neodymium_bars"
+  }
+}
