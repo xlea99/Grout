@@ -13,7 +13,7 @@ public final class IceStopsCrops {
      * before growing counts (crops, stems, cocoa, cactus, sugar cane, nether wart, berries, bamboo, kelp and vines,
      * chorus). Server only: growth is server-side.
      */
-    public static final Entry ENTRY = Entries.tweak("ice_stops_crops", Taste.STRONG).home(Entry.MINECRAFT)
+    public static final Entry ENTRY = Entries.tweak("grout:ice_stops_crops", Taste.STRONG).home(Entry.MINECRAFT)
         .side(Side.SERVER).restart(Restart.GAME);
 
     private IceStopsCrops() {

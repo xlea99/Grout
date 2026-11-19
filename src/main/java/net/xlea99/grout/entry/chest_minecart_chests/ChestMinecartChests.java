@@ -14,12 +14,12 @@ public final class ChestMinecartChests {
      * like chest boats: crafting, syncing and drawing ask the switch the server synced; the hand-off between item and
      * cart always runs, so switching it off loses no cart's chest.
      */
-    public static final Entry ENTRY = Entries.compat("chest_minecart_chests", Taste.STRONG).home(Entry.MINECRAFT)
+    public static final Entry ENTRY = Entries.compat("grout:chest_minecart_chests", Taste.STRONG).home(Entry.MINECRAFT)
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();
 
     /** Quark's Minecart Upgrade recipe (five iron around any wooden chest) is shaped: its carts remember the chest too. */
-    public static final Entry QUARK = Entries.compat("chest_minecart_chests_quark", Taste.NONE)
+    public static final Entry QUARK = Entries.compat("grout:chest_minecart_chests_quark", Taste.NONE)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("quark")
         .side(Side.SERVER).restart(Restart.GAME)

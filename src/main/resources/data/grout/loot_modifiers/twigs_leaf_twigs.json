@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "guppylib:entry",
-      "entry": "twigs_leaf_twigs"
+      "entry": "grout:twigs_leaf_twigs"
     }
   ],
   "type": "twigs:twig_loot_modifier",

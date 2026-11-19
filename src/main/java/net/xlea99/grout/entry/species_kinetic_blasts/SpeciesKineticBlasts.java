@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class SpeciesKineticBlasts {
     /** Damage is dealt on the server. */
-    public static final Entry ENTRY = Entries.fix("species_kinetic_blasts", Taste.NONE).home("species")
+    public static final Entry ENTRY = Entries.fix("grout:species_kinetic_blasts", Taste.NONE).home("species")
         .requiresMods("species")
         .side(Side.SERVER).restart(Restart.GAME);
 

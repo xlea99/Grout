@@ -14,7 +14,7 @@ public final class AmCrimsonMosquitoFixes {
      * it, as the goal's name ("in view") says. And one that ended up in water hung there for good, aiming at more water and
      * unable to drown: now it buzzes up out of it. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.fix("am_crimson_mosquito_fixes", Taste.NONE).home("alexsmobs")
+    public static final Entry ENTRY = Entries.fix("grout:am_crimson_mosquito_fixes", Taste.NONE).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 
@@ -23,7 +23,7 @@ public final class AmCrimsonMosquitoFixes {
      * value after changing it, not before, so the frames between ticks had nothing to blend. Taking off, its legs jumped
      * 12 degrees at a time. They now blend. Client side: it only changes how the model is drawn.
      */
-    public static final Entry SMOOTH_POSES = Entries.fix("am_crimson_mosquito_smooth_poses", Taste.NONE).shownUnder(ENTRY)
+    public static final Entry SMOOTH_POSES = Entries.fix("grout:am_crimson_mosquito_smooth_poses", Taste.NONE).shownUnder(ENTRY)
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 

@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class ClayworksNoPotWashing {
     /** Deep End's call: a water cauldron no longer washes the color off Clayworks' decorated pots. (Clayworks 4.0.3.) */
-    public static final Entry ENTRY = Entries.tweak("clayworks_no_pot_washing", Taste.DEEP_END).home("clayworks")
+    public static final Entry ENTRY = Entries.tweak("grout:clayworks_no_pot_washing", Taste.DEEP_END).home("clayworks")
         .requiresMods("clayworks")
         .side(Side.SERVER).restart(Restart.GAME);
 

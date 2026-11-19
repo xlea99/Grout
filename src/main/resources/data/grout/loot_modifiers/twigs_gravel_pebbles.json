@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "guppylib:entry",
-      "entry": "twigs_gravel_pebbles"
+      "entry": "grout:twigs_gravel_pebbles"
     }
   ],
   "type": "neoforge:add_table",

@@ -15,7 +15,7 @@ public final class LithiumNavigationSwaps {
      * placed on their route until their own stuck check gives up. Whenever a mob's current navigator starts a path and
      * isn't the one on record, Lithium's own registration update runs first. Server only: only the server's mobs path.
      */
-    public static final Entry ENTRY = Entries.fix("lithium_navigation_swaps", Taste.NONE).home("lithium")
+    public static final Entry ENTRY = Entries.fix("grout:lithium_navigation_swaps", Taste.NONE).home("lithium")
         .requiresMods("lithium")
         .side(Side.SERVER).restart(Restart.GAME);
 

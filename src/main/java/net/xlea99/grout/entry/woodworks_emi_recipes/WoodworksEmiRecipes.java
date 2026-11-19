@@ -12,7 +12,7 @@ public final class WoodworksEmiRecipes {
      * (user-confirmed 2026-11-05): nobody could look up what it makes. Now EMI has a Sawing category with the sawmill as
      * its workstation, Every Compat's sawing recipes included. Display only. (Woodworks 4.0.2.)
      */
-    public static final Entry ENTRY = Entries.compat("woodworks_emi_recipes", Taste.NONE).home("woodworks")
+    public static final Entry ENTRY = Entries.compat("grout:woodworks_emi_recipes", Taste.NONE).home("woodworks")
         .requiresMods("woodworks", "emi")
         .usesIds("item", "woodworks:sawmill")
         .usesIds("recipe_type", "woodworks:sawing")

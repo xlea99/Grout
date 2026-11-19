@@ -60,7 +60,10 @@ public final class SpecRecolors {
         return ResourceLocation.fromNamespaceAndPath(Grout.MODID, "recolors/" + name + ".json");
     }
 
-    /** {@code id} names the entry in the log and the pack; {@code spec} is a {@code grout:recolors/*.json}. */
+    /**
+     * {@code id} is the entry's {@link net.xlea99.guppylib.core.Entry#name name} (the pack is {@code grout:<name>}, so no
+     * colon), for the log and the pack; {@code spec} is a {@code grout:recolors/*.json}.
+     */
     public static void register(String id, ResourceLocation spec, String... namespaces) {
         CONSTRUCTING.set(List.of(namespaces));
         try {

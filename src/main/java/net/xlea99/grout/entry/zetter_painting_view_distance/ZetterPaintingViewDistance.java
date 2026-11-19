@@ -15,7 +15,7 @@ public final class ZetterPaintingViewDistance {
      * sending position updates for an entity that never moves (the packets behind zetter_paintings_stay_put's bug).
      * Now it's built like vanilla's. (Zetter 0.21.7, ZetterEntities.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_painting_view_distance", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_painting_view_distance", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.SERVER).restart(Restart.GAME);
 

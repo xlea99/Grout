@@ -41,7 +41,7 @@ public final class PileCovers {
     }
 
     public static void register(IEventBus modBus) {
-        SpecRecolors.register(ScholarSuppsBookPiles.ENTRY.id(), SpecRecolors.spec("scholar_supps_book_piles"), Grout.MODID);
+        SpecRecolors.register(ScholarSuppsBookPiles.ENTRY.name(), SpecRecolors.spec("scholar_supps_book_piles"), Grout.MODID);
         modBus.addListener((ModelEvent.RegisterAdditional event) -> {
             event.register(WRITTEN_COVER);
             event.register(WRITABLE_COVER);

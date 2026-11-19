@@ -14,7 +14,7 @@ public final class PackAnimalChests {
      * frame), too small to draw the chest's own texture onto, so each is recolored from it by role on the player's
      * machine ({@code SaddlebagDrawing}). Runtime-gated: the syncing and drawing ask the switch the server synced.
      */
-    public static final Entry ENTRY = Entries.compat("pack_animal_chests", Taste.STRONG).home(Entry.MINECRAFT)
+    public static final Entry ENTRY = Entries.compat("grout:pack_animal_chests", Taste.STRONG).home(Entry.MINECRAFT)
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();
 
@@ -22,7 +22,7 @@ public final class PackAnimalChests {
      * Alex's Mobs' elephants take any wooden chest too, and forgot which (a plain chest came back on shearing or death):
      * {@link ElephantChests}.
      */
-    public static final Entry ALEXS_MOBS = Entries.compat("pack_animal_chests_alexs_mobs", Taste.NONE)
+    public static final Entry ALEXS_MOBS = Entries.compat("grout:pack_animal_chests_alexs_mobs", Taste.NONE)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME)

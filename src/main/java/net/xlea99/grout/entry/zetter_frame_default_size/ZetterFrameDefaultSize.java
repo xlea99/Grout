@@ -14,7 +14,7 @@ public final class ZetterFrameDefaultSize {
      * places as 1x1 (user, 2026-11-01: "just instantiate a default instead of crashing the game"). Items Zetter or
      * Grout make always carry their size. Found by reading the code (audit B4). (Zetter 0.21.7, FrameItem.useOn.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_frame_default_size", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_frame_default_size", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

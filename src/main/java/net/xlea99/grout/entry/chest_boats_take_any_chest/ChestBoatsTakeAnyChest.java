@@ -12,7 +12,7 @@ public final class ChestBoatsTakeAnyChest {
      * Regions Unexplored's, Alex's Caves' and Spawn's recipes ask for the vanilla chest alone, so a variant chest
      * (Quark's, Woodworks', Every Compat's) couldn't make their boats. See {@link StandardChestBoatRecipes}.
      */
-    public static final Entry ENTRY = Entries.fix("chest_boats_take_any_chest", Taste.NONE).home(Entry.MINECRAFT)
+    public static final Entry ENTRY = Entries.fix("grout:chest_boats_take_any_chest", Taste.NONE).home(Entry.MINECRAFT)
         .side(Side.SERVER).restart(Restart.GAME);
 
     private ChestBoatsTakeAnyChest() {

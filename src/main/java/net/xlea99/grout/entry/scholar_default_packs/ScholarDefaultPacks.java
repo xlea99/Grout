@@ -11,7 +11,7 @@ public final class ScholarDefaultPacks {
      * None: Scholar's built-in resource packs (colored books, chiseled bookshelf colored books, and its compat packs)
      * stay on after the first launch, as Scholar means them to. Client: resource packs. See {@link UnsavedPacks}.
      */
-    public static final Entry ENTRY = Entries.fix("scholar_default_packs", Taste.NONE).home("scholar")
+    public static final Entry ENTRY = Entries.fix("grout:scholar_default_packs", Taste.NONE).home("scholar")
         .requiresMods("scholar")
         .side(Side.CLIENT).restart(Restart.GAME);
 

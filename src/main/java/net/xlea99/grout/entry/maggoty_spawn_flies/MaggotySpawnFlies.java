@@ -13,7 +13,7 @@ public final class MaggotySpawnFlies {
      * drop about one maggot for every five. The tag
      * {@code grout:flies_cant_eat} says what's safe. (Spawn 4.0.8, Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.feature("maggoty_spawn_flies", Taste.STRONG).home("spawn")
+    public static final Entry ENTRY = Entries.feature("grout:maggoty_spawn_flies", Taste.STRONG).home("spawn")
         .requiresMods("spawn", "alexsmobs")
         .usesIds("item", "alexsmobs:maggot")
         .side(Side.SERVER).restart(Restart.GAME);

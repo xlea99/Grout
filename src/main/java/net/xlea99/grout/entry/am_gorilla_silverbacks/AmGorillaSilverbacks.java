@@ -15,7 +15,7 @@ public final class AmGorillaSilverbacks {
      * badly hurt one may still give up. Only sometimes does it end in death. The loser loses its silver and keeps away from the
      * winner for a day or two. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_gorilla_silverbacks", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_gorilla_silverbacks", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 

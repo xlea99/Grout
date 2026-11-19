@@ -12,7 +12,7 @@ public final class ClayworksEmiRecipes {
      * does what that plugin does: a Baking category, the kiln as its workstation and a fuel workstation, and filling the
      * kiln from a recipe. Display only. (Clayworks 4.0.3.)
      */
-    public static final Entry ENTRY = Entries.compat("clayworks_emi_recipes", Taste.NONE).home("clayworks")
+    public static final Entry ENTRY = Entries.compat("grout:clayworks_emi_recipes", Taste.NONE).home("clayworks")
         .requiresMods("clayworks", "emi")
         .side(Side.CLIENT).restart(Restart.GAME);
 

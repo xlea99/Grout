@@ -12,7 +12,7 @@ public final class ClayworksPotTrimSaving {
      * clients. In a chunk with nothing else unsaved the trim is lost on leaving, with the item it took, and other players
      * don't see it until the chunk reloads. (Clayworks 4.0.3.)
      */
-    public static final Entry ENTRY = Entries.fix("clayworks_pot_trim_saving", Taste.NONE).home("clayworks")
+    public static final Entry ENTRY = Entries.fix("grout:clayworks_pot_trim_saving", Taste.NONE).home("clayworks")
         .requiresMods("clayworks")
         .side(Side.SERVER).restart(Restart.GAME);
 

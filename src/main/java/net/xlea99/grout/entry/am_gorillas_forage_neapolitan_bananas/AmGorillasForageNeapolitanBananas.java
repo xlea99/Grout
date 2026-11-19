@@ -12,7 +12,7 @@ public final class AmGorillasForageNeapolitanBananas {
      * banana, never Alex's Mobs' own, which that drop names in code where no tag or loot table can reach it. Taming and
      * breeding already take Neapolitan's through {@code #alexsmobs:bananas}. (Alex's Mobs 1.22.9, Neapolitan 6.0.1.)
      */
-    public static final Entry ENTRY = Entries.compat("am_gorillas_forage_neapolitan_bananas", Taste.DEEP_END).home("alexsmobs")
+    public static final Entry ENTRY = Entries.compat("grout:am_gorillas_forage_neapolitan_bananas", Taste.DEEP_END).home("alexsmobs")
         .requiresMods("alexsmobs", "neapolitan")
         .usesIds("item", "neapolitan:banana")
         .side(Side.SERVER).restart(Restart.GAME);

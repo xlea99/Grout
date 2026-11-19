@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class SuppsCapturedMobJitter {
     /** Visual: the renderer animates the client's copy of the captured mob. */
-    public static final Entry ENTRY = Entries.fix("supps_captured_mob_jitter", Taste.NONE).home("supplementaries")
+    public static final Entry ENTRY = Entries.fix("grout:supps_captured_mob_jitter", Taste.NONE).home("supplementaries")
         .requiresMods("supplementaries")
         .side(Side.CLIENT).restart(Restart.GAME);
 

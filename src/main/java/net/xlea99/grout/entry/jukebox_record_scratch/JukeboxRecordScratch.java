@@ -14,7 +14,7 @@ public final class JukeboxRecordScratch {
      * where it stopped. Needs synced playback to start the song again mid-way. The work is the server's. See
      * {@link RecordScratch}.
      */
-    public static final Entry ENTRY = Entries.feature("jukebox_record_scratch", Taste.STRONG).home(Entry.MINECRAFT)
+    public static final Entry ENTRY = Entries.feature("grout:jukebox_record_scratch", Taste.STRONG).home(Entry.MINECRAFT)
         .requiresEntries(JukeboxSyncedPlayback.ENTRY)
         .side(Side.SERVER).restart(Restart.GAME);
 

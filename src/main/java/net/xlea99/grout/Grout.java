@@ -22,7 +22,7 @@ public class Grout {
     public Grout(IEventBus modEventBus, ModContainer modContainer) {
         // The mixin plugin normally got here first; this only matters if it didn't.
         Boot.start(GroutSpec.CATALOG);
-        Setups.runCommon(modEventBus);
+        Setups.runCommon(GroutSpec.CATALOG, modEventBus);
         // Alex's Caves magnets for every block that is one (shared by several entries' metals): joins AC's after each
         // block's entry has said so.
         Magnets.register(modEventBus);

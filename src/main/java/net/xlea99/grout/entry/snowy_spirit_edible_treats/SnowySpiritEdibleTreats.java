@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class SnowySpiritEdibleTreats {
     /** Food is an item's default component, set at startup: client and server must agree. */
-    public static final Entry ENTRY = Entries.tweak("snowy_spirit_edible_treats", Taste.STRONG).home("snowyspirit")
+    public static final Entry ENTRY = Entries.tweak("grout:snowy_spirit_edible_treats", Taste.STRONG).home("snowyspirit")
         .requiresMods("snowyspirit")
         .usesIds("mob_effect", "alexscaves:sugar_rush")
         .side(Side.SERVER).restart(Restart.GAME).registryShaping();

@@ -8,12 +8,12 @@ import net.xlea99.grout.core.Taste;
 
 public final class CcTetherPotionCompat {
     /** Tanks change on the server (the client predicts the same). */
-    public static final Entry ENTRY = Entries.compat("cc_tether_potion_compat", Taste.LIGHT).home("caverns_and_chasms")
+    public static final Entry ENTRY = Entries.compat("grout:cc_tether_potion_compat", Taste.LIGHT).home("caverns_and_chasms")
         .requiresMods("caverns_and_chasms", "moonlight")
         .side(Side.SERVER).restart(Restart.GAME);
 
     /** A tether, impact or trail potion breaks open into an empty cauldron too, as an Amendments cauldron. */
-    public static final Entry AMENDMENTS = Entries.compat("cc_tether_potion_compat_amendments", Taste.NONE)
+    public static final Entry AMENDMENTS = Entries.compat("grout:cc_tether_potion_compat_amendments", Taste.NONE)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("amendments")
         .side(Side.SERVER).restart(Restart.GAME);

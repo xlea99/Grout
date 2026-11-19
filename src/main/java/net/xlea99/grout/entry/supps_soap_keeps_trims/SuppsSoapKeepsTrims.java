@@ -12,7 +12,7 @@ public final class SuppsSoapKeepsTrims {
      * back: trims stay. Runtime-gated: crafting previews its result on the client, and EMI's example recipes are built
      * there.
      */
-    public static final Entry ENTRY = Entries.tweak("supps_soap_keeps_trims", Taste.LIGHT).home("supplementaries")
+    public static final Entry ENTRY = Entries.tweak("grout:supps_soap_keeps_trims", Taste.LIGHT).home("supplementaries")
         .requiresMods("supplementaries")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

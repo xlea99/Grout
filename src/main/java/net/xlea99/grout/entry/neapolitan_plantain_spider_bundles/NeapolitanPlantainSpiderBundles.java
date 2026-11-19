@@ -12,7 +12,7 @@ public final class NeapolitanPlantainSpiderBundles {
      * is shears. The check is backwards, so only Silk Touch tools release them; and the extra spiders add the same entity
      * again, which the level refuses, so there's never more than one. (Neapolitan 6.0.1.)
      */
-    public static final Entry ENTRY = Entries.fix("neapolitan_plantain_spider_bundles", Taste.NONE).home("neapolitan")
+    public static final Entry ENTRY = Entries.fix("grout:neapolitan_plantain_spider_bundles", Taste.NONE).home("neapolitan")
         .requiresMods("neapolitan")
         .side(Side.SERVER).restart(Restart.GAME);
 

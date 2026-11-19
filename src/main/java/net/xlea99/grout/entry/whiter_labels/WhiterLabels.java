@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class WhiterLabels {
     /** Only how placed labels look. */
-    public static final Entry ENTRY = Entries.tweak("whiter_labels", Taste.DEEP_END).home("labels")
+    public static final Entry ENTRY = Entries.tweak("grout:whiter_labels", Taste.DEEP_END).home("labels")
         .requiresMods("labels")
         .side(Side.CLIENT).restart(Restart.GAME);
 

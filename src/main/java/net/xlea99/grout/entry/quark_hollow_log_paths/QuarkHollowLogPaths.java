@@ -12,7 +12,7 @@ public final class QuarkHollowLogPaths {
      * collision isn't a full cube as walkable-through unless the block says otherwise, and the hollow logs don't. Now land
      * mobs treat them as solid, so they step over or go around. Fish in waterlogged ones are untouched. (Quark 4.1-488.)
      */
-    public static final Entry ENTRY = Entries.fix("quark_hollow_log_paths", Taste.NONE).home("quark")
+    public static final Entry ENTRY = Entries.fix("grout:quark_hollow_log_paths", Taste.NONE).home("quark")
         .requiresMods("quark")
         .side(Side.SERVER).restart(Restart.GAME);
 

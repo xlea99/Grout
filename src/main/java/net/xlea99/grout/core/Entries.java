@@ -4,7 +4,7 @@ import net.xlea99.guppylib.core.Entry;
 import net.xlea99.guppylib.core.Registry;
 
 /**
- * Where Grout's entries are declared: {@code Entries.feature("jukebox_playlists", Taste.LIGHT)} adds to Grout's
+ * Where Grout's entries are declared: {@code Entries.feature("grout:jukebox_playlists", Taste.LIGHT)} adds to Grout's
  * one registry, taste included ({@link Tastes}).
  */
 public final class Entries {

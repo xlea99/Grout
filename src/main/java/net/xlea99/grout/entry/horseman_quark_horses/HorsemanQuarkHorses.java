@@ -23,7 +23,7 @@ public final class HorsemanQuarkHorses {
      * <p>Runtime-gated: the swimming half runs on the client too (a ridden horse moves on its rider's client).
      * (Horseman 1.5.13, Quark 4.1-488, read 2026-10-31.)
      */
-    public static final Entry ENTRY = Entries.compat("horseman_quark_horses", Taste.NONE).home("horseman")
+    public static final Entry ENTRY = Entries.compat("grout:horseman_quark_horses", Taste.NONE).home("horseman")
         .requiresMods("horseman", "quark")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

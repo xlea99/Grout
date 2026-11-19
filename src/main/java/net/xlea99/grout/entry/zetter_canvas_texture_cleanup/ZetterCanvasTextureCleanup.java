@@ -15,7 +15,7 @@ public final class ZetterCanvasTextureCleanup {
      * keeps a fresh entry per reload. Now the replaced instance is closed, and closing also releases the registration.
      * Found by reading the code (audit U5, 2026-11-01). (Zetter 0.21.7, CanvasRenderer.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_canvas_texture_cleanup", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_canvas_texture_cleanup", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.CLIENT).restart(Restart.GAME);
 

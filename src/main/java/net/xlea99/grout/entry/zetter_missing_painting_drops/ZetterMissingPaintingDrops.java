@@ -16,7 +16,7 @@ public final class ZetterMissingPaintingDrops {
      * its data or variant comes back. Found by reading the code (audit U4, 2026-11-01); the crash is a plain null
      * dereference. (Zetter 0.21.7, PaintingEntity.dropItem.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_missing_painting_drops", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_missing_painting_drops", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.SERVER).restart(Restart.GAME);
 

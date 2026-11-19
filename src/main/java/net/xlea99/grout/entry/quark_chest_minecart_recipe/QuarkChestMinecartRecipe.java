@@ -15,7 +15,7 @@ public final class QuarkChestMinecartRecipe {
      * oak_chest_boat did). Back as the same recipe under our own namespace, which the filter can't reach, only while
      * Variant Chests is on (data/grout/recipe/quark_chest_minecart_recipe/). (Quark 4.1-488.)
      */
-    public static final Entry ENTRY = Entries.fix("quark_chest_minecart_recipe", Taste.NONE).home("quark")
+    public static final Entry ENTRY = Entries.fix("grout:quark_chest_minecart_recipe", Taste.NONE).home("quark")
         .requiresMods("quark")
         .side(Side.SERVER).restart(Restart.WORLD);
 

@@ -14,7 +14,7 @@ public final class ConnectibleChainsCollisions {
      * and only reaches the second from inside {@code Entity.collide}, which Alex's Caves cancels for every entity, calling
      * {@code collideBoundingBox} itself. Runs on both sides, so it's runtime-gated. (Chains 2.5.0, Lithium 0.15.4, AC 2.0.2.)
      */
-    public static final Entry ENTRY = Entries.compat("connectiblechains_collisions", Taste.NONE).home("connectiblechains")
+    public static final Entry ENTRY = Entries.compat("grout:connectiblechains_collisions", Taste.NONE).home("connectiblechains")
         .requiresMods("connectiblechains", "lithium", "alexscaves")
         .side(Side.SERVER).restart(Restart.GAME);
 

@@ -18,7 +18,7 @@ public final class AmSlightlySexierRattlesnake {
      * blocks, a bite within 2): how close you are, how loud, whether you're coming at it, so you may be warned from 7 blocks
      * or sneak to 2. Each snake has its own temper, patience and roaming ({@link SnakeTemper}). (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_slightly_sexier_rattlesnake", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_slightly_sexier_rattlesnake", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 
@@ -31,7 +31,7 @@ public final class AmSlightlySexierRattlesnake {
      * server says it's watching; asleep, its eyes close (a sleeping texture made from its own, {@link SleepingRattlesnakeTexture})
      * and it breathes slowly. Client side: without our server entry there, the head lifts for anything near and it never sleeps.
      */
-    public static final Entry MOTION = Entries.tweak("am_slightly_sexier_rattlesnake_motion", Taste.STRONG).shownUnder(ENTRY)
+    public static final Entry MOTION = Entries.tweak("grout:am_slightly_sexier_rattlesnake_motion", Taste.STRONG).shownUnder(ENTRY)
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 
@@ -40,7 +40,7 @@ public final class AmSlightlySexierRattlesnake {
      * burst of three every two and a half seconds. Only drawn on the client, from the sleep {@link #MOTION} is told of, so it
      * sends nothing and adds nothing to any registry. Its own entry because it needs Alex's Caves too.
      */
-    public static final Entry ZS = Entries.tweak("am_slightly_sexier_rattlesnake_zs", Taste.LIGHT).shownUnder(MOTION)
+    public static final Entry ZS = Entries.tweak("grout:am_slightly_sexier_rattlesnake_zs", Taste.LIGHT).shownUnder(MOTION)
         .requiresMods("alexsmobs", "alexscaves").requiresEntries(MOTION)
         .usesIds("particle_type", "alexscaves:sleep")
         .side(Side.CLIENT).restart(Restart.GAME);

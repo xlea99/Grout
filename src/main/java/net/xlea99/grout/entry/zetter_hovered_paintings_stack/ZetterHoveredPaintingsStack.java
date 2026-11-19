@@ -21,7 +21,7 @@ public final class ZetterHoveredPaintingsStack {
      * stores only its size) gets the default without it being written in, so blank canvases stack after hover too.
      * Runtime-gated: storePaintingData runs on both sides. (Zetter 0.21.7.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_hovered_paintings_stack", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_hovered_paintings_stack", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class AdvancementFramesPacketChecks {
     /** The server checks what clients ask for. */
-    public static final Entry ENTRY = Entries.fix("advancement_frames_packet_checks", Taste.NONE)
+    public static final Entry ENTRY = Entries.fix("grout:advancement_frames_packet_checks", Taste.NONE)
         .home("advancementframes")
         .requiresMods("advancementframes")
         .side(Side.SERVER).restart(Restart.GAME);

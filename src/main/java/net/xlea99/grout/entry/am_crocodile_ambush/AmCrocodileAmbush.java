@@ -12,7 +12,7 @@ public final class AmCrocodileAmbush {
      * makes one fast charge. If that misses it stands there with its mouth open and won't chase again for a while, and one that's hit mostly
      * runs for the water. Tame ones rest for much less and never run. Babies stay as they were. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_crocodile_ambush", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_crocodile_ambush", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 

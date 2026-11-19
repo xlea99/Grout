@@ -13,7 +13,7 @@ public final class ZetterCopiesLikeBooks {
      * nor in 1.20.1's; it only caps the label at 2), so one painting could be copied forever (user-confirmed
      * 2026-11-01). Runtime-gated: recipe matching runs on both sides.
      */
-    public static final Entry ENTRY = Entries.tweak("zetter_copies_like_books", Taste.LIGHT).home("zetter")
+    public static final Entry ENTRY = Entries.tweak("grout:zetter_copies_like_books", Taste.LIGHT).home("zetter")
         .requiresMods("zetter")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

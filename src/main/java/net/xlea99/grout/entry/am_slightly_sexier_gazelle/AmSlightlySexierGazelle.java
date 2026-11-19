@@ -12,7 +12,7 @@ public final class AmSlightlySexierGazelle {
      * when it walks, and when it's afraid it runs in real bounds, with hang time in the air ({@link GazelleMotion}). Eating, flicks and
      * looking stay Alex's. Client only. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_slightly_sexier_gazelle", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_slightly_sexier_gazelle", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 

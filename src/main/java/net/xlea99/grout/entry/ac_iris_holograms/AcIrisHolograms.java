@@ -13,7 +13,7 @@ public final class AcIrisHolograms {
      * the render type asks for it, which is before the target is bound, and the pack's program draws into the world
      * instead. (Alex's Caves 2.0.2, Iris 1.8.14-beta.1.)
      */
-    public static final Entry ENTRY = Entries.compat("ac_iris_holograms", Taste.NONE).home("alexscaves")
+    public static final Entry ENTRY = Entries.compat("grout:ac_iris_holograms", Taste.NONE).home("alexscaves")
         .requiresMods("alexscaves", "iris")
         .side(Side.CLIENT).restart(Restart.GAME);
 

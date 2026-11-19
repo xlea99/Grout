@@ -16,7 +16,7 @@ public final class ZetterPaintingLighting {
      * 2x1's canvas goes dark while its per-block-lit frame stays lit). Now the type has eyeHeight(0), as vanilla 1.21
      * gives item frames for the same reason. (Zetter 0.21.7, ZetterEntities / PaintingEntity.getEyeHeight.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_painting_lighting", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_painting_lighting", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.CLIENT).restart(Restart.GAME);
 

@@ -12,7 +12,7 @@ public final class AmSlightlySexierCrocodile {
      * now sprawls low with its spine and tail in an S-curve, rises onto straighter legs when it hunts, and swims on a long tail wave
      * ({@link CrocodileMotion}). Basking, the lunge and the death roll stay Alex's. Client only. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_slightly_sexier_crocodile", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_slightly_sexier_crocodile", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 

@@ -11,7 +11,7 @@ public final class EasyAnvilsQuarkAnvils {
      * None: no new rule, just one order for two mods that set the same number in whichever order they loaded. Easy
      * Anvils decides renaming, Quark's No Durability On Cosmetics decides runes. See {@link AnvilBreaks}.
      */
-    public static final Entry ENTRY = Entries.compat("easy_anvils_quark_anvils", Taste.NONE).home("easyanvils")
+    public static final Entry ENTRY = Entries.compat("grout:easy_anvils_quark_anvils", Taste.NONE).home("easyanvils")
         .requiresMods("easyanvils", "quark")
         .side(Side.SERVER).restart(Restart.GAME);
 

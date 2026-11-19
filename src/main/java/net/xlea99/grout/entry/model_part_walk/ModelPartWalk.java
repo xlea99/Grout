@@ -13,7 +13,7 @@ public final class ModelPartWalk {
      * own switch so it can be told apart from {@link KeyframePartLookup}, beside which the menu shows it (it doesn't need it).
      * Client side: drawing only.
      */
-    public static final Entry ENTRY = Entries.fix("model_part_walk", Taste.DANGEROUS)
+    public static final Entry ENTRY = Entries.fix("grout:model_part_walk", Taste.DANGEROUS)
         .shownUnder(KeyframePartLookup.ENTRY)
         .side(Side.CLIENT).restart(Restart.GAME);
 

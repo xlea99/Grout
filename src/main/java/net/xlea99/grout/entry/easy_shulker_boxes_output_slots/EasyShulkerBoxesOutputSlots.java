@@ -16,7 +16,7 @@ public final class EasyShulkerBoxesOutputSlots {
      * client too. (Item Interactions 21.1.4, bundled in Easy Shulker Boxes 21.1.3:
      * ItemInteractionHelper.overrideStackedOnOther.)
      */
-    public static final Entry ENTRY = Entries.fix("easy_shulker_boxes_output_slots", Taste.NONE).home("easyshulkerboxes")
+    public static final Entry ENTRY = Entries.fix("grout:easy_shulker_boxes_output_slots", Taste.NONE).home("easyshulkerboxes")
         .requiresMods("easyshulkerboxes")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

@@ -16,7 +16,7 @@ beige, coral, forest, ginger, indigo, maroon, mint, navy, olive, rose, slate, ta
 nearest in hue to the Dye Depot dye, with every pixel's hue replaced by the dye's. These textures are licensed under
 [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/), like Quark's art.
 
-`assets/grout/textures/glint/` (the `sexy_runic_glints` entry's glints) are mostly derived from Quark's glints too,
+`assets/grout/textures/glint/` (the `grout:sexy_runic_glints` entry's glints) are mostly derived from Quark's glints too,
 recolored, hue-turned or re-shaded per color: `amber`, `aqua`, `beige`, `black`, `brown`, `coral`, `forest`, `ginger`,
 `gray`, `green`, `light_blue`, `lime`, `magenta`, `maroon`, `mint`, `olive`, `pink`, `rainbow`, `red`, `rose`, `slate`,
 `tan`, `verdant` and the four `*_ramp` ray maps. These are under CC BY-NC-SA 3.0 as well.
@@ -34,7 +34,7 @@ released under that same license. Its text, and the GNU GPL v3.0 it builds on, a
 
 ## Derived from Regions Unexplored
 
-The `spawn_ru_pineify_rotten_wood` entry's bark, `resourcepacks/spawn_ru_pineify_rotten_wood/assets/spawn/textures/block/rotten_log.png`
+The `grout:spawn_ru_pineify_rotten_wood` entry's bark, `resourcepacks/spawn_ru_pineify_rotten_wood/assets/spawn/textures/block/rotten_log.png`
 and `.../assets/grout/textures/block/rotten_log_mossy.png`, is derived from
 [Regions Unexplored](https://github.com/Apollounknowndev/RegionsUnexplored)' pine log texture (by Apollo and
 contributors): its pixels kept, its seven shades recolored to Regions Unexplored's dead log colors; the mossy one adds
@@ -46,25 +46,25 @@ darker blotches turn a sickly olive. Regions Unexplored is under the MIT License
 
 ## Recolored at runtime, not included
 
-The `dye_depot_sparklers` entry's sparkler and spark textures are
+The `grout:dye_depot_sparklers` entry's sparkler and spark textures are
 [Caverns & Chasms](https://github.com/team-abnormals/caverns-and-chasms)' own (by Team Abnormals), recolored on the
 player's machine from their installed copy of Caverns & Chasms. Its Abnormals License forbids distributing modified
 copies, so none ship in this jar: only the color tables in `grout_recolors/`, which are this mod's own.
 
-The `etcetera_shimmering_bismuth_trims` entry's animated bismuth trims are made the same way, on the player's machine
+The `grout:etcetera_shimmering_bismuth_trims` entry's animated bismuth trims are made the same way, on the player's machine
 from their installed [Etcetera](https://modrinth.com/mod/etcetera) (by Ninni, All Rights Reserved): its bismuth trim
 palette, hue-shifted per frame of its bismuth block. Nothing of Etcetera's is included.
 
-The `spawn_ru_pineify_rotten_wood` entry's rotten log top, anthill and sign textures are made on the player's machine from their installed
+The `grout:spawn_ru_pineify_rotten_wood` entry's rotten log top, anthill and sign textures are made on the player's machine from their installed
 [Spawn](https://modrinth.com/mod/spawn) (by Ninni, All Rights Reserved): Spawn's bark colors swapped for the new bark's,
 and the anthills' holes laid over the new bark. Nothing of Spawn's is included.
 
-The `ac_thornwood_very_slightly_lighter_planks` entry's thornwood textures are made on the player's machine from their
+The `grout:ac_thornwood_very_slightly_lighter_planks` entry's thornwood textures are made on the player's machine from their
 installed [Alex's Caves](https://modrinth.com/mod/alexs-caves) (by AlexModGuy, art by Ninni): each thornwood wood color
 a hair lighter, from the color table in `assets/grout/recolors/ac_thornwood.json`, which is this mod's own. Nothing
 of Alex's Caves' is included.
 
-The `scholar_supps_book_piles` entry's book cover overlays are made on the player's machine from their installed
+The `grout:scholar_supps_book_piles` entry's book cover overlays are made on the player's machine from their installed
 [Supplementaries](https://modrinth.com/mod/supplementaries) (by MehVahdJukaar): the covers of its written book and book
 and quill, turned gray with everything else cleared, from the color table in
 `assets/grout/recolors/scholar_supps_book_piles.json`, which is this mod's own. Nothing of Supplementaries' is
@@ -77,7 +77,7 @@ Minecraft's art, and are under this mod's license like the code.
 
 ## Sounds
 
-`assets/grout/sounds/block/jukebox/record_scratch.ogg` (the `jukebox_record_scratch` entry) is
+`assets/grout/sounds/block/jukebox/record_scratch.ogg` (the `grout:jukebox_record_scratch` entry) is
 ["record scratch.wav"](https://freesound.org/people/luffy/sounds/3536/) by **luffy**, from Freesound, licensed under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: cut from the 17-second recording down to the
 scratch itself (about 1.2 seconds), mixed to mono, faded at both ends, peak-normalized, and encoded to Ogg Vorbis. It

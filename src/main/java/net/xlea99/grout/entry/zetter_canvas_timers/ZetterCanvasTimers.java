@@ -14,7 +14,7 @@ public final class ZetterCanvasTimers {
      * and a texture request timed out after 30 ms (meant: 1.5 s). Now it's fed the same clock in ticks (millis / 50).
      * (Zetter 0.21.7, ZetterClientModEvents.onRenderTickStart.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_canvas_timers", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_canvas_timers", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.CLIENT).restart(Restart.GAME);
 

@@ -13,7 +13,7 @@ public final class ZetterEmiRecipes {
      * out how to frame or copy a painting. Now EMI lists them with example items, one framing and unframing recipe per
      * frame. Display only. (Zetter 0.21.7.)
      */
-    public static final Entry ENTRY = Entries.compat("zetter_emi_recipes", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.compat("grout:zetter_emi_recipes", Taste.NONE).home("zetter")
         .requiresMods("zetter", "emi")
         .side(Side.CLIENT).restart(Restart.GAME);
 

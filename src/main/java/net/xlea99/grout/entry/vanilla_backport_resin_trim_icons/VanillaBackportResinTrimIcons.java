@@ -12,7 +12,7 @@ public final class VanillaBackportResinTrimIcons {
      * only, both halves in one entry: the icon sprites (our pack) and the overrides (Blueprint), so off is exactly the
      * old look, never icons pointing at sprites that aren't there.
      */
-    public static final Entry ENTRY = Entries.compat("vanilla_backport_resin_trim_icons", Taste.NONE)
+    public static final Entry ENTRY = Entries.compat("grout:vanilla_backport_resin_trim_icons", Taste.NONE)
         .home("vanillabackport")
         .requiresMods("vanillabackport", "blueprint")
         .side(Side.CLIENT).restart(Restart.GAME)

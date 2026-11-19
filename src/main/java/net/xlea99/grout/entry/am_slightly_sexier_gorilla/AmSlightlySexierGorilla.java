@@ -17,7 +17,7 @@ public final class AmSlightlySexierGorilla {
      * within 16 blocks of its Silverback 98% of the time, for 0.085 ms of pathing per tick. An angry Gorilla closes in faster
      * (Alex's chased you slower than you walk). (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_slightly_sexier_gorilla", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_slightly_sexier_gorilla", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 
@@ -28,7 +28,7 @@ public final class AmSlightlySexierGorilla {
      * underneath; a charge is a bounding gallop, and upright it waddles. Client side: it only changes how the model is posed, so
      * it needs nothing from the server and doesn't require {@link #ENTRY}, only sits under it in the menu.
      */
-    public static final Entry MOTION = Entries.tweak("am_slightly_sexier_gorilla_motion", Taste.STRONG).shownUnder(ENTRY)
+    public static final Entry MOTION = Entries.tweak("grout:am_slightly_sexier_gorilla_motion", Taste.STRONG).shownUnder(ENTRY)
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 

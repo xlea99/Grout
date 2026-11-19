@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class AmendmentsCakeSlicing {
     /** The server slices; the client only holds back its guess. */
-    public static final Entry ENTRY = Entries.compat("amendments_cake_slicing", Taste.NONE).home("amendments")
+    public static final Entry ENTRY = Entries.compat("grout:amendments_cake_slicing", Taste.NONE).home("amendments")
         .requiresMods("amendments")
         .side(Side.SERVER).restart(Restart.GAME);
 

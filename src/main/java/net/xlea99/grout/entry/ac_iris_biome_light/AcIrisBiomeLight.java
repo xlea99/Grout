@@ -14,7 +14,7 @@ public final class AcIrisBiomeLight {
      * from the biome's own sky color. Thick biome fog, which packs don't read either, is drawn over their picture
      * ({@link BiomeFog}). Does nothing with no shaderpack on. (Alex's Caves 2.0.2, Iris 1.8.14-beta.1.)
      */
-    public static final Entry ENTRY = Entries.compat("ac_iris_biome_light", Taste.NONE).home("alexscaves")
+    public static final Entry ENTRY = Entries.compat("grout:ac_iris_biome_light", Taste.NONE).home("alexscaves")
         .requiresMods("alexscaves", "iris", "sodium")
         .side(Side.CLIENT).restart(Restart.GAME);
 

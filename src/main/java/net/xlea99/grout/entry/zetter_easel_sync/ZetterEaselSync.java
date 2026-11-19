@@ -20,7 +20,7 @@ public final class ZetterEaselSync {
      * fresh one when it sits in an inventory, so it stacks again. Runtime-gated: the merge runs on the client, the rest
      * on the server. (Zetter 0.21.7.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_easel_sync", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_easel_sync", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

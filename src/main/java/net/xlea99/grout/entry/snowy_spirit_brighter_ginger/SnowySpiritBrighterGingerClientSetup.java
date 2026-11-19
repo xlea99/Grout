@@ -8,7 +8,7 @@ import net.xlea99.grout.client.SpecRecolors;
 public final class SnowySpiritBrighterGingerClientSetup implements EntrySetup {
     @Override
     public void setup(Wiring wiring) {
-        wiring.whenActive(SnowySpiritBrighterGinger.ENTRY, () -> SpecRecolors.register(SnowySpiritBrighterGinger.ENTRY.id(),
+        wiring.whenActive(SnowySpiritBrighterGinger.ENTRY, () -> SpecRecolors.register(SnowySpiritBrighterGinger.ENTRY.name(),
             SpecRecolors.spec("snowy_spirit_ginger"), "snowyspirit"));
     }
 }

@@ -8,6 +8,7 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.xlea99.guppylib.boot.Setups;
 import net.xlea99.guppylib.client.menu.EntryScreen;
 import net.xlea99.grout.Grout;
+import net.xlea99.grout.boot.GroutSpec;
 import net.xlea99.grout.client.menu.TasteMenu;
 
 /**
@@ -17,10 +18,11 @@ import net.xlea99.grout.client.menu.TasteMenu;
 @Mod(value = Grout.MODID, dist = Dist.CLIENT)
 public final class GroutClient {
     public GroutClient(IEventBus modEventBus, ModContainer container) {
-        container.registerExtensionPoint(IConfigScreenFactory.class, (mod, parent) -> new EntryScreen(parent, TasteMenu.INSTANCE));
+        container.registerExtensionPoint(IConfigScreenFactory.class,
+            (mod, parent) -> new EntryScreen(parent, GroutSpec.FAMILY, TasteMenu.INSTANCE));
         EntryPacks.register(modEventBus, container);
         ClientChecks.register(modEventBus);
         RecolorPack.register(modEventBus);
-        Setups.runClient(modEventBus);
+        Setups.runClient(GroutSpec.CATALOG, modEventBus);
     }
 }

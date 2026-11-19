@@ -12,7 +12,7 @@ public final class AmBoneSerpentDeadTargets {
      * goals gets cleared when it dies; one set directly, by another serpent's alert or by another mod, never does, and it leaps at the
      * spot forever. It lets go of a dead target now. Alex's Mobs issue (ISSUES #171).
      */
-    public static final Entry ENTRY = Entries.fix("am_bone_serpent_dead_targets", Taste.NONE).home("alexsmobs")
+    public static final Entry ENTRY = Entries.fix("grout:am_bone_serpent_dead_targets", Taste.NONE).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 

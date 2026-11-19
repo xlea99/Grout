@@ -12,7 +12,7 @@ public final class BetterF3LostF3Info {
      * (how other mods add F3 lines) and the F3+2 / F3+3 charts. This puts both back. Client: a screen overlay. See
      * {@link LostF3Info}.
      */
-    public static final Entry ENTRY = Entries.fix("betterf3_lost_f3_info", Taste.NONE).home("betterf3")
+    public static final Entry ENTRY = Entries.fix("grout:betterf3_lost_f3_info", Taste.NONE).home("betterf3")
         .requiresMods("betterf3")
         .side(Side.CLIENT).restart(Restart.GAME);
 

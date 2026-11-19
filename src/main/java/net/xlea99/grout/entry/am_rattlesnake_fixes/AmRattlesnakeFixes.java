@@ -12,7 +12,7 @@ public final class AmRattlesnakeFixes {
      * only runs while it rattles and is never put back when a rattle ends, so the next one began wherever the last stopped.
      * It starts with the rattle now. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.fix("am_rattlesnake_fixes", Taste.NONE).home("alexsmobs")
+    public static final Entry ENTRY = Entries.fix("grout:am_rattlesnake_fixes", Taste.NONE).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 
@@ -22,7 +22,7 @@ public final class AmRattlesnakeFixes {
      * timer, and the server's coil never changes, so it's never sent again. Alex's own random coils last 15 to 27 seconds on
      * the server. Only the server ends a coil now. Client side. (1.20.1 did the same.)
      */
-    public static final Entry COIL_SYNC = Entries.fix("am_rattlesnake_coil_sync", Taste.NONE).shownUnder(ENTRY)
+    public static final Entry COIL_SYNC = Entries.fix("grout:am_rattlesnake_coil_sync", Taste.NONE).shownUnder(ENTRY)
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 

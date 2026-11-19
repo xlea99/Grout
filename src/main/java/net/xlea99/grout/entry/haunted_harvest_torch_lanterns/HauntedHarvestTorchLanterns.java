@@ -11,7 +11,7 @@ public final class HauntedHarvestTorchLanterns {
      * The lanterns are registered whenever Haunted Harvest is (never by the switch: placed ones survive it off), so the
      * mixins always apply and the switch only gates lighting them.
      */
-    public static final Entry ENTRY = Entries.feature("haunted_harvest_torch_lanterns", Taste.LIGHT)
+    public static final Entry ENTRY = Entries.feature("grout:haunted_harvest_torch_lanterns", Taste.LIGHT)
         .home("hauntedharvest")
         .requiresMods("hauntedharvest")
         .side(Side.SERVER).restart(Restart.GAME)

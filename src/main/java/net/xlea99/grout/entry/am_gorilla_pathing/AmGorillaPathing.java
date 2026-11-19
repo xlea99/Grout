@@ -16,7 +16,7 @@ public final class AmGorillaPathing {
      * when the one ahead has moved, or once a second. Trials in a slice of a real jungle: 5 of 5 legs crossed against 2, and
      * Gorilla pathing went from 0.83 to 0.25 ms per tick for 24 Gorillas (3 troops, marching). (Alex's Mobs 1.22.9, Citadel 2.7.1.)
      */
-    public static final Entry ENTRY = Entries.fix("am_gorilla_pathing", Taste.NONE).home("alexsmobs")
+    public static final Entry ENTRY = Entries.fix("grout:am_gorilla_pathing", Taste.NONE).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 

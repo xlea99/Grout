@@ -14,12 +14,12 @@ public final class AmSlightlySexierBoneSerpent {
      * server. It also tells clients when the serpent is hunting and when it bites, by what vanilla already sends: that's for {@link #JAW}.
      * (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_slightly_sexier_bone_serpent", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_slightly_sexier_bone_serpent", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 
     /** It has no attack animation, only a small wobble as it moves. Now its jaws unhinge when it leaps at its prey, and snap when it bites ({@link SerpentMaw}). */
-    public static final Entry JAW = Entries.tweak("am_slightly_sexier_bone_serpent_jaw", Taste.NONE)
+    public static final Entry JAW = Entries.tweak("grout:am_slightly_sexier_bone_serpent_jaw", Taste.NONE)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .side(Side.CLIENT).restart(Restart.GAME);
 

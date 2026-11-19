@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "guppylib:entry",
-      "entry": "quark_chest_minecart_recipe",
+      "entry": "grout:quark_chest_minecart_recipe",
       "and": [
         {
           "type": "neoforge:mod_loaded",

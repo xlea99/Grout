@@ -14,7 +14,7 @@ public final class EasyShulkerBoxesDyeDepot {
      * no load conditions, so the entry's mixin drops them while it's off: runtime-gated, since that mixin must be there
      * exactly when the entry isn't on.
      */
-    public static final Entry ENTRY = Entries.compat("easy_shulker_boxes_dye_depot", Taste.NONE).home("easyshulkerboxes")
+    public static final Entry ENTRY = Entries.compat("grout:easy_shulker_boxes_dye_depot", Taste.NONE).home("easyshulkerboxes")
         .requiresMods("easyshulkerboxes", "dye_depot")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

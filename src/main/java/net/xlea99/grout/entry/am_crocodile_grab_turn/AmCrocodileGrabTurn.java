@@ -12,7 +12,7 @@ public final class AmCrocodileGrabTurn {
      * that now is: so the prey jumps through it to its other end. It keeps its grip on the same side now, and turns slowly. (Alex's Mobs 1.22.9, ISSUES
      * #174.)
      */
-    public static final Entry ENTRY = Entries.fix("am_crocodile_grab_turn", Taste.NONE).home("alexsmobs")
+    public static final Entry ENTRY = Entries.fix("grout:am_crocodile_grab_turn", Taste.NONE).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 

@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class WardenRoarLoop {
     /** Wardens think on the server. */
-    public static final Entry ENTRY = Entries.fix("warden_roar_loop", Taste.NONE).home(Entry.MINECRAFT)
+    public static final Entry ENTRY = Entries.fix("grout:warden_roar_loop", Taste.NONE).home(Entry.MINECRAFT)
         .side(Side.SERVER).restart(Restart.GAME);
 
     private WardenRoarLoop() {

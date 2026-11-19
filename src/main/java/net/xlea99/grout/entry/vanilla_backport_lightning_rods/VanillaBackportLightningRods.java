@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class VanillaBackportLightningRods {
     /** Lightning picks its target on the server. */
-    public static final Entry ENTRY = Entries.fix("vanilla_backport_lightning_rods", Taste.NONE).home("vanillabackport")
+    public static final Entry ENTRY = Entries.fix("grout:vanilla_backport_lightning_rods", Taste.NONE).home("vanillabackport")
         .requiresMods("vanillabackport")
         .side(Side.SERVER).restart(Restart.GAME);
 

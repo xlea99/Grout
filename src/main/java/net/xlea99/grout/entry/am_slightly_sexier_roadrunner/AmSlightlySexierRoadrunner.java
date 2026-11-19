@@ -12,7 +12,7 @@ public final class AmSlightlySexierRoadrunner {
      * it sprints low and flat, with weight in its tail and neck, leans into its turns, and at rest moves its head in a bird's quick
      * snaps ({@link RoadrunnerMotion}). A Roadrunner named Meep keeps its spinning legs, untouched. Client only. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_slightly_sexier_roadrunner", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_slightly_sexier_roadrunner", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 

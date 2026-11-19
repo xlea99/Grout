@@ -14,7 +14,7 @@ public final class QuarkArmorSwapRespectsLocks {
      * 2026-10-31 by lockprobe: an unlocked control swapped, a 4144959 stand swapped too). Runtime-gated: the swap runs on
      * the client too. (Quark 4.1-488, QuickArmorSwappingModule.swapSlot.)
      */
-    public static final Entry ENTRY = Entries.fix("quark_armor_swap_respects_locks", Taste.NONE).home("quark")
+    public static final Entry ENTRY = Entries.fix("grout:quark_armor_swap_respects_locks", Taste.NONE).home("quark")
         .requiresMods("quark")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();

@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "guppylib:entry",
-      "entry": "cc_crafted_tether_potions"
+      "entry": "grout:cc_crafted_tether_potions"
     }
   ],
   "type": "grout:cc_tether_potion",

@@ -13,19 +13,19 @@ public final class FireBlocksPlaceUnlit {
      * switch the server synced. Campfires as Forgery's {@code campfires_place_unlit} had them (every CampfireBlock); the
      * children bring other mods' fire blocks along.
      */
-    public static final Entry ENTRY = Entries.feature("fire_blocks_place_unlit", Taste.STRONG).home(Grout.MODID)
+    public static final Entry ENTRY = Entries.feature("grout:fire_blocks_place_unlit", Taste.STRONG).home(Grout.MODID)
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();
 
     /** Supplementaries' fire pit. */
-    public static final Entry SUPPLEMENTARIES = Entries.compat("fire_blocks_place_unlit_supplementaries", Taste.NONE)
+    public static final Entry SUPPLEMENTARIES = Entries.compat("grout:fire_blocks_place_unlit_supplementaries", Taste.NONE)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("supplementaries")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();
 
     /** Caverns & Chasms' braziers (plain, soul, ender, cupric). */
-    public static final Entry CAVERNS_AND_CHASMS = Entries.compat("fire_blocks_place_unlit_caverns_and_chasms", Taste.NONE)
+    public static final Entry CAVERNS_AND_CHASMS = Entries.compat("grout:fire_blocks_place_unlit_caverns_and_chasms", Taste.NONE)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("caverns_and_chasms")
         .side(Side.SERVER).restart(Restart.GAME)

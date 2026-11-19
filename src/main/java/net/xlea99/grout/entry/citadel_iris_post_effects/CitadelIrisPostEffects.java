@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class CitadelIrisPostEffects {
     /** Only when entities are drawn within the frame. */
-    public static final Entry ENTRY = Entries.compat("citadel_iris_post_effects", Taste.NONE)
+    public static final Entry ENTRY = Entries.compat("grout:citadel_iris_post_effects", Taste.NONE)
         .home("citadel")
         .requiresMods("citadel", "iris")
         .side(Side.CLIENT).restart(Restart.GAME);

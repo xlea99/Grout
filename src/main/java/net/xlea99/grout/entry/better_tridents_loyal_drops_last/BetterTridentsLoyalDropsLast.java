@@ -18,7 +18,7 @@ public final class BetterTridentsLoyalDropsLast {
      * Load-gated: Better Tridents registers while it's constructed, before any runtime switch could be read.
      * (Better Tridents 21.1.0, BetterTridents.registerEventHandlers.)
      */
-    public static final Entry ENTRY = Entries.fix("better_tridents_loyal_drops_last", Taste.NONE).home("bettertridents")
+    public static final Entry ENTRY = Entries.fix("grout:better_tridents_loyal_drops_last", Taste.NONE).home("bettertridents")
         .requiresMods("bettertridents")
         .side(Side.SERVER).restart(Restart.GAME);
 

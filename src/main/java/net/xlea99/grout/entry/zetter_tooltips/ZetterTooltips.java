@@ -15,7 +15,7 @@ public final class ZetterTooltips {
      * painting or frame, it calls Zetter's own with the context's level; if Zetter ever fixes its signature, the default
      * never runs for its items and this goes idle. (Zetter 0.21.7, CanvasItem / PaintingItem.appendHoverText.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_tooltips", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_tooltips", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.CLIENT).restart(Restart.GAME);
 

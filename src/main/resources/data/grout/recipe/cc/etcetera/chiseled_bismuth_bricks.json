@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "guppylib:entry",
-      "entry": "cc_extended_plated_bricks_etcetera"
+      "entry": "grout:cc_extended_plated_bricks_etcetera"
     }
   ],
   "type": "minecraft:crafting_shaped",

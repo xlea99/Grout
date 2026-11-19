@@ -18,7 +18,7 @@ public final class ZetterPaintingsStayPut {
      * the default; if Zetter ever fixes its signature, the default never runs for its paintings and this goes idle.
      * (Zetter 0.21.7, PaintingEntity.lerpTo.)
      */
-    public static final Entry ENTRY = Entries.fix("zetter_paintings_stay_put", Taste.NONE).home("zetter")
+    public static final Entry ENTRY = Entries.fix("grout:zetter_paintings_stay_put", Taste.NONE).home("zetter")
         .requiresMods("zetter")
         .side(Side.CLIENT).restart(Restart.GAME);
 

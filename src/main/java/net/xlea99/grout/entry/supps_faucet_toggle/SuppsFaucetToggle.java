@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class SuppsFaucetToggle {
     /** The faucet's state is the server's. */
-    public static final Entry ENTRY = Entries.fix("supps_faucet_toggle", Taste.NONE).home("supplementaries")
+    public static final Entry ENTRY = Entries.fix("grout:supps_faucet_toggle", Taste.NONE).home("supplementaries")
         .requiresMods("supplementaries")
         .side(Side.SERVER).restart(Restart.GAME);
 

@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class SuppsBlueBombDispensing {
     /** Dispensers work on the server only. */
-    public static final Entry ENTRY = Entries.fix("supps_blue_bomb_dispensing", Taste.NONE).home("supplementaries")
+    public static final Entry ENTRY = Entries.fix("grout:supps_blue_bomb_dispensing", Taste.NONE).home("supplementaries")
         .requiresMods("supplementaries")
         .side(Side.SERVER).restart(Restart.GAME);
 

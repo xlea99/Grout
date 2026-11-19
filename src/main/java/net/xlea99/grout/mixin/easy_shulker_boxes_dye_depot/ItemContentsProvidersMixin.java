@@ -21,7 +21,7 @@ public abstract class ItemContentsProvidersMixin {
     private Map<ResourceLocation, JsonElement> grout$dyeDepotBoxesFollowTheSwitch(Map<ResourceLocation, JsonElement> providers) {
         if (EasyShulkerBoxesDyeDepot.ENTRY.active())
             return providers;
-        String ours = EasyShulkerBoxesDyeDepot.ENTRY.id() + "/";
+        String ours = EasyShulkerBoxesDyeDepot.ENTRY.name() + "/";
         return providers.entrySet().stream()
             .filter(entry -> !(entry.getKey().getNamespace().equals(Grout.MODID) && entry.getKey().getPath().startsWith(ours)))
             .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));

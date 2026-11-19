@@ -17,7 +17,7 @@ public final class ZettifyAllPaintings {
      * Zetter is installed, so a world holding virtual paintings never breaks with the switch off. Runtime-gated:
      * the client registers them when it joins a world, hence a rejoin to switch.
      */
-    public static final Entry ENTRY = Entries.feature("zettify_all_paintings", Taste.STRONG).home("zetter")
+    public static final Entry ENTRY = Entries.feature("grout:zettify_all_paintings", Taste.STRONG).home("zetter")
         .requiresMods("zetter")
         .side(Side.SERVER).restart(Restart.WORLD)
         .runtimeGated();
@@ -29,7 +29,7 @@ public final class ZettifyAllPaintings {
      * same painting hung by vanilla (user, 2026-11-01). Player paintings keep Zetter's flat look: they were painted on
      * the flat easel screen. Only the hung canvas; easel, paint screen, hand and tooltip are untouched.
      */
-    public static final Entry SHADING = Entries.tweak("zettify_all_paintings_shading", Taste.NONE)
+    public static final Entry SHADING = Entries.tweak("grout:zettify_all_paintings_shading", Taste.NONE)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("zetter")
         .sharesMixins("zetter_canvas_shading", "zetter")
@@ -40,7 +40,7 @@ public final class ZettifyAllPaintings {
      * 2026-11-01: "i wonder if it wouldn't just look really good"). Trades the easel's exact colors for paintings that
      * sit on the wall like everything else.
      */
-    public static final Entry SHADING_ALL = Entries.tweak("zettify_all_paintings_shading_all", Taste.DEEP_END)
+    public static final Entry SHADING_ALL = Entries.tweak("grout:zettify_all_paintings_shading_all", Taste.DEEP_END)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("zetter")
         .sharesMixins("zetter_canvas_shading", "zetter")

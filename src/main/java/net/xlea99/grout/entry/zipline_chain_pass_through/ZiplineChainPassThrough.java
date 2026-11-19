@@ -14,7 +14,7 @@ public final class ZiplineChainPassThrough {
      * starts, not just for holding one, so chains can still be walked with a pickaxe in hand. Runs on both sides, so it's
      * runtime-gated: see {@link ChainPassing}. (Zipline 1.5.3, Chains 2.5.0.)
      */
-    public static final Entry ENTRY = Entries.compat("zipline_chain_pass_through", Taste.NONE).home("zipline")
+    public static final Entry ENTRY = Entries.compat("grout:zipline_chain_pass_through", Taste.NONE).home("zipline")
         .requiresMods("zipline", "connectiblechains")
         .side(Side.SERVER).restart(Restart.GAME);
 

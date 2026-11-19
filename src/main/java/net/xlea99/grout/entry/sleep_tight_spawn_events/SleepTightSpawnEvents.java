@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class SleepTightSpawnEvents {
     /** Spawns happen on the server. */
-    public static final Entry ENTRY = Entries.fix("sleep_tight_spawn_events", Taste.NONE).home("sleep_tight")
+    public static final Entry ENTRY = Entries.fix("grout:sleep_tight_spawn_events", Taste.NONE).home("sleep_tight")
         .requiresMods("sleep_tight")
         .side(Side.SERVER).restart(Restart.GAME);
 

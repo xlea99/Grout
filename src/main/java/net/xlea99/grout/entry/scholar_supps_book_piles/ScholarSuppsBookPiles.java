@@ -11,7 +11,7 @@ public final class ScholarSuppsBookPiles {
      * None: books Scholar colored (dyed, or golden) keep their color in Supplementaries' book piles, where they were
      * always drawn brown. Client: drawing only. See {@link PileCovers}.
      */
-    public static final Entry ENTRY = Entries.compat("scholar_supps_book_piles", Taste.NONE).home("scholar")
+    public static final Entry ENTRY = Entries.compat("grout:scholar_supps_book_piles", Taste.NONE).home("scholar")
         .requiresMods("scholar", "supplementaries")
         .side(Side.CLIENT).restart(Restart.GAME);
 

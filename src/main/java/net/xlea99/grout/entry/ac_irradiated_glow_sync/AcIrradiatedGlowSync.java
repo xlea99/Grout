@@ -8,7 +8,7 @@ import net.xlea99.grout.core.Taste;
 
 public final class AcIrradiatedGlowSync {
     /** Only tells clients a mob is irradiated, which it already is on the server. */
-    public static final Entry ENTRY = Entries.fix("ac_irradiated_glow_sync", Taste.NONE)
+    public static final Entry ENTRY = Entries.fix("grout:ac_irradiated_glow_sync", Taste.NONE)
         .home("alexscaves")
         .requiresMods("alexscaves")
         .usesIds("mob_effect", "alexscaves:irradiated")

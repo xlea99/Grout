@@ -15,7 +15,7 @@ public final class EnchantingTablesKeepLapis {
      * the table breaks, so switching it off loses no lapis (off, the slot starts empty and closing hands lapis back, as
      * in vanilla; what a table already holds waits in it).
      */
-    public static final Entry ENTRY = Entries.tweak("enchanting_tables_keep_lapis", Taste.LIGHT).home(Entry.MINECRAFT)
+    public static final Entry ENTRY = Entries.tweak("grout:enchanting_tables_keep_lapis", Taste.LIGHT).home(Entry.MINECRAFT)
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();
 

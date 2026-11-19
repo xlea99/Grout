@@ -13,7 +13,7 @@ public final class AmGazelleMovement {
      * degrees in a tick to go back, and worst of all off ledges, where a waypoint can't count as reached. See {@link GazelleNavigation},
      * {@link GazelleMoveControl}, {@link GazelleFlee}. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_gazelle_movement", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_gazelle_movement", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 

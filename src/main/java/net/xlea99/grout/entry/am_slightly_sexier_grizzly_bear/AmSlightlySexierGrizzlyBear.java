@@ -12,7 +12,7 @@ public final class AmSlightlySexierGrizzlyBear {
      * geometry: on all fours its walk becomes a bear's rolling pace and its run a gallop ({@link GrizzlyMotion}), and it breathes,
      * looks about and flicks its ears. Sitting, standing, mauling, eating and sniffing stay Alex's. Client only. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.tweak("am_slightly_sexier_grizzly_bear", Taste.STRONG).home("alexsmobs")
+    public static final Entry ENTRY = Entries.tweak("grout:am_slightly_sexier_grizzly_bear", Taste.STRONG).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.CLIENT).restart(Restart.GAME);
 

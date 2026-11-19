@@ -13,7 +13,7 @@ public final class AmHummingbirdFixes {
      * Bred babies were always the first color, since breeding never picks one: they take a parent's, as Alex's other bred
      * mobs do. (Alex's Mobs 1.22.9.)
      */
-    public static final Entry ENTRY = Entries.fix("am_hummingbird_fixes", Taste.NONE).home("alexsmobs")
+    public static final Entry ENTRY = Entries.fix("grout:am_hummingbird_fixes", Taste.NONE).home("alexsmobs")
         .requiresMods("alexsmobs")
         .side(Side.SERVER).restart(Restart.GAME);
 

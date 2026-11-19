@@ -9,6 +9,6 @@ public final class AcThornwoodVerySlightlyLighterPlanksClientSetup implements En
     @Override
     public void setup(Wiring wiring) {
         wiring.whenActive(AcThornwoodVerySlightlyLighterPlanks.ENTRY, () -> SpecRecolors.register(
-            AcThornwoodVerySlightlyLighterPlanks.ENTRY.id(), SpecRecolors.spec("ac_thornwood"), "alexscaves"));
+            AcThornwoodVerySlightlyLighterPlanks.ENTRY.name(), SpecRecolors.spec("ac_thornwood"), "alexscaves"));
     }
 }
