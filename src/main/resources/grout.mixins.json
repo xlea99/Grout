@@ -47,7 +47,6 @@
     "dye_depot_rock_candy.ConfectionOvenBlockEntityMixin",
     "dye_depot_rock_candy_candy_cavity.DonutArchStructurePieceMixin",
     "amendments_cauldron_dispensing.DispenserBehaviorMixin",
-    "bucket_mob_flicker.MobBucketItemMixin",
     "amendments_mixed_potion_brewing.PotionBrewingMixin",
     "amendments_potion_dilution.LiquidMixerMixin",
     "cc_tether_potion_compat.SoftFluidTankMixin",
@@ -204,10 +203,6 @@
     "zetter_painting_view_distance.ZetterEntitiesMixin"
   ],
   "client": [
-    "keyframe_part_lookup.HierarchicalModelMixin",
-    "keyframe_part_lookup.ModelPartAccessor",
-    "model_part_walk.ModelPartChildren",
-    "model_part_walk.ModelPartMixin",
     "spawn_flies_shovel_swatter.FlyEventsMixin",
     "spawn_stew_repels_flies_inventory.FlyEventsAccessor",
     "spawn_stew_repels_flies_inventory.FlyEventsMixin",
@@ -264,7 +259,6 @@
     "scholar_lectern_atlases.ColoredBookModelMixin",
     "betterf3_lost_f3_info.DebugScreenOverlayMixin",
     "haunted_harvest_unified_carved_pumpkin_supplementaries.StatueBlockTileRendererMixin",
-    "no_end_cave_sounds.BiomeAmbientSoundsHandlerMixin",
     "supps_moving_block_contents.ClientHooksMixin",
     "supps_moving_block_contents.PistonHeadRendererMixin",
     "themed_candle_holder_flames.CandleHolderBlockMixin",

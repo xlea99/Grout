@@ -45,7 +45,6 @@ import net.xlea99.grout.entry.advancement_frames_packet_checks.AdvancementFrames
 import net.xlea99.grout.entry.amendments_lava_layers.AmendmentsLavaLayers;
 import net.xlea99.grout.entry.amendments_mixed_potion_brewing.AmendmentsMixedPotionBrewing;
 import net.xlea99.grout.entry.amendments_potion_dilution.AmendmentsPotionDilution;
-import net.xlea99.grout.entry.bucket_mob_flicker.BucketMobFlicker;
 import net.xlea99.grout.entry.cauldron_fourths.CauldronFourths;
 import net.xlea99.grout.entry.chest_boat_chests.ChestBoatChests;
 import net.xlea99.grout.entry.chest_boats_take_any_chest.ChestBoatsTakeAnyChest;
@@ -78,8 +77,6 @@ import net.xlea99.grout.entry.better_tridents_loyal_drops_last.BetterTridentsLoy
 import net.xlea99.grout.entry.no_deadly_memes.NoDeadlyMemes;
 import net.xlea99.grout.entry.haunted_harvest_mask_limit.HauntedHarvestMaskLimit;
 import net.xlea99.grout.entry.horseman_quark_horses.HorsemanQuarkHorses;
-import net.xlea99.grout.entry.keyframe_part_lookup.KeyframePartLookup;
-import net.xlea99.grout.entry.model_part_walk.ModelPartWalk;
 import net.xlea99.grout.entry.haunted_harvest_pumpkin_compat.HauntedHarvestPumpkinCompat;
 import net.xlea99.grout.entry.haunted_harvest_torch_lanterns.HauntedHarvestTorchLanterns;
 import net.xlea99.grout.entry.haunted_harvest_unified_carved_pumpkin.HauntedHarvestUnifiedCarvedPumpkin;
@@ -106,7 +103,6 @@ import net.xlea99.grout.entry.quark_armor_swap_respects_locks.QuarkArmorSwapResp
 import net.xlea99.grout.entry.quark_chest_minecart_recipe.QuarkChestMinecartRecipe;
 import net.xlea99.grout.entry.quark_elytra_duplication_crash.QuarkElytraDuplicationCrash;
 import net.xlea99.grout.entry.quark_parrot_egg_dispensing.QuarkParrotEggDispensing;
-import net.xlea99.grout.entry.no_end_cave_sounds.NoEndCaveSounds;
 import net.xlea99.grout.entry.paper_labels.PaperLabels;
 import net.xlea99.grout.entry.quark_tool_restock_enchantments.QuarkToolRestockEnchantments;
 import net.xlea99.grout.entry.scholar_amendments_lectern_sync.ScholarAmendmentsLecternSync;
@@ -226,7 +222,6 @@ public final class Catalog {
         AdvancementFramesPacketChecks.class,
         AmendmentsMixedPotionBrewing.class,
         AmendmentsPotionDilution.class,
-        BucketMobFlicker.class,
         BetterTridentsLoyalDropsLast.class,
         CauldronFourths.class,
         ChestBoatChests.class,
@@ -271,8 +266,6 @@ public final class Catalog {
         EmfHauntedHarvestMasks.class,
         HauntedHarvestMaskLimit.class,
         HorsemanQuarkHorses.class,
-        KeyframePartLookup.class,
-        ModelPartWalk.class,
         HauntedHarvestPumpkinCompat.class,
         HauntedHarvestTorchLanterns.class,
         HauntedHarvestUnifiedCarvedPumpkin.class,
@@ -301,7 +294,6 @@ public final class Catalog {
         QuarkArmorSwapRespectsLocks.class,
         QuarkElytraDuplicationCrash.class,
         QuarkParrotEggDispensing.class,
-        NoEndCaveSounds.class,
         PaperLabels.class,
         QuarkToolRestockEnchantments.class,
         RuBrokenSounds.class,
