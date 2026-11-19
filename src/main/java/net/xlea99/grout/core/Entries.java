@@ -6,7 +6,7 @@ import net.xlea99.guppylib.core.Registry;
 import net.xlea99.grout.boot.GroutSpec;
 
 /**
- * Where Grout's entries are declared: {@code Entries.feature("grout:jukebox_playlists", Taste.LIGHT)} adds to Grout's
+ * Where Grout's entries are declared: {@code Entries.feature("grout:extended_metal_bars", Taste.STRONG)} adds to Grout's
  * family's one registry, taste included ({@link Tastes}).
  */
 public final class Entries {

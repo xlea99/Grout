@@ -18,14 +18,14 @@ public final class ExtendedMetalBars {
         .runtimeGated();
 
     /** Caverns & Chasms' necromium. */
-    public static final Entry CAVERNS_AND_CHASMS = Entries.compat("grout:extended_metal_bars_caverns_and_chasms", Taste.LIGHT)
+    public static final Entry CAVERNS_AND_CHASMS = Entries.compat("grout:extended_metal_bars_cc", Taste.LIGHT)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("caverns_and_chasms")
         .side(Side.SERVER).restart(Restart.GAME)
         .runtimeGated();
 
     /** Alex's Caves' azure and scarlet neodymium. Their bars are magnets (magnet/Magnets): off, they stop being magnets. */
-    public static final Entry ALEXSCAVES = Entries.compat("grout:extended_metal_bars_alexscaves", Taste.LIGHT)
+    public static final Entry ALEXSCAVES = Entries.compat("grout:extended_metal_bars_ac", Taste.LIGHT)
         .requiresEntries(ENTRY).shownUnder(ENTRY)
         .requiresMods("alexscaves")
         .side(Side.SERVER).restart(Restart.GAME)

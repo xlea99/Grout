@@ -1,7 +1,7 @@
 # Notice
 
 Grout's code is under the Mozilla Public License 2.0 (see `LICENSE`). Some of its art is derived from other mods'
-art, and one sound comes from Freesound, each under its own license, as listed here.
+art, each under its own license, as listed here.
 
 ## Bundled library
 
@@ -74,12 +74,3 @@ included.
 
 `indigo`, `navy` and `teal` in `assets/grout/textures/glint/` are procedural glimmers, not derived from Quark's or
 Minecraft's art, and are under this mod's license like the code.
-
-## Sounds
-
-`assets/grout/sounds/block/jukebox/record_scratch.ogg` (the `grout:jukebox_record_scratch` entry) is
-["record scratch.wav"](https://freesound.org/people/luffy/sounds/3536/) by **luffy**, from Freesound, licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Changes: cut from the 17-second recording down to the
-scratch itself (about 1.2 seconds), mixed to mono, faded at both ends, peak-normalized, and encoded to Ogg Vorbis. It
-stays under CC BY 4.0.
-

@@ -16,7 +16,6 @@ import net.xlea99.grout.entry.cc_crafted_tether_potions.CcCraftedTetherPotions;
 import net.xlea99.grout.entry.cc_hidden_trim_icons.CcHiddenTrimIcons;
 import net.xlea99.grout.entry.cc_extended_plated_bricks.CcExtendedPlatedBricks;
 import net.xlea99.grout.entry.extended_metal_bars.ExtendedMetalBars;
-import net.xlea99.grout.entry.fire_resistance_no_fire_overlay.FireResistanceNoFireOverlay;
 import net.xlea99.grout.entry.ac_immediately_fast_gingerbread_stripes.AcImmediatelyFastGingerbreadStripes;
 import net.xlea99.grout.entry.ac_irradiated_glow_sync.AcIrradiatedGlowSync;
 import net.xlea99.grout.entry.ac_iris_biome_light.AcIrisBiomeLight;
@@ -94,19 +93,12 @@ import net.xlea99.grout.entry.boidsify.Boidsify;
 import net.xlea99.grout.entry.no_deadly_memes.NoDeadlyMemes;
 import net.xlea99.grout.entry.haunted_harvest_mask_limit.HauntedHarvestMaskLimit;
 import net.xlea99.grout.entry.horseman_quark_horses.HorsemanQuarkHorses;
-import net.xlea99.grout.entry.jukebox_playlists.JukeboxPlaylists;
 import net.xlea99.grout.entry.keyframe_part_lookup.KeyframePartLookup;
 import net.xlea99.grout.entry.model_part_walk.ModelPartWalk;
-import net.xlea99.grout.entry.jukebox_record_scratch.JukeboxRecordScratch;
-import net.xlea99.grout.entry.jukebox_progress_signal.JukeboxProgressSignal;
-import net.xlea99.grout.entry.jukebox_synced_playback.JukeboxSyncedPlayback;
-import net.xlea99.grout.entry.supps_jukebox_speakers.SuppsJukeboxSpeakers;
 import net.xlea99.grout.entry.haunted_harvest_pumpkin_compat.HauntedHarvestPumpkinCompat;
 import net.xlea99.grout.entry.haunted_harvest_torch_lanterns.HauntedHarvestTorchLanterns;
 import net.xlea99.grout.entry.haunted_harvest_unified_carved_pumpkin.HauntedHarvestUnifiedCarvedPumpkin;
-import net.xlea99.grout.entry.enchanting_tables_keep_lapis.EnchantingTablesKeepLapis;
 import net.xlea99.grout.entry.enderman_head_reach.EndermanHeadReach;
-import net.xlea99.grout.entry.ice_stops_crops.IceStopsCrops;
 import net.xlea99.grout.entry.iris_firework_fade.IrisFireworkFade;
 import net.xlea99.grout.entry.betterf3_lost_f3_info.BetterF3LostF3Info;
 import net.xlea99.grout.entry.connectiblechains_collisions.ConnectibleChainsCollisions;
@@ -117,7 +109,6 @@ import net.xlea99.grout.entry.etcetera_easy_anvils_label_costs.EtceteraEasyAnvil
 import net.xlea99.grout.entry.etcetera_label_wash_stacking.EtceteraLabelWashStacking;
 import net.xlea99.grout.entry.etcetera_shimmering_bismuth_trims.EtceteraShimmeringBismuthTrims;
 import net.xlea99.grout.entry.faucet_pouring_recipes.FaucetPouringRecipes;
-import net.xlea99.grout.entry.fire_blocks_place_unlit.FireBlocksPlaceUnlit;
 import net.xlea99.grout.entry.lithium_navigation_swaps.LithiumNavigationSwaps;
 import net.xlea99.grout.entry.map_atlases_fixes.MapAtlasesFixes;
 import net.xlea99.grout.entry.moonlight_jade_contents.MoonlightJadeContents;
@@ -309,20 +300,13 @@ public final class Catalog {
         HauntedHarvestMaskLimit.class,
         HorsemanQuarkHorses.class,
         Boidsify.class,
-        JukeboxSyncedPlayback.class,
-        JukeboxProgressSignal.class,
-        JukeboxPlaylists.class,
         KeyframePartLookup.class,
         ModelPartWalk.class,
-        JukeboxRecordScratch.class,
-        SuppsJukeboxSpeakers.class,
         HauntedHarvestPumpkinCompat.class,
         HauntedHarvestTorchLanterns.class,
         HauntedHarvestUnifiedCarvedPumpkin.class,
-        EnchantingTablesKeepLapis.class,
         BigPolarBears.class,
         EndermanHeadReach.class,
-        IceStopsCrops.class,
         IrisFireworkFade.class,
         BetterF3LostF3Info.class,
         ZiplineServerChecks.class,
@@ -333,11 +317,9 @@ public final class Catalog {
         EtceteraLabelWashStacking.class,
         EtceteraShimmeringBismuthTrims.class,
         FaucetPouringRecipes.class,
-        FireBlocksPlaceUnlit.class,
         LithiumNavigationSwaps.class,
         MapAtlasesFixes.class,
         ExtendedMetalBars.class,
-        FireResistanceNoFireOverlay.class,
         MoonlightJadeContents.class,
         MoonlightRegistrationRaces.class,
         NeapolitanAmendmentsMilkshakes.class,
