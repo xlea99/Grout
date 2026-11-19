@@ -3,8 +3,8 @@ package net.xlea99.lifeguard.entry.ice_stops_crops;
 import net.minecraft.tags.BlockTags;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.level.block.CropGrowEvent;
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link IceStopsCrops}. */
 public final class IceStopsCropsSetup implements EntrySetup {

@@ -3,6 +3,11 @@ package net.xlea99.lifeguard.core;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import net.xlea99.guppylib.core.AutoRule;
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Registry;
+import net.xlea99.guppylib.core.SettingsView;
+import net.xlea99.guppylib.core.Side;
 
 /**
  * Lifeguard's taste layer on top of the shared entry model, which knows nothing of tastes: each entry carries its

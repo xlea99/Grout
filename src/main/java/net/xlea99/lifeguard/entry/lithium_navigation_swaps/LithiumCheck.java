@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.lithium_navigation_swaps;
 
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.xlea99.lifeguard.boot.BrokenEntries;
+import net.xlea99.guppylib.boot.BrokenEntries;
 
 /**
  * Checks, by name only, that Lithium still has the internal interface {@link NavigationSwaps} calls. A Lithium update

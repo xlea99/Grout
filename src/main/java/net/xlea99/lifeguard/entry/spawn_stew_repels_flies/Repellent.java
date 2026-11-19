@@ -19,7 +19,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.xlea99.lifeguard.sync.Payloads;
+import net.xlea99.guppylib.sync.Payloads;
 
 /**
  * What the effect does to a player's flies ({@link SpawnStewRepelsFlies}). Flies reach a player in several ways, through several of Spawn's own paths, so this doesn't stop any of them. It watches for flies it

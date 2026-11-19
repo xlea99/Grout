@@ -6,9 +6,10 @@ import java.util.Map;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.xlea99.lifeguard.core.Entry;
+import net.xlea99.guppylib.client.menu.MenuRule;
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Side;
 import net.xlea99.lifeguard.core.Profile;
-import net.xlea99.lifeguard.core.Side;
 import net.xlea99.lifeguard.core.Taste;
 import net.xlea99.lifeguard.core.Tastes;
 

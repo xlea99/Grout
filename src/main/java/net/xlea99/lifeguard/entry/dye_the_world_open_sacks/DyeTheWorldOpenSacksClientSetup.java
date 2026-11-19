@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.dye_the_world_open_sacks;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link DyeTheWorldOpenSacks}. */
 public final class DyeTheWorldOpenSacksClientSetup implements EntrySetup {

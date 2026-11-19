@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.chest_boats_take_any_chest;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 import net.xlea99.lifeguard.data.RecipeEdits;
 
 /** Setup for {@link ChestBoatsTakeAnyChest}. */

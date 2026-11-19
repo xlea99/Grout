@@ -1,8 +1,8 @@
 package net.xlea99.lifeguard.entry.zettify_all_paintings;
 
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link ZettifyAllPaintings}: the creative tab entries (testing). */
 public final class ZettifyAllPaintingsClientSetup implements EntrySetup {

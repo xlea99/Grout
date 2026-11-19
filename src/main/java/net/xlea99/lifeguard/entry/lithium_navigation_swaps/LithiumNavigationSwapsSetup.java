@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.lithium_navigation_swaps;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link LithiumNavigationSwaps}. */
 public final class LithiumNavigationSwapsSetup implements EntrySetup {

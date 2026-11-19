@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.cc_cannon_backfire;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link CcCannonBackfire}. */
 public final class CcCannonBackfireSetup implements EntrySetup {

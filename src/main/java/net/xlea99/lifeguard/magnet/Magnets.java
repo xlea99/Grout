@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.world.poi.ExtendPoiTypesEvent;
-import net.xlea99.lifeguard.core.Entry;
+import net.xlea99.guppylib.core.Entry;
 
 /**
  * Our neodymium blocks are Alex's Caves magnets: scarlet ones attract, azure ones repel, and what's pulled can walk on

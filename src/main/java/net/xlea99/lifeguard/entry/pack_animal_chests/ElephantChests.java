@@ -11,7 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
-import net.xlea99.lifeguard.sync.Payloads;
+import net.xlea99.guppylib.sync.Payloads;
 import org.jetbrains.annotations.Nullable;
 
 /**

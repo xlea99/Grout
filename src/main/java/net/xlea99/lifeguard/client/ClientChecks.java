@@ -9,8 +9,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.xlea99.guppylib.core.Entry;
 import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.core.Entry;
 
 /**
  * Checks an active entry asks for after every resource reload, once models are baked: that its assets actually won (no

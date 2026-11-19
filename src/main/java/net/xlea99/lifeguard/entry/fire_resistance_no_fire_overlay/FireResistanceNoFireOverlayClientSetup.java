@@ -3,8 +3,8 @@ package net.xlea99.lifeguard.entry.fire_resistance_no_fire_overlay;
 import net.minecraft.world.effect.MobEffects;
 import net.neoforged.neoforge.client.event.RenderBlockScreenEffectEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link FireResistanceNoFireOverlay}. */
 public final class FireResistanceNoFireOverlayClientSetup implements EntrySetup {

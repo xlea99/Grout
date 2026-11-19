@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.pack_animal_chests;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link PackAnimalChests}. */
 public final class PackAnimalChestsClientSetup implements EntrySetup {

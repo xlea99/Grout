@@ -3,8 +3,8 @@ package net.xlea99.lifeguard.entry.spawn_stew_repels_flies;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link SpawnStewRepelsFlies}. {@link Repellent} is kept apart because it names Spawn's classes, and this loads either way. */
 public final class SpawnStewRepelsFliesSetup implements EntrySetup {

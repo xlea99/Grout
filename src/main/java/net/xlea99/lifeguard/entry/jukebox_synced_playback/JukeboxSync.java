@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.level.block.LevelEvent;
-import net.xlea99.lifeguard.sync.Payloads;
+import net.xlea99.guppylib.sync.Payloads;
 
 /**
  * Jukebox music follows the server. The jukebox keeps its song's time (vanilla counts it, to know when it's over), and

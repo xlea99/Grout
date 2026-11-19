@@ -22,8 +22,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.conditions.ConditionalOps;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import net.xlea99.guppylib.sync.Payloads;
 import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.sync.Payloads;
 
 /**
  * The loaded faucet pouring recipes ({@code data/<namespace>/faucet_pouring/*.json}, see {@link PouringRecipe}), and

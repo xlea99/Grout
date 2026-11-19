@@ -22,9 +22,9 @@ import net.minecraft.server.packs.resources.Resource;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.xlea99.guppylib.core.Entry;
 import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.core.Entries;
-import net.xlea99.lifeguard.core.Entry;
 
 /**
  * The resource packs entries ship ({@link Entry#resourcePack()}), as one required pack, fixed on top, so a player can't

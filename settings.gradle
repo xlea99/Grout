@@ -9,3 +9,9 @@ pluginManagement {
 plugins {
     id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
 }
+
+// GuppyLib, the shared machinery (its own repo, a sibling folder): built from its SOURCE when that folder sits beside this
+// one, so a change there reaches Lifeguard's next build and run with nothing published; else the published version.
+if (file('../GuppyLib').isDirectory()) {
+    includeBuild('../GuppyLib')
+}

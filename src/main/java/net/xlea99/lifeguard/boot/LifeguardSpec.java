@@ -1,8 +1,9 @@
 package net.xlea99.lifeguard.boot;
 
+import net.xlea99.guppylib.boot.ModCatalog;
+import net.xlea99.guppylib.core.ModSpec;
 import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.core.Entries;
-import net.xlea99.lifeguard.core.ModSpec;
 import net.xlea99.lifeguard.core.Tastes;
 
 /**

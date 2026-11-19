@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import net.xlea99.lifeguard.boot.BrokenEntries;
+import net.xlea99.guppylib.boot.BrokenEntries;
 import net.xlea99.lifeguard.entry.sexy_runic_glints.Shaderpacks;
 import org.joml.Matrix4f;
 import org.joml.Matrix4fc;

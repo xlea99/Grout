@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.ac_iris_biome_light;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link AcIrisBiomeLight}. */
 public final class AcIrisBiomeLightClientSetup implements EntrySetup {

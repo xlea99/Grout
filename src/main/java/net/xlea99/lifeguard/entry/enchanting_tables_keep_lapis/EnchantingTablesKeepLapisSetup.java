@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.enchanting_tables_keep_lapis;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link EnchantingTablesKeepLapis}. */
 public final class EnchantingTablesKeepLapisSetup implements EntrySetup {

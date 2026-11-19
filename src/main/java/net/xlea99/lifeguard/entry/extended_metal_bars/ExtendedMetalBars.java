@@ -1,10 +1,10 @@
 package net.xlea99.lifeguard.entry.extended_metal_bars;
 
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Restart;
+import net.xlea99.guppylib.core.Side;
 import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.core.Entries;
-import net.xlea99.lifeguard.core.Entry;
-import net.xlea99.lifeguard.core.Restart;
-import net.xlea99.lifeguard.core.Side;
 import net.xlea99.lifeguard.core.Taste;
 
 public final class ExtendedMetalBars {

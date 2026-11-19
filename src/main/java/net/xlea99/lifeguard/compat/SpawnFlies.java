@@ -8,7 +8,7 @@ import java.util.List;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.xlea99.lifeguard.sync.Payloads;
+import net.xlea99.guppylib.sync.Payloads;
 
 /**
  * Taking one of Spawn's flies off something, the one way every entry does it, so that frogs and flytraps can't come to disagree about the rules. Spawn's flies are records attached to a

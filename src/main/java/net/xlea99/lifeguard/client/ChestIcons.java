@@ -48,10 +48,10 @@ import net.neoforged.neoforge.client.event.RegisterSpriteSourceTypesEvent;
 import net.neoforged.neoforge.client.model.BakedModelWrapper;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.geometry.UnbakedGeometryHelper;
+import net.xlea99.guppylib.core.Entry;
 import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.client.ChestTones.Tone;
 import net.xlea99.lifeguard.client.ChestTones.Transfer;
-import net.xlea99.lifeguard.core.Entry;
 import org.jetbrains.annotations.Nullable;
 
 /**

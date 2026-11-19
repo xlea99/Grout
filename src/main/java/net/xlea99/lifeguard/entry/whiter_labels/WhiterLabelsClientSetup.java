@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.whiter_labels;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link WhiterLabels}. */
 public final class WhiterLabelsClientSetup implements EntrySetup {

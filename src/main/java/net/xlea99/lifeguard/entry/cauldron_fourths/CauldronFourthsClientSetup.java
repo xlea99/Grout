@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.cauldron_fourths;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link CauldronFourths}. */
 public final class CauldronFourthsClientSetup implements EntrySetup {

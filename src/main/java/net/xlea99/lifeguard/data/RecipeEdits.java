@@ -12,9 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.resources.ResourceLocation;
+import net.xlea99.guppylib.core.Entry;
 import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.core.Entries;
-import net.xlea99.lifeguard.core.Entry;
 
 /**
  * Entries' edits to other mods' recipes ({@link Entry#editsRecipe}), made to the recipe files as the game loads them:

@@ -1,9 +1,9 @@
 package net.xlea99.lifeguard.entry.betterf3_lost_f3_info;
 
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Restart;
+import net.xlea99.guppylib.core.Side;
 import net.xlea99.lifeguard.core.Entries;
-import net.xlea99.lifeguard.core.Entry;
-import net.xlea99.lifeguard.core.Restart;
-import net.xlea99.lifeguard.core.Side;
 import net.xlea99.lifeguard.core.Taste;
 
 public final class BetterF3LostF3Info {

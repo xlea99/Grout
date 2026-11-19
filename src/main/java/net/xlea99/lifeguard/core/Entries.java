@@ -1,5 +1,8 @@
 package net.xlea99.lifeguard.core;
 
+import net.xlea99.guppylib.core.Entry;
+import net.xlea99.guppylib.core.Registry;
+
 /**
  * Where Lifeguard's entries are declared: {@code Entries.feature("jukebox_playlists", Taste.LIGHT)} adds to Lifeguard's
  * one registry, taste included ({@link Tastes}).

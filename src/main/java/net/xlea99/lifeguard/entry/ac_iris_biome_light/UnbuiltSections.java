@@ -4,7 +4,7 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import javax.annotation.Nullable;
-import net.xlea99.lifeguard.boot.BrokenEntries;
+import net.xlea99.guppylib.boot.BrokenEntries;
 
 /**
  * What {@code RenderSectionManagerMixin} needs of Sodium's sections and build queues, by name: Modrinth's Sodium keeps its code in

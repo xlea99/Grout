@@ -5,9 +5,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.xlea99.guppylib.boot.Setups;
+import net.xlea99.guppylib.client.menu.EntryScreen;
 import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.boot.Setups;
-import net.xlea99.lifeguard.client.menu.LifeguardScreen;
 import net.xlea99.lifeguard.client.menu.TasteMenu;
 
 /**
@@ -17,7 +17,7 @@ import net.xlea99.lifeguard.client.menu.TasteMenu;
 @Mod(value = Lifeguard.MODID, dist = Dist.CLIENT)
 public final class LifeguardClient {
     public LifeguardClient(IEventBus modEventBus, ModContainer container) {
-        container.registerExtensionPoint(IConfigScreenFactory.class, (mod, parent) -> new LifeguardScreen(parent, TasteMenu.INSTANCE));
+        container.registerExtensionPoint(IConfigScreenFactory.class, (mod, parent) -> new EntryScreen(parent, TasteMenu.INSTANCE));
         EntryPacks.register(modEventBus, container);
         ClientChecks.register(modEventBus);
         RecolorPack.register(modEventBus);

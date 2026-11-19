@@ -13,7 +13,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.xlea99.lifeguard.sync.Payloads;
+import net.xlea99.guppylib.sync.Payloads;
 
 /**
  * Which chest a chest minecart carries: an item id under {@link #KEY}, in the chest minecart item's custom data and the

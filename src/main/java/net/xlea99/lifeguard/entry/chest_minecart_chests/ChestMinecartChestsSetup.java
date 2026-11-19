@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.chest_minecart_chests;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link ChestMinecartChests}. */
 public final class ChestMinecartChestsSetup implements EntrySetup {

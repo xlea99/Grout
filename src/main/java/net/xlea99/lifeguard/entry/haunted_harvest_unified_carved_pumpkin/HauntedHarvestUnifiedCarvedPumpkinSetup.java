@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.haunted_harvest_unified_carved_pumpkin;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link HauntedHarvestUnifiedCarvedPumpkin}. */
 public final class HauntedHarvestUnifiedCarvedPumpkinSetup implements EntrySetup {

@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.extended_metal_bars;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link ExtendedMetalBars}. */
 public final class ExtendedMetalBarsSetup implements EntrySetup {

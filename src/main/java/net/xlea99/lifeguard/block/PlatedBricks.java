@@ -21,8 +21,8 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.xlea99.guppylib.core.Entry;
 import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.core.Entry;
 import net.xlea99.lifeguard.entry.cc_extended_plated_bricks.CcExtendedPlatedBricks;
 import net.xlea99.lifeguard.magnet.Magnets;
 

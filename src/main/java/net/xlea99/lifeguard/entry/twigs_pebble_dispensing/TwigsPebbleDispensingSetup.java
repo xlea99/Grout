@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.twigs_pebble_dispensing;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link TwigsPebbleDispensing}. */
 public final class TwigsPebbleDispensingSetup implements EntrySetup {

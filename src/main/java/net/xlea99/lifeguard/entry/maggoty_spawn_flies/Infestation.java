@@ -24,13 +24,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameRules;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.xlea99.guppylib.sync.Payloads;
 import net.xlea99.lifeguard.entry.spawn_stew_repels_flies.Repellent;
-import net.xlea99.lifeguard.sync.Payloads;
 
 /**
  * What flies and maggots do to one player ({@link MaggotySpawnFlies}). How many maggots there are never changes how often they eat, so flies grow slowly

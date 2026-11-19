@@ -18,7 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.xlea99.lifeguard.boot.BrokenEntries;
+import net.xlea99.guppylib.boot.BrokenEntries;
 import org.jetbrains.annotations.Nullable;
 
 /**

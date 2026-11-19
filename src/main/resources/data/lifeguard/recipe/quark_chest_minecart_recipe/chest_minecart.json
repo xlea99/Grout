@@ -1,7 +1,7 @@
 {
   "neoforge:conditions": [
     {
-      "type": "lifeguard:entry",
+      "type": "guppylib:entry",
       "entry": "quark_chest_minecart_recipe",
       "and": [
         {

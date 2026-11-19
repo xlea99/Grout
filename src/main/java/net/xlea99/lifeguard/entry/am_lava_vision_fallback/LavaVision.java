@@ -14,8 +14,8 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.brewing.RegisterBrewingRecipesEvent;
+import net.xlea99.guppylib.boot.BrokenEntries;
 import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.boot.BrokenEntries;
 import net.xlea99.lifeguard.mixin.am_lava_vision_fallback.PotionBrewingBuilderAccessor;
 import org.jetbrains.annotations.Nullable;
 

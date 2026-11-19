@@ -6,7 +6,7 @@ import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.xlea99.lifeguard.sync.Payloads;
+import net.xlea99.guppylib.sync.Payloads;
 
 /**
  * Quark's half of the server side: Variant Chests keeps the chest a pack animal wears in its persistent data under

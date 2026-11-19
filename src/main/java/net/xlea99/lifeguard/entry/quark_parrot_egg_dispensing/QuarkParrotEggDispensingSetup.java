@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.quark_parrot_egg_dispensing;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link QuarkParrotEggDispensing}. */
 public final class QuarkParrotEggDispensingSetup implements EntrySetup {

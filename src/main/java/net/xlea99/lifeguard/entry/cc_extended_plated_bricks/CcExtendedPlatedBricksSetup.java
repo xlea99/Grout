@@ -1,8 +1,8 @@
 package net.xlea99.lifeguard.entry.cc_extended_plated_bricks;
 
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 import net.xlea99.lifeguard.block.PlatedBricks;
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
 
 /** Setup for {@link CcExtendedPlatedBricks}. */
 public final class CcExtendedPlatedBricksSetup implements EntrySetup {

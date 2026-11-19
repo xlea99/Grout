@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.species_soap_washes_stackaticks;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link SpeciesSoapWashesStackaticks}. */
 public final class SpeciesSoapWashesStackaticksSetup implements EntrySetup {

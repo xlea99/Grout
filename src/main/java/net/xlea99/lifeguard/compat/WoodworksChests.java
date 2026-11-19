@@ -5,8 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.horse.AbstractChestedHorse;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.xlea99.lifeguard.boot.BrokenEntries;
-import net.xlea99.lifeguard.core.Entry;
+import net.xlea99.guppylib.boot.BrokenEntries;
+import net.xlea99.guppylib.core.Entry;
 import org.jetbrains.annotations.Nullable;
 
 /**

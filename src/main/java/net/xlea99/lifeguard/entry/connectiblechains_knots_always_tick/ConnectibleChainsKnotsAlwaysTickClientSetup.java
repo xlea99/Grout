@@ -5,9 +5,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.xlea99.lifeguard.boot.BrokenEntries;
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.BrokenEntries;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link ConnectibleChainsKnotsAlwaysTick}. Entity Culling is found by name, so none of it is compiled in. */
 public final class ConnectibleChainsKnotsAlwaysTickClientSetup implements EntrySetup {

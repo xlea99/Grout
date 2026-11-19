@@ -213,6 +213,8 @@ dependencies {
 
     // MixinSquared, bundled: entries that reach into another mod's own mixins need it whatever else is installed.
     // The same artifact other mods bundle (AllTheLeaks does), so NeoForge keeps one copy, the newest in range.
+    // GuppyLib: the entry machinery (config files, the menu, mixin gating and preflight, sync). A required mod.
+    implementation "net.xlea99:guppylib:${guppylib_version}"
     compileOnly "com.github.bawnorton.mixinsquared:mixinsquared-common:${mixinsquared_version}"
     jarJar(implementation("com.github.bawnorton.mixinsquared:mixinsquared-neoforge")) {
         version {
@@ -269,12 +271,12 @@ if (file('../DeepEndWorkspace/gametests/java').isDirectory()) {
 }
 
 // Tests live in the private workspace, never in this repo. A clone without it builds normally; with it, `gradlew test`
-// runs the core's JUnit tests. They never reach the jar either way.
-if (file('../DeepEndWorkspace/tests/java').isDirectory()) {
+// runs Lifeguard's JUnit tests. They never reach the jar either way.
+if (file('../DeepEndWorkspace/tests/lifeguard/java').isDirectory()) {
     repositories {
         mavenCentral()
     }
-    sourceSets.test.java.srcDir '../DeepEndWorkspace/tests/java'
+    sourceSets.test.java.srcDir '../DeepEndWorkspace/tests/lifeguard/java'
     dependencies {
         testImplementation platform('org.junit:junit-bom:5.11.3')
         testImplementation 'org.junit.jupiter:junit-jupiter'

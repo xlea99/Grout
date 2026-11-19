@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.scholar_supps_book_piles;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Client setup for {@link ScholarSuppsBookPiles}. */
 public final class ScholarSuppsBookPilesClientSetup implements EntrySetup {

@@ -27,8 +27,8 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.resources.IoSupplier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.xlea99.guppylib.boot.BrokenEntries;
 import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.boot.BrokenEntries;
 import org.jetbrains.annotations.Nullable;
 
 /**

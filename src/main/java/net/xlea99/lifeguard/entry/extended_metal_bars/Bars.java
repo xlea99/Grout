@@ -16,9 +16,9 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.xlea99.guppylib.core.Entry;
 import net.xlea99.lifeguard.Lifeguard;
 import net.xlea99.lifeguard.block.BorrowedSoundType;
-import net.xlea99.lifeguard.core.Entry;
 import net.xlea99.lifeguard.magnet.Magnets;
 
 /**

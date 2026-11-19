@@ -4,8 +4,8 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import javax.annotation.Nullable;
+import net.xlea99.guppylib.boot.BrokenEntries;
 import net.xlea99.lifeguard.Lifeguard;
-import net.xlea99.lifeguard.boot.BrokenEntries;
 
 /**
  * Whether an Iris shaderpack is in use. Shaderpacks draw the world through their own programs, which replace vanilla's

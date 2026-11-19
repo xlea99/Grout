@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.amendments_cake_slicing;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link AmendmentsCakeSlicing}. */
 public final class AmendmentsCakeSlicingSetup implements EntrySetup {

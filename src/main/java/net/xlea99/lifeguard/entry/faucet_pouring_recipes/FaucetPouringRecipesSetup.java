@@ -1,7 +1,7 @@
 package net.xlea99.lifeguard.entry.faucet_pouring_recipes;
 
-import net.xlea99.lifeguard.boot.EntrySetup;
-import net.xlea99.lifeguard.boot.Wiring;
+import net.xlea99.guppylib.boot.EntrySetup;
+import net.xlea99.guppylib.boot.Wiring;
 
 /** Setup for {@link FaucetPouringRecipes}. */
 public final class FaucetPouringRecipesSetup implements EntrySetup {
